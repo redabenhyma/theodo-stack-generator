@@ -47,7 +47,7 @@ npm install -g theodo-stack-generator
 
 ## Usage
 
-- Create a directory && run the generator:
+- Create a directory and run the generator:
 ```
 mkdir myAwesomeProject && cd myAwesomeProject
 yo theodo-stack
