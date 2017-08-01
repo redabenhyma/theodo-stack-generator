@@ -11,13 +11,14 @@ This generator scripts everything you need to start a project with:
 ## Prerequisites
 
 You need to install:
-
++ Node.js (> 6.x) + Npm (install it with [nvm](https://github.com/creationix/nvm)): `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
++ [Yarn](https://yarnpkg.com/en/docs/install)
 + [Yeoman](http://yeoman.io/): `npm install -g yo`
+
+If you want a server (Symfony or Loopback) with the provisioning and the deployment scripts:
 + [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 + [Vagrant](https://www.vagrantup.com/downloads.html)
-+ Node.js (> 6.x) + Npm (install it with [nvm](https://github.com/creationix/nvm)): `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
 + [Ansible (version 2)](http://docs.ansible.com/ansible/intro_installation.html)
-+ [Yarn](https://yarnpkg.com/en/docs/install)
 + [PHP](http://php.net/manual/en/intro-whatis.php) if you want to use API plateform (Symfony) :
   - Symfony requires you to configure your [local PHP timezone ](https://stackoverflow.com/questions/20743060/symfony2-and-date-default-timezone-get-it-is-not-safe-to-rely-on-the-system)
 
@@ -26,17 +27,13 @@ You need to install:
 
 ### Choose a technology according to your needs
 
-This generator will ask you to choose between 3 starter-kits (or no client at all).
+This generator will ask you to choose between 2 starter-kits (or no client at all).
 
-- **React-Redux** from [Create React App starter-kit](https://github.com/facebookincubator/create-react-app):
-  - A react starter-kit which generates a react-redux app!
-  - For who ?
-    - Those who want React-redux!
+- **React-Redux**:
+  - A react starter-kit which generates a react-redux app based on [Create React App starter-kit](https://github.com/facebookincubator/create-react-app)!
 
-- **Angular4** from [Angular starter](https://github.com/AngularClass/angular-starter):
-  - An Angular 4 starter-kit!
-  - For who ?
-    - Those who want Angular!
+- **Angular4**:
+  - An Angular 4 starter-kit which generates an Angular4 app based on [Angular starter](https://github.com/AngularClass/angular-starter)!
 
 
 ### Install the generator
@@ -44,7 +41,7 @@ This generator will ask you to choose between 3 starter-kits (or no client at al
 - Install the package:
 ```
 git clone git@github.com:theodo/theodo-stack-generator.git
-cd theodo-stack-generator && npm link && cd ../
+cd theodo-stack-generator && yarn && npm link && cd ../
 npm install -g theodo-stack-generator
 ```
 
@@ -55,8 +52,9 @@ npm install -g theodo-stack-generator
 mkdir myAwesomeProject && cd myAwesomeProject
 yo theodo-stack
 ```
+
 If you choose API Platform, you will be prompt to enter:
-- `database_driver`, enter: `pdo_pgsql` to use postgresql.
+- `database_driver`, enter: `pdo_pgsql` to use postgresql which is already provisioned by ansible.
 - `database_port`, enter: `5432`
 - `database_name`, enter your **app name**.
 - `database_user`, enter your **app name**.
@@ -75,5 +73,4 @@ At the moment, the `xubuntu` distrib doesn't support the vagrant `synced_folder`
 
 This generator can be improved in many ways, PR are welcome! [here](https://github.com/theodo/theodo-stack-generator) !
 
-- Clone the repository.
-- Run `npm link`
+To install it and use it locally, follow the previous documentation.
