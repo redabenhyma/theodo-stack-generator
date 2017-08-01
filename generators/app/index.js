@@ -1,20 +1,23 @@
 const Generator = require('yeoman-generator');
 const _ = require('lodash');
 
-class LoopbackGenerator extends Generator {
+class StackGenerator extends Generator {
   prompting() {
     return this.prompt([
       {
         type    : 'input',
         name    : 'appName',
         message : 'Your application name',
+        default : this.appname,
+        require : true,
+        desc    : 'test',
       },
       {
         type    : 'list',
         name    : 'backend',
         message : 'Choose your backend',
         default : 'API Platform (Symfony)',
-        choices : ['API Platform (Symfony)', 'Loopback (nodejs)']
+        choices : ['API Platform (Symfony)', 'Loopback (nodejs)', 'none']
       },
       {
         type    : 'list',
@@ -23,44 +26,8 @@ class LoopbackGenerator extends Generator {
         default : 'react-redux',
         choices : ['react-redux', 'angular4', 'none']
       },
-      {
-        type    : 'input',
-        name    : 'stagingDatabasePassword',
-        message : 'Your staging database password',
-        default : 'pleaseChangeMe',
-      },
-      {
-        type    : 'input',
-        name    : 'prodDatabasePassword',
-        message : 'Your production database password',
-        default : 'pleaseChangeMe',
-      },
-      {
-        type    : 'input',
-        name    : 'repositoryUrl',
-        message : 'Your git repository URL (used for deployment script)',
-        default : '',
-      },
-      {
-        type    : 'input',
-        name    : 'stagingIpAddress',
-        message : 'Your staging IP address',
-        default : '',
-      },
-      {
-        type    : 'input',
-        name    : 'prodIpAddress',
-        message : '[Optionnal] Your production IP address',
-        default : '',
-      },
-      {
-        type    : 'list',
-        name    : 'vagrantOs',
-        message : 'Choose your Vagrant OS',
-        default : 'xenial',
-        choices : ['xenial', 'trusty']
-      }
-    ]).then(answers => {
+    ])
+    .then(answers => {
       this.answers = answers;
       this.answers.clientPublicDirectory = 'client/build';
 
@@ -76,38 +43,54 @@ class LoopbackGenerator extends Generator {
       if (this.answers.client === 'none') {
         this.answers.installationFile = 'installation-no-client.md';
       }
-    });
-  }
 
-  _addReactReduxBoilerplate() {
-    this.log('Cloning react-boilerplate');
-    this.spawnCommandSync('git', [
-      'clone',
-      '--branch',
-      'v3.4.0',
-      'https://github.com/react-boilerplate/react-boilerplate.git',
-      'client'
-    ]);
+      if (this.answers.backend === 'none') {
+        return Promise.resolve();
+      }
 
-    this.spawnCommandSync('rm', ['client/internals/webpack/webpack.base.babel.js']);
-    this.spawnCommandSync('rm', ['client/appveyor.yml']);
-    this.spawnCommandSync('rm', ['client/LICENSE.md']);
-    this.spawnCommandSync('rm', ['client/Changelog.md']);
-    this.spawnCommandSync('rm', ['client/CODE_OF_CONDUCT.md']);
-    this.spawnCommandSync('rm', ['client/.lgtm']);
-    this.spawnCommandSync('rm', ['client/MAINTAINERS']);
-    this.spawnCommandSync('rm', ['-rf', 'client/.git']);
-    this.spawnCommandSync('rm', ['-rf', 'client/.github']);
-
-    return Promise.all([
-      'client/internals/webpack/webpack.base.babel.js',
-    ].map(file => {
-      return this.fs.copyTpl(
-        this.templatePath(file),
-        this.destinationPath(file),
-        this.answers
-      );
-    }));
+      return this.prompt([
+        {
+          type    : 'input',
+          name    : 'stagingDatabasePassword',
+          message : '[Provisioning] Staging database password',
+          default : this.appname,
+        },
+        {
+          type    : 'input',
+          name    : 'prodDatabasePassword',
+          message : '[Provisioning] Production database password',
+          default : this.appname,
+        },
+        {
+          type    : 'input',
+          name    : 'repositoryUrl',
+          message : '[Deployment] Your git repository URL',
+          default : '',
+        },
+        {
+          type    : 'input',
+          name    : 'stagingIpAddress',
+          message : '[Provisioning/Deployment] Staging IP address',
+          default : '',
+        },
+        {
+          type    : 'input',
+          name    : 'prodIpAddress',
+          message : '[Provisioning/Deployment](Optionnal) Your production IP address',
+          default : '',
+        },
+        {
+          type    : 'list',
+          name    : 'vagrantOs',
+          message : '[Varant] Choose your OS',
+          default : 'xenial',
+          choices : ['xenial', 'trusty']
+        }
+      ]);
+    })
+    .then(serverAnswers => {
+      this.answers = Object.assign(this.answers, serverAnswers);
+    })
   }
 
   _addReactBoilerplate() {
@@ -116,6 +99,8 @@ class LoopbackGenerator extends Generator {
     this.spawnCommandSync('create-react-app', ['client']);
 
     this.spawnCommandSync('rm', ['client/src/App.js']);
+    this.spawnCommandSync('rm', ['client/src/App.test.js']);
+    this.spawnCommandSync('rm', ['client/src/index.js']);
 
     return Promise.all([
       'client/src/App.js',
@@ -161,6 +146,7 @@ class LoopbackGenerator extends Generator {
         let existingPackage = this.fs.readJSON('./client/package.json');
         content = _.merge(content, existingPackage);
       } catch (e) {}
+      this.spawnCommandSync('rm', ['client/package.json']);
       this.fs.writeJSON(this.destinationPath('./client/package.json'), content);
     });
   }
@@ -181,7 +167,7 @@ class LoopbackGenerator extends Generator {
 
   _addClient() {
     if (this.answers.client === 'none') {
-      return;
+      return Promise.resolve();
     }
 
     if (this.answers.client === 'react-redux') {
@@ -194,6 +180,10 @@ class LoopbackGenerator extends Generator {
   }
 
   _addConfigurationTemplates () {
+    if (this.answers.backend === 'none') {
+      return Promise.resolve();
+    }
+
     const files = [
       'gitignore',
       '.yo-rc.json',
@@ -229,7 +219,7 @@ class LoopbackGenerator extends Generator {
 
   _addMigrationsTemplates () {
     if (this.answers.backend !== 'Loopback (nodejs)') {
-      return;
+      return Promise.resolve();
     }
 
     return Promise.all([
@@ -246,6 +236,10 @@ class LoopbackGenerator extends Generator {
   }
 
   _addProvisioningTemplates () {
+    if (this.answers.backend === 'none') {
+      return Promise.resolve();
+    }
+
     if (this.answers.backend === 'API Platform (Symfony)') {
       this.fs.copy(
         this.templatePath('devops-symfony/provisioning/roles'),
@@ -253,16 +247,14 @@ class LoopbackGenerator extends Generator {
         this.answers
       );
 
-      this.fs.copy(
-        this.templatePath('devops-symfony/deploy'),
-        this.destinationPath('devops-symfony/deploy'),
-        this.answers
-      );
 
       return Promise.all([
         'Gemfile',
         'Gemfile.lock',
         'Capfile',
+        'devops-symfony/deploy/stages/prod.rb',
+        'devops-symfony/deploy/stages/staging.rb',
+        'devops-symfony/deploy/deploy.rb',
         'devops-symfony/provisioning/group_vars/prod',
         'devops-symfony/provisioning/group_vars/staging',
         'devops-symfony/provisioning/group_vars/vagrant',
@@ -338,24 +330,36 @@ class LoopbackGenerator extends Generator {
     this.spawnCommandSync('php', ['-r', 'composer-setup.php']);
     this.spawnCommandSync('php', ['-r', "unlink('composer-setup.php');"]);
     this.spawnCommandSync('composer', ['create-project', 'api-platform/api-platform', 'server']);
-    this.spawnCommandSync('cd', ['server/web']);
+  }
+
+  _addServer () {
+    if (this.answers.backend === 'Loopback (nodejs)') {
+      return this._addNodeServerTemplates();
+    } else if (this.answers.backend === 'API Platform (Symfony)') {
+      return this._addSymfonyServer();
+    } else {
+      return Promise.resolve();
+    }
   }
 
   installProject() {
     return this._addConfigurationTemplates()
-    .then(() => {
-      if (this.answers.backend === 'Loopback (nodejs)') {
-        return this._addNodeServerTemplates();
-      } else if (this.answers.backend === 'API Platform (Symfony)') {
-        return; // this._addSymfonyServer();
-      }
-    })
+    .then(() => this._addServer())
     .then(() => this._addProvisioningTemplates())
     .then(() => this._addMigrationsTemplates())
     .then(() => this._addClient())
   }
 
   end() {
+    if (this.answers.client === 'react-redux') {
+      this.destinationRoot('client');
+      this.spawnCommandSync('yarn');
+    };
+
+    if (this.answers.backend === 'none') {
+      return Promise.resolve();
+    }
+
     // .gitgnore is not included by npm publish https://github.com/npm/npm/issues/3763
     // It can be bypassed by renaming a gitgnore file to .gitignore
     this.spawnCommandSync('mv', ['./gitignore', './.gitignore']);
@@ -368,13 +372,8 @@ class LoopbackGenerator extends Generator {
       this.spawnCommandSync('mv', ['./devops-symfony', './devops']);
     };
 
-    if (this.answers.client === 'react-redux') {
-      this.destinationRoot('client');
-      this.spawnCommandSync('yarn');
-    };
-
     this.log('Everything went well, enjoy your new app!')
   }
 };
 
-module.exports = LoopbackGenerator;
+module.exports = StackGenerator;
