@@ -18,7 +18,8 @@ You need to install:
 + Node.js (> 6.x) + Npm (install it with [nvm](https://github.com/creationix/nvm)): `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
 + [Ansible (version 2)](http://docs.ansible.com/ansible/intro_installation.html)
 + [Yarn](https://yarnpkg.com/en/docs/install)
-+ [PHP](http://php.net/manual/en/intro-whatis.php) if you want to use API plateform (Symfony)
++ [PHP](http://php.net/manual/en/intro-whatis.php) if you want to use API plateform (Symfony) :
+  - Symfony requires you to configure your [local PHP timezone ](https://stackoverflow.com/questions/20743060/symfony2-and-date-default-timezone-get-it-is-not-safe-to-rely-on-the-system)
 
 
 ## Installation
@@ -54,6 +55,11 @@ npm install -g theodo-stack-generator
 mkdir myAwesomeProject && cd myAwesomeProject
 yo theodo-stack
 ```
+If you choose API Platform, you will be prompt to enter:
+- `database_driver`, enter: `pdo_pgsql` to use postgresql.
+- `database_port`, enter: `5432`
+- `database_name`, enter your **app name**.
+- `database_user`, enter your **app name**.
 
 Then follow the generated documentation installation steps.
 
