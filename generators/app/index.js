@@ -132,7 +132,6 @@ class StackGenerator extends Generator {
           'react-redux': '4.4.6',
           'react-router': '3.0.0',
           'react-router-redux': '4.0.6',
-          'material-ui': '0.18.7',
           'redux':'3.7.2',
           'redux-saga': '0.15.6',
         },
