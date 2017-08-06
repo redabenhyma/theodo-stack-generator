@@ -242,7 +242,7 @@ class StackGenerator extends Generator {
     if (this.answers.backend === 'API Platform (Symfony)') {
       this.fs.copy(
         this.templatePath('devops-symfony/provisioning/roles'),
-        this.destinationPath('devops-symfony/provisioning/roles'),
+        this.destinationPath('devops/provisioning/roles'),
         this.answers
       );
 
@@ -275,7 +275,7 @@ class StackGenerator extends Generator {
     if (this.answers.backend === 'Loopback (nodejs)') {
       this.fs.copy(
         this.templatePath('devops-node/provisioning/roles'),
-        this.destinationPath('devops-node/provisioning/roles'),
+        this.destinationPath('devops/provisioning/roles'),
         this.answers
       );
 
