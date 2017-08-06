@@ -1,14 +1,12 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
-
-import RootContainer from './containers/root';
-import HomeViewContainer from './containers/home-view';
-import PageContainer from './containers/page';
+import { Header } from './components';
+import { Home, Page } from './containers';
 
 const routes = (
-  <Route path="/" component={RootContainer}>
-    <IndexRoute component={HomeViewContainer} />
-    <Route component={PageContainer} path="/page" />
+  <Route path="/" component={Header}>
+    <IndexRoute component={Home} />
+    <Route component={Page} path="/page" />
   </Route>
 );
 

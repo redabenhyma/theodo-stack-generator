@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { browserHistory, Link } from 'react-router';
-import { connect } from 'react-redux';
 import styles from './style.css';
 
-export class HomeView extends Component {
+export default class Home extends Component {
 
   render() {
     return (
       <div>
-        <p className="App-intro">
+        <p className={styles.intro}>
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <button onClick={() => browserHistory.push('/page')}>Click me!</button>
@@ -17,16 +16,3 @@ export class HomeView extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {};
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HomeView);
