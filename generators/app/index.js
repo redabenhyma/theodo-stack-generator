@@ -118,6 +118,9 @@ class StackGenerator extends Generator {
     }))
     .then(() => {
       let content = {
+        scripts: {
+          analyze: 'source-map-explorer build/static/js/main.*',
+        },
         dependencies: {
           'react-intl': '2.3.0',
           'react-redux': '4.4.6',
@@ -125,6 +128,7 @@ class StackGenerator extends Generator {
           'react-router-redux': '4.0.6',
           'redux':'3.7.2',
           'redux-saga': '0.15.6',
+          'source-map-explorer': '^1.4.0',
         },
         devDependencies: {
           'eslint': '3.9.1',
