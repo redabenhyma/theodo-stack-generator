@@ -1,12 +1,10 @@
 ## Installation
 
-### Installation
-
 #### Install dependencies
 
 - `yarn`
 
-- Build the frontend code: `cd client && npm run build`
+- Build the frontend code if you have one: `cd client && npm run build`
 
 #### Create the vagrant
 - Launch VM from the root directory of the project:
@@ -17,11 +15,6 @@
 - Connect to the vagrant as www-data:
   - `vagrant ssh`
   - `sudo su www-data`
-
-#### Setup database
-
-- Run migrations:
-  - `cd /var/www/<%= appName %>/current && npm run migrate:up`
 
 #### Start the server
 
@@ -38,14 +31,14 @@ You can also browse Loopback's explorer at : `http://10.0.0.10/explorer`
  Webpack can watch your frontend files and recompiles the code automatically as soon as you change your code.
 
  :bangbang: The webpack live-reloading is really slow in a vagrant. To avoid that, run the webpack-dev-server on your local environment:
- - `cd client && npm start`.
+ - `cd client && yarn start`.
 
 
  Think of the loopback server in the vagrant as an external API that you will query from your local reactjs app.
 
  In your local environment, all your HTTP requests should be redirected to the vagrant IP address.
 
- For example, if you want to fetch the url `/api/users`, you can adapt the file `client/app/utils/request.js` to use the following snippet:
+ For example, if you want to fetch the url `/api/users`, you can adapt the file `client/utils/request.js` to use the following snippet:
 
  ```javascript
 
@@ -70,11 +63,3 @@ const request = function(url) {
 request('api/users')
 .then(console.log)
  ```
-
-### Migrations:
-
-In your vagrant, run:
-
-- Create: `npm run migrate:create`
-- Down: `npm run migrate:down`
-- Up: `npm run migrate:up`

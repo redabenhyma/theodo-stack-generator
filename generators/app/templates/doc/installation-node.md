@@ -1,7 +1,5 @@
 ## Installation
 
-### Installation
-
 #### Install dependencies
 
 - `yarn`

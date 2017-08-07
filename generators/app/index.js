@@ -31,17 +31,8 @@ class StackGenerator extends Generator {
       this.answers = answers;
       this.answers.clientPublicDirectory = 'client/build';
 
-      if (this.answers.client === 'react-redux') {
-        this.answers.installationFile = 'doc/installation-react-redux.md';
-      }
-
       if (this.answers.client === 'angular4') {
-        this.answers.installationFile = 'doc/installation-angular.md';
         this.answers.clientPublicDirectory = 'client/dist';
-      }
-
-      if (this.answers.client === 'none') {
-        this.answers.installationFile = 'installation-no-client.md';
       }
 
       if (this.answers.backend === 'none') {
@@ -178,39 +169,84 @@ class StackGenerator extends Generator {
     }
   }
 
+  _addDocumentation () {
+    let files = [
+      'README.md',
+    ];
+
+    if (this.answers.backend !== 'none') {
+      files = files.concat([
+        'doc/provisioning.md',
+      ]);
+    }
+
+    if (this.answers.backend === 'Loopback (nodejs)') {
+      files = files.concat([
+        'doc/installation-node.md',
+        'doc/deployment-node.md',
+        'doc/database-node.md',
+        'doc/tests-node.md',
+      ]);
+    }
+
+    if (this.answers.backend === 'API Platform (Symfony)') {
+      files = files.concat([
+        'doc/installation-symfony.md',
+        'doc/deployment-symfony.md',
+        'doc/database-symfony.md',
+        'doc/tests-symfony.md',
+      ]);
+    }
+
+    if (this.answers.client === 'angular4') {
+      files = files.concat([
+        'doc/development-angular.md',
+      ]);
+    }
+
+    if (this.answers.client === 'react-redux') {
+      files = files.concat([
+        'doc/development-react-redux.md',
+      ]);
+    }
+
+    return Promise.all(files.map(file => {
+     return this.fs.copyTpl(
+       this.templatePath(file),
+       this.destinationPath(file.replace(/-node|-symfony|-react-redux|-angular|-no-client/, '')),
+       this.answers
+     );
+   }));
+  }
+
   _addConfigurationTemplates () {
     if (this.answers.backend === 'none') {
       return Promise.resolve();
     }
 
-    const files = [
+    let files = [
       'gitignore',
       '.yo-rc.json',
       '.editorconfig',
       '.eslintignore',
       'ansible.cfg',
-      'README.md',
       'Vagrantfile',
-      this.answers.installationFile
     ];
 
     if (this.answers.backend === 'Loopback (nodejs)') {
-      files.concat([
+      files = files.concat([
         'database.json',
         'package.json',
         'yarn.lock',
         'pm2.yml',
         'shipitfile.js',
-        'doc/deployment-node.md',
-        'doc/provisioning-node.md',
-        'doc/tests-node.md',
       ])
     }
 
     return Promise.all(files.map(file => {
      return this.fs.copyTpl(
        this.templatePath(file),
-       this.destinationPath(file),
+       this.destinationPath(file.replace(/-node|-symfony/, '')),
        this.answers
      );
    }));
@@ -242,7 +278,7 @@ class StackGenerator extends Generator {
     if (this.answers.backend === 'API Platform (Symfony)') {
       this.fs.copy(
         this.templatePath('devops-symfony/provisioning/roles'),
-        this.destinationPath('devops-symfony/provisioning/roles'),
+        this.destinationPath('devops/provisioning/roles'),
         this.answers
       );
 
@@ -266,7 +302,7 @@ class StackGenerator extends Generator {
      ].map(file => {
        return this.fs.copyTpl(
          this.templatePath(file),
-         this.destinationPath(file),
+         this.destinationPath(file.replace(/-node|-symfony/, '')),
          this.answers
        );
      }));
@@ -275,7 +311,7 @@ class StackGenerator extends Generator {
     if (this.answers.backend === 'Loopback (nodejs)') {
       this.fs.copy(
         this.templatePath('devops-node/provisioning/roles'),
-        this.destinationPath('devops-node/provisioning/roles'),
+        this.destinationPath('devops/provisioning/roles'),
         this.answers
       );
 
@@ -291,7 +327,7 @@ class StackGenerator extends Generator {
      ].map(file => {
        return this.fs.copyTpl(
          this.templatePath(file),
-         this.destinationPath(file),
+         this.destinationPath(file.replace(/-node|-symfony/, '')),
          this.answers
        );
      }));
@@ -343,13 +379,19 @@ class StackGenerator extends Generator {
 
   installProject() {
     return this._addConfigurationTemplates()
+    .then(() => this._addDocumentation())
     .then(() => this._addServer())
     .then(() => this._addProvisioningTemplates())
     .then(() => this._addMigrationsTemplates())
     .then(() => this._addClient())
   }
 
+
   end() {
+    // .gitgnore is not included by npm publish https://github.com/npm/npm/issues/3763
+    // It can be bypassed by renaming a gitgnore file to .gitignore
+    this.spawnCommandSync('mv', ['./gitignore', './.gitignore']);
+
     if (this.answers.client === 'react-redux') {
       this.destinationRoot('client');
       this.spawnCommandSync('yarn');
@@ -359,17 +401,6 @@ class StackGenerator extends Generator {
       return Promise.resolve();
     }
 
-    // .gitgnore is not included by npm publish https://github.com/npm/npm/issues/3763
-    // It can be bypassed by renaming a gitgnore file to .gitignore
-    this.spawnCommandSync('mv', ['./gitignore', './.gitignore']);
-
-    if (this.answers.backend === 'Loopback (nodejs)') {
-      this.spawnCommandSync('mv', ['./devops-node', './devops']);
-    };
-
-    if (this.answers.backend === 'API Platform (Symfony)') {
-      this.spawnCommandSync('mv', ['./devops-symfony', './devops']);
-    };
 
     this.log('Everything went well, enjoy your new app!')
   }
