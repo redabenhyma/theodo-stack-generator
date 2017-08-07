@@ -31,17 +31,8 @@ class StackGenerator extends Generator {
       this.answers = answers;
       this.answers.clientPublicDirectory = 'client/build';
 
-      if (this.answers.client === 'react-redux') {
-        this.answers.installationFile = 'doc/installation-react-redux.md';
-      }
-
       if (this.answers.client === 'angular4') {
-        this.answers.installationFile = 'doc/installation-angular.md';
         this.answers.clientPublicDirectory = 'client/dist';
-      }
-
-      if (this.answers.client === 'none') {
-        this.answers.installationFile = 'installation-no-client.md';
       }
 
       if (this.answers.backend === 'none') {
@@ -179,18 +170,19 @@ class StackGenerator extends Generator {
   }
 
   _addDocumentation () {
-    if (this.answers.backend === 'none') {
-      return Promise.resolve();
-    }
-
     let files = [
       'README.md',
-      'doc/provisioning.md',
-      this.answers.installationFile
     ];
+
+    if (this.answers.backend !== 'none') {
+      files = files.concat([
+        'doc/provisioning.md',
+      ]);
+    }
 
     if (this.answers.backend === 'Loopback (nodejs)') {
       files = files.concat([
+        'doc/installation-node.md',
         'doc/deployment-node.md',
         'doc/database-node.md',
         'doc/tests-node.md',
@@ -199,16 +191,29 @@ class StackGenerator extends Generator {
 
     if (this.answers.backend === 'API Platform (Symfony)') {
       files = files.concat([
+        'doc/installation-symfony.md',
         'doc/deployment-symfony.md',
         'doc/database-symfony.md',
         'doc/tests-symfony.md',
       ]);
     }
 
+    if (this.answers.client === 'angular4') {
+      files = files.concat([
+        'doc/development-angular.md',
+      ]);
+    }
+
+    if (this.answers.client === 'react-redux') {
+      files = files.concat([
+        'doc/development-react-redux.md',
+      ]);
+    }
+
     return Promise.all(files.map(file => {
      return this.fs.copyTpl(
        this.templatePath(file),
-       this.destinationPath(file.replace(/-node|-symfony|-react-redux|-angular/, '')),
+       this.destinationPath(file.replace(/-node|-symfony|-react-redux|-angular|-no-client/, '')),
        this.answers
      );
    }));
@@ -226,7 +231,6 @@ class StackGenerator extends Generator {
       '.eslintignore',
       'ansible.cfg',
       'Vagrantfile',
-      this.answers.installationFile
     ];
 
     if (this.answers.backend === 'Loopback (nodejs)') {

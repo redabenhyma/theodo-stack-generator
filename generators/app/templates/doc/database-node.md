@@ -1,5 +1,11 @@
 ## Database
 
+#### Setup database
+
+- Run migrations:
+  - `cd /var/www/<%= appName %>/current && npm run migrate:up`
+
+
 ### Accessing the database
 - In your vagrant:
   - `psql -U <%= appName %> -d <%= appName %>``
