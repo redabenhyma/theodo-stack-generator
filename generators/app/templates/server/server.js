@@ -1,11 +1,24 @@
-var loopback = require('loopback');
-var boot = require('loopback-boot');
-var app = module.exports = loopback();
+const loopback = require('loopback');
+const boot = require('loopback-boot');
+const app = module.exports = loopback();
+const history = require('connect-history-api-fallback')
 
 app.use(loopback.token({
     model: app.models.accessToken,
     currentUserLiteral: 'me'
 }));
+
+// This rewrites all routes requests to the root /index.html file
+app.use(history({
+  rewrites: [
+    {
+      from: /\/(api|explorer)/,
+      to: (context) => {
+        return context.parsedUrl.pathname
+      }
+    }
+  ]
+}))
 
 app.start = function() {
   // start the web server
