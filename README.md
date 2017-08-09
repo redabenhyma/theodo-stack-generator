@@ -9,7 +9,11 @@ This generator scripts everything you need to start a project with:
 
 ## What's next ?
 
-- See [Theodo React standards](http://blog.m33.network/2017/07/react/)
+- HTTPS configuration
+- Linters
+- Unit tests
+- End-to-end tests
+- Authentication
 
 ## Prerequisites
 
