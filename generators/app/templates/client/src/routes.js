@@ -1,7 +1,7 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import { Header } from './components';
-import { Home, Page } from './containers';
+import { Home, Page } from './pages';
 
 const routes = (
   <Route path="/" component={Header}>
