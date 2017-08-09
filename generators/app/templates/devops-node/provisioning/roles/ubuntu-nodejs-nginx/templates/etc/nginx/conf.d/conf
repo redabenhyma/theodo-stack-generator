@@ -10,17 +10,12 @@ server {
 
 server {
     listen 443 ssl http2;
-    listen [::]:443 ssl http2;
     server_name  {{ inventory_hostname }};
 
     # Configure the Certificate and Key you got from your CA (e.g. Lets Encrypt)
     ssl on;
     ssl_certificate /etc/nginx/fake-data/cert.crt;
     ssl_certificate_key /etc/nginx/fake-data/key.key;
-
-    ssl_session_timeout 1d;
-    ssl_session_cache shared:SSL:50m;
-    ssl_session_tickets off;
 
     # Only use TLS v1.2 as Transport Security Protocol
     ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
