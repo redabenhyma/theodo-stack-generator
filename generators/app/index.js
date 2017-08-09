@@ -130,7 +130,6 @@ class StackGenerator extends Generator {
           analyze: 'source-map-explorer build/static/js/main.*',
         },
         dependencies: {
-          'connect-history-api-fallback': '1.3.0',
           'react-intl': '2.3.0',
           'react-redux': '4.4.6',
           'react-router': '3.0.0',

@@ -25,4 +25,5 @@
     - any-nodejs
     - fubarhouse.yarn
     - ubuntu-nodejs-nginx
+    - nginx
     - ubuntu-postgresql
