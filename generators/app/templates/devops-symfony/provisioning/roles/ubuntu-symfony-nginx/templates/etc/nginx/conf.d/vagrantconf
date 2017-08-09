@@ -1,22 +1,25 @@
 server {
-    listen      {{ port }};
+    listen      80;
 
-    server_name {{ inventory_hostname }};
-    root        /var/www/{{ project_name }}/current/server/web;
+    server_name 10.0.0.10;
+    root        /var/www/summerphp/current/server/web;
 
-    error_log /var/log/nginx/{{ project_name }}.error.log;
-    access_log /var/log/nginx/{{ project_name }}.access.log;
+    error_log /var/log/nginx/summerphp.error.log;
+    access_log /var/log/nginx/summerphp.access.log;
 
-    index build/index.html
-
-    #index app_dev.php;
+    # index build/index.html
+    #index app.php;
     #try_files $uri @rewrite;
-
+    
     gzip            on;
     gzip_min_length 1000;
     gzip_comp_level 9;
     gzip_proxied    any;
     gzip_types      application/javascript application/x-javascript application/json text/css;
+
+    location / {
+        try_files $uri /build/index.html;
+    }
 
     location @rewrite {
         rewrite ^/?(.*)$ /app_dev.php/$1 last;
