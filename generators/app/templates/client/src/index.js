@@ -5,7 +5,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import configureStore from './store';
+import configureStore from './modules/store';
 
 const initialState = {};
 const store = configureStore(initialState, browserHistory);

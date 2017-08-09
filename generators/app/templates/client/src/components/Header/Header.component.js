@@ -1,6 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+
+import React, { Component } from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
+import PropTypes from 'prop-types';
+
 import fr from 'react-intl/locale-data/fr';
 import frMessages from '../../translations/fr.json';
 import logo from './logo.svg';
@@ -12,9 +14,9 @@ const locales = {
 
 addLocaleData([...fr]);
 
-export class Root extends Component {
+export default class Root extends Component {
   static propTypes = {
-    children: React.PropTypes.element,
+    children: PropTypes.element,
   };
 
   render() {
@@ -32,18 +34,4 @@ export class Root extends Component {
       </div>
     );
   }
-
 }
-
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {};
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Root);
