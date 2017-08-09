@@ -130,10 +130,12 @@ class StackGenerator extends Generator {
           analyze: 'source-map-explorer build/static/js/main.*',
         },
         dependencies: {
+          'enzyme': '2.9.1',
           'react-intl': '2.3.0',
           'react-redux': '4.4.6',
           'react-router': '3.0.0',
           'react-router-redux': '4.0.6',
+          'react-test-renderer': '15.6.1',
           'redux':'3.7.2',
           'redux-saga': '0.15.6',
           'source-map-explorer': '^1.4.0',

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-
+import { PropTypes } from 'prop-types'
 import routes from './routes';
 
 class App extends React.Component {
 
   static propTypes = {
-    store: React.PropTypes.object.isRequired, // eslint-disable-line
-    history: React.PropTypes.object.isRequired, // eslint-disable-line
+    store: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   render() {
