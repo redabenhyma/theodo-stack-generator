@@ -1,11 +1,11 @@
 server {
-    listen      80;
+    listen      {{ port }};
 
-    server_name 10.0.0.10;
-    root        /var/www/summerphp/current/server/web;
+    server_name {{ inventory_hostname }};
+    root        /var/www/{{ project_name }}/current/server/web;
 
-    error_log /var/log/nginx/summerphp.error.log;
-    access_log /var/log/nginx/summerphp.access.log;
+    error_log /var/log/nginx/{{ project_name }}.error.log;
+    access_log /var/log/nginx/{{ project_name }}.access.log;
 
     # index build/index.html
     #index app.php;
