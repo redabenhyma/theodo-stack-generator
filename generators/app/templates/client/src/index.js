@@ -17,12 +17,11 @@ const rootEl = document.getElementById('root');
 ReactDOM.render(<App store={store} history={history} />, rootEl);
 registerServiceWorker();
 
-
 if (module.hot) {
   module.hot.accept('./App', () => {
     const NextApp = require('./App').default;
     ReactDOM.render(
-      <NextApp />,
+      <NextApp store={store} history={history} />,
       rootEl
     );
   });
