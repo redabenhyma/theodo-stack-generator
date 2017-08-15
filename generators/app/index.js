@@ -322,6 +322,24 @@ class StackGenerator extends Generator {
   }
 
   _addNodeServerTemplates () {
+    this.fs.copy(
+      this.templatePath('server/boot'),
+      this.destinationPath('server/boot'),
+      this.answers
+    )
+
+    this.fs.copy(
+      this.templatePath('server/models'),
+      this.destinationPath('server/models'),
+      this.answers
+    )
+
+    this.fs.copy(
+      this.templatePath('tests'),
+      this.destinationPath('tests'),
+      this.answers
+    )
+
     return Promise.all([
      'server/.eslintrc',
      'server/component-config.json',
@@ -332,11 +350,6 @@ class StackGenerator extends Generator {
      'server/middleware.json',
      'server/model-config.json',
      'server/server.js',
-     'server/models/user.js',
-     'server/models/user.json',
-     'server/boot/authentication.js',
-     'server/boot/create-admin.js',
-     'tests/test.js',
    ].map(file => {
      return this.fs.copyTpl(
        this.templatePath(file),
