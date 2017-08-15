@@ -1,42 +1,12 @@
-## Installation
-
-#### Install dependencies
-
-- `yarn`
-
-- Build the frontend code if you have one: `cd client && npm run build`
-
-#### Create the vagrant
-- Launch VM from the root directory of the project:
-  - `vagrant up`
-  - If you encounter error `ttyname failed: Inappropriate ioctl for devices`:
-    - Update vagrant to the latest version from the website (it works on 1.9.5)
-
-- Connect to the vagrant as www-data:
-  - `vagrant ssh`
-  - `sudo su www-data`
-
-#### Start the server
-
-- Start the server:
-  - `cd /var/www/<%= appName %>/current && node server/server.js`
-
-Now, you are set up !
-
-You can browse a static page served by Loopback at the following url : `http://10.0.0.10`
-You can also browse Loopback's explorer at : `http://10.0.0.10/explorer`
-
-### How to develop using webpack
+# How to develop using webpack
 
  Webpack can watch your frontend files and recompiles the code automatically as soon as you change your code.
 
- :bangbang: The webpack live-reloading is really slow in a vagrant. To avoid that, run the webpack-dev-server on your local environment:
- - `cd client && yarn start`.
+ :bangbang: The webpack live-reloading is really slow in a virtual machine such as Vagrant. To avoid that, run the webpack-dev-server on your local environment, but run your server in a virtual machine.
 
+ If you have a server in a Vagrant, consider it as an external API that you will query from your local app.
 
- Think of the loopback server in the vagrant as an external API that you will query from your local reactjs app.
-
- In your local environment, all your HTTP requests should be redirected to the vagrant IP address.
+ In your local environment, all your HTTP requests should be redirected to the server IP address.
 
  For example, if you want to fetch the url `/api/users`, you can adapt the file `client/utils/request.js` to use the following snippet:
 
