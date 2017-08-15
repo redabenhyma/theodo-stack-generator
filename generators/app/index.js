@@ -114,6 +114,8 @@ class StackGenerator extends Generator {
       'client/src/pages/Page/style.css',
       'client/src/pages/Page/Page.component.js',
       'client/src/pages/Page/Page.container.js',
+      'client/src/pages/Page/Page.test.js',
+      'client/src/pages/Page/Page.snapshot.test.js',
       'client/src/translations/fr.json',
       'client/src/utils/request.js',
       'client/src/utils/request.test.js',

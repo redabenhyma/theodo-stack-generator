@@ -7,7 +7,7 @@ export default class Page extends Component {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div className='page-container'>
         <Link to='/'>Back</Link>
       </div>
     );
