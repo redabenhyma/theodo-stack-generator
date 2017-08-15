@@ -5,8 +5,13 @@ import Page from './Page.component';
 let wrapper = null;
 
 describe('The page component', () => {
+  const props = {
+    intl: {
+      formatMessage: jest.fn(),
+    },
+  }
   beforeEach(() => {
-    wrapper = shallow(<Page />);
+    wrapper = shallow(<Page {...props} />);
   })
 
   it('should contain one link', () => {
@@ -14,7 +19,6 @@ describe('The page component', () => {
     expect(links).toHaveLength(1);
     const link = links.first();
     expect(link.text()).toEqual('<Link />');
-    expect(link.html()).toContain('Back');
     expect(link.prop('to')).toEqual('/');
   })
 })

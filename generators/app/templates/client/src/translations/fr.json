@@ -1,1 +1,8 @@
-{}
+{
+  "home.use-a-link": "Ou uilise un lien",
+  "home.get-started": "Pour commencer, modifie",
+  "home.save-to-reload": "et sauvegarde pour recharger.",
+  "home.click-me": "Click sur moi",
+  "page.back": "Retour",
+  "page.api-to-translate-example": "Ce message est traduit en utilisant directement l'API react-intl"
+}
