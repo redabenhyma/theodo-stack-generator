@@ -93,68 +93,39 @@ class StackGenerator extends Generator {
     this.spawnCommandSync('rm', ['client/src/App.test.js']);
     this.spawnCommandSync('rm', ['client/src/index.js']);
 
-    return Promise.all([
-      'client/src/App.js',
-      'client/src/index.js',
-      'client/src/routes.js',
-      'client/src/modules/store.js',
-      'client/src/modules/reducers.js',
-      'client/src/components/index.js',
-      'client/src/components/Header/index.js',
-      'client/src/components/Header/Header.component.js',
-      'client/src/components/Header/Header.container.js',
-      'client/src/components/Header/logo.svg',
-      'client/src/components/Header/style.css',
-      'client/src/pages/index.js',
-      'client/src/pages/Home/index.js',
-      'client/src/pages/Home/style.css',
-      'client/src/pages/Home/Home.component.js',
-      'client/src/pages/Home/Home.container.js',
-      'client/src/pages/Page/index.js',
-      'client/src/pages/Page/style.css',
-      'client/src/pages/Page/Page.component.js',
-      'client/src/pages/Page/Page.container.js',
-      'client/src/pages/Page/Page.test.js',
-      'client/src/pages/Page/Page.snapshot.test.js',
-      'client/src/translations/fr.json',
-      'client/src/utils/request.js',
-      'client/src/utils/request.test.js',
-    ].map(file => {
-      return this.fs.copyTpl(
-        this.templatePath(file),
-        this.destinationPath(file),
-        this.answers
-      );
-    }))
-    .then(() => {
-      let content = {
-        scripts: {
-          analyze: 'source-map-explorer build/static/js/main.*',
-        },
-        dependencies: {
-          'enzyme': '2.9.1',
-          'react-intl': '2.3.0',
-          'react-redux': '4.4.6',
-          'react-router': '3.0.0',
-          'react-router-redux': '4.0.6',
-          'react-test-renderer': '15.6.1',
-          'redux':'3.7.2',
-          'redux-saga': '0.15.6',
-          'source-map-explorer': '^1.4.0',
-        },
-        devDependencies: {
-          'eslint': '3.9.1',
-          'babel-eslint':'7.1.1',
-          'nsp': '2.6.3'
-        },
-      };
-      try {
-        let existingPackage = this.fs.readJSON('./client/package.json');
-        content = _.merge(content, existingPackage);
-      } catch (e) {}
-      this.spawnCommandSync('rm', ['client/package.json']);
-      this.fs.writeJSON(this.destinationPath('./client/package.json'), content);
-    });
+    this.fs.copy(
+      this.templatePath('client/src'),
+      this.destinationPath('client/src'),
+      this.answers
+    )
+
+    let content = {
+      scripts: {
+        analyze: 'source-map-explorer build/static/js/main.*',
+      },
+      dependencies: {
+        'enzyme': '2.9.1',
+        'react-intl': '2.3.0',
+        'react-redux': '4.4.6',
+        'react-router': '3.0.0',
+        'react-router-redux': '4.0.6',
+        'react-test-renderer': '15.6.1',
+        'redux':'3.7.2',
+        'redux-saga': '0.15.6',
+        'source-map-explorer': '^1.4.0',
+      },
+      devDependencies: {
+        'eslint': '3.9.1',
+        'babel-eslint':'7.1.1',
+        'nsp': '2.6.3'
+      },
+    };
+    try {
+      let existingPackage = this.fs.readJSON('./client/package.json');
+      content = _.merge(content, existingPackage);
+    } catch (e) {}
+    this.spawnCommandSync('rm', ['client/package.json']);
+    this.fs.writeJSON(this.destinationPath('./client/package.json'), content);
   }
 
   _addAngularBoilerplate() {
