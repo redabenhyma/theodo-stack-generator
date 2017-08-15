@@ -20,8 +20,9 @@ Choose a server between:
     - Yarn
     - nginx
     - creating www-data user
-    - postgresql database
+    - Postgresql database
     - HTTPS configuration
+    - db-migrate and initial loopback migrations
   - Shipit deployment script
 
 
