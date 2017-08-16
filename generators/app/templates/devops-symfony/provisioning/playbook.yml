@@ -7,7 +7,7 @@
   - name: install python 2
     raw: sudo bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qy python-minimal)"
 
-- name: Provisioning test-fansible
+- name: Provisioning <%= appName %>
   hosts: all
   become: true
   vars_files:
@@ -20,6 +20,7 @@
     - ubuntu-php
     - composer
     - ubuntu-symfony-nginx
+    - nginx
     - ubuntu-postgresql
     - any-nodejs
     - fubarhouse.yarn

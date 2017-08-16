@@ -18,12 +18,18 @@
 - Install the project
   - Connect to the vagrant: `vagrant ssh`
 
+If you have a frontend:
   - Build the frontend code: `cd /var/www/<%= appName %>/current/client && yarn build`
 
   - Symlink the frontend code in the web directory: `cd /var/www/<%= appName %>/current/server/web && ln -s ../../client/build/ build`
 
-- Connect to the vagrant as www-data:
-  - `vagrant ssh`
-  - `sudo su www-data`
+  - Browse your frontend: https://10.0.0.10
+
+In all cases
+
+- Run migrations:
+  - `cd /var/www/<%= appName %>/current/server && app/console doctrine:generate:entities AppBundle`
+
+- Browse your API: https://10.0.0.10/app_dev.php/doc
 
 **TODO**
