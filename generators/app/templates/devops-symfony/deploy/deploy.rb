@@ -10,7 +10,6 @@ set :stages, %w(prod)
 set :symfony_directory_structure, 3
 
 set :linked_files, fetch(:linked_files, []).push('app/config/parameters.yml')
-set :linked_dirs, [fetch(:log_path), "app/sessions", "web/uploads"]
 
 set :ssh_user, 'www-data'
 set :ssh_options, {
