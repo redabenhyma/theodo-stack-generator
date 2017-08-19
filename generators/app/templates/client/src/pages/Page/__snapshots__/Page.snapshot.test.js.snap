@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The page component should renders correctly 1`] = `
+<div
+  className="page-container"
+>
+  <a
+    onClick={[Function]}
+    style={Object {}}
+  >
+    <span>
+      Retour
+    </span>
+  </a>
+  <p />
+</div>
+`;

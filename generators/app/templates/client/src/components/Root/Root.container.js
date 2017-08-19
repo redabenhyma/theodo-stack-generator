@@ -1,4 +1,4 @@
-import Root from './Header.component';
+import Root from './Root.component';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
