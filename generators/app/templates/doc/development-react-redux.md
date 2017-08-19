@@ -1,4 +1,16 @@
-# How to develop using webpack
+## Getting started
+
+In the client folder, run:
+
+- `yarn` to install dependencies
+
+- `yarn start` to start a local dev-server
+
+- `yarn build` to build a minified version of the code.
+
+- `yarn test` to launch the tests.
+
+## How to develop using webpack
 
  Webpack can watch your frontend files and recompiles the code automatically as soon as you change your code.
 
