@@ -1,8 +1,12 @@
 {
-  "home.use-a-link": "Or use a link",
-  "home.get-started": "To get started, edit",
-  "home.save-to-reload": "and save to reload.",
-  "home.click-me": "Click me",
-  "page.back": "Back",
-  "page.api-to-translate-example": "This message is translated using directly react-intl API"
+  "home": {
+    "use-a-link": "Or use a link",
+    "get-started": "To get started, edit",
+    "save-to-reload": "and save to reload.",
+    "click-me": "Click me"
+  },
+  "page": {
+    "back": "Back",
+    "api-to-translate-example": "This message is translated using directly react-intl API"
+  }
 }

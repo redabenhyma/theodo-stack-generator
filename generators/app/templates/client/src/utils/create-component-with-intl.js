@@ -4,8 +4,10 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import fr from 'react-intl/locale-data/fr';
 import frMessages from '../translations/fr.json';
 
+import { flattenMessages } from './intl';
+
 const locales = {
-  fr: frMessages,
+  fr: flattenMessages(frMessages),
 };
 
 
