@@ -30,8 +30,9 @@ Choose a client between:
 
 - React-Redux: A boosted [create-react-app](https://github.com/facebookincubator/create-react-app) with
   - redux
+  - redux-saga
   - hot-reloading
-  - react-intl for translations
+  - react-intl with nested translations files!
   - react-router for routing
   - examples of unit and snapshot tests
 
