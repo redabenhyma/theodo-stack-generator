@@ -19,3 +19,7 @@
 - Deploy the code: `cap staging deploy`:
   - The first deployment will create the structure of the project. It will fail because the `parameters.yml` file is not present in the the shared folder, you have to **create it now**.
   - Deploy the code again
+
+@TODO:
+- add `yarn && yarn build` as a deploy task
+- add the symlink between web and build as a deploy task
