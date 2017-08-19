@@ -7,10 +7,8 @@ set :repo_url, '<%= repositoryUrl %>'
 
 set :stages, %w(prod)
 
-#TODO: change to var/logs,var/cache,bin/console ... if it's a SF3 project
-set :log_path, "app/logs"
-set :cache_path, "app/cache"
-set :symfony_console_path, 'app/console'
+set :symfony_directory_structure, 3
+
 set :linked_files, fetch(:linked_files, []).push('app/config/parameters.yml')
 set :linked_dirs, [fetch(:log_path), "app/sessions", "web/uploads"]
 
