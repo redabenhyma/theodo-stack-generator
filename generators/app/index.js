@@ -277,6 +277,7 @@ class StackGenerator extends Generator {
         'devops-symfony/deploy/stages/prod.rb',
         'devops-symfony/deploy/stages/staging.rb',
         'devops-symfony/deploy/deploy.rb',
+        'devops-symfony/deploy/tasks/yarn.cap',
         'devops-symfony/provisioning/group_vars/prod',
         'devops-symfony/provisioning/group_vars/staging',
         'devops-symfony/provisioning/group_vars/vagrant',
