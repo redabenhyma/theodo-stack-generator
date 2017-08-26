@@ -65,13 +65,6 @@ class StackGenerator extends Generator {
           name    : 'prodIpAddress',
           message : '[Provisioning/Deployment](Optionnal) Your production IP address',
           default : '',
-        },
-        {
-          type    : 'list',
-          name    : 'vagrantOs',
-          message : '[Varant] Choose your OS',
-          default : 'xenial',
-          choices : ['xenial', 'trusty']
         }
       ];
 
