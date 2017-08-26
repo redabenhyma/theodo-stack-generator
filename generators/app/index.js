@@ -35,7 +35,7 @@ class StackGenerator extends Generator {
         return Promise.resolve();
       }
 
-      return this.prompt([
+      const serverQuestions = [
         {
           type    : 'input',
           name    : 'stagingDatabasePassword',
@@ -73,10 +73,29 @@ class StackGenerator extends Generator {
           default : 'xenial',
           choices : ['xenial', 'trusty']
         }
-      ]);
+      ];
+
+      if (this.answers.backend === 'Loopback (nodejs)') {
+        serverQuestions.unshift({
+          type    : 'list',
+          name    : 'virtualEnv',
+          message : 'Choose between Docker and Vagrant for local development',
+          default : 'docker',
+          choices : ['docker', 'vagrant']
+        })
+      }
+      
+      return this.prompt(serverQuestions);
     })
     .then(serverAnswers => {
       this.answers = Object.assign(this.answers, serverAnswers);
+      if (this.answers.virtualEnv === 'docker') {
+        // docker database host is postgresql
+        this.answers.databaseHost = 'postgresql';
+      } else {
+        // vagrant database host is localhost
+        this.answers.databaseHost = 'localhost';
+      }
     })
   }
 
@@ -147,11 +166,20 @@ class StackGenerator extends Generator {
 
     if (this.answers.backend === 'Loopback (nodejs)') {
       files = files.concat([
-        'doc/installation-node.md',
         'doc/deployment-node.md',
         'doc/database-node.md',
         'doc/tests-node.md',
       ]);
+
+      if (this.answers.virtualEnv === 'vagrant') {
+        files = files.concat([
+          'doc/installation-node-vagrant.md',
+        ]);
+      } else if (this.answers.virtualEnv === 'docker'){
+        files = files.concat([
+          'doc/installation-node-docker.md',
+        ]);
+      }
     }
 
     if (this.answers.backend === 'API Platform (Symfony)') {
@@ -172,7 +200,7 @@ class StackGenerator extends Generator {
     return Promise.all(files.map(file => {
      return this.fs.copyTpl(
        this.templatePath(file),
-       this.destinationPath(file.replace(/-node|-symfony|-react-redux|-angular|-no-client/, '')),
+       this.destinationPath(file.replace(/-node|-symfony|-react-redux|-no-client|-vagrant|-docker/, '')),
        this.answers
      );
    }));
@@ -189,7 +217,6 @@ class StackGenerator extends Generator {
       '.editorconfig',
       '.eslintignore',
       'ansible.cfg',
-      'Vagrantfile',
     ];
 
     if (this.answers.backend === 'Loopback (nodejs)') {
@@ -199,6 +226,12 @@ class StackGenerator extends Generator {
         'yarn.lock',
         'pm2.yml',
         'shipitfile.js',
+      ])
+    }
+
+    if (this.answers.virtualEnv === 'vagrant') {
+      files = files.concat([
+        'Vagrantfile',        
       ])
     }
 
@@ -235,63 +268,74 @@ class StackGenerator extends Generator {
     }
 
     if (this.answers.backend === 'API Platform (Symfony)') {
-      this.fs.copy(
-        this.templatePath('devops-symfony/provisioning/roles'),
-        this.destinationPath('devops/provisioning/roles'),
-        this.answers
-      );
-
-
-      return Promise.all([
-        'Gemfile',
-        'Gemfile.lock',
-        'Capfile',
-        'devops-symfony/deploy/stages/prod.rb',
-        'devops-symfony/deploy/stages/staging.rb',
-        'devops-symfony/deploy/deploy.rb',
-        'devops-symfony/deploy/tasks/yarn.cap',
-        'devops-symfony/provisioning/group_vars/prod',
-        'devops-symfony/provisioning/group_vars/staging',
-        'devops-symfony/provisioning/group_vars/vagrant',
-        'devops-symfony/provisioning/hosts/prod',
-        'devops-symfony/provisioning/hosts/staging',
-        'devops-symfony/provisioning/hosts/vagrant',
-        'devops-symfony/provisioning/vars/main.yml',
-        'devops-symfony/provisioning/vars/ubuntu-xdebug.yml',
-        'devops-symfony/provisioning/playbook.yml',
-     ].map(file => {
-       return this.fs.copyTpl(
-         this.templatePath(file),
-         this.destinationPath(file.replace(/-node|-symfony/, '')),
-         this.answers
-       );
-     }));
+      return this._addSymfonyDevopsTemplates();
     }
 
     if (this.answers.backend === 'Loopback (nodejs)') {
-      this.fs.copy(
-        this.templatePath('devops-node/provisioning/roles'),
-        this.destinationPath('devops/provisioning/roles'),
-        this.answers
-      );
-
-      return Promise.all([
-       'devops-node/provisioning/group_vars/prod',
-       'devops-node/provisioning/group_vars/staging',
-       'devops-node/provisioning/group_vars/vagrant',
-       'devops-node/provisioning/hosts/prod',
-       'devops-node/provisioning/hosts/staging',
-       'devops-node/provisioning/hosts/vagrant',
-       'devops-node/provisioning/vars/main.yml',
-       'devops-node/provisioning/playbook.yml',
-     ].map(file => {
-       return this.fs.copyTpl(
-         this.templatePath(file),
-         this.destinationPath(file.replace(/-node|-symfony/, '')),
-         this.answers
-       );
-     }));
+      return this._addNodeDevopsTemplates();
     }
+  }
+
+  _addSymfonyDevopsTemplates () {
+    this.fs.copy(
+      this.templatePath('devops-symfony/provisioning/roles'),
+      this.destinationPath('devops/provisioning/roles'),
+      this.answers
+    );
+
+
+    return Promise.all([
+      'Gemfile',
+      'Gemfile.lock',
+      'Capfile',
+      'devops-symfony/deploy/stages/prod.rb',
+      'devops-symfony/deploy/stages/staging.rb',
+      'devops-symfony/deploy/deploy.rb',
+      'devops-symfony/deploy/tasks/yarn.cap',
+      'devops-symfony/provisioning/group_vars/prod',
+      'devops-symfony/provisioning/group_vars/staging',
+      'devops-symfony/provisioning/group_vars/vagrant',
+      'devops-symfony/provisioning/hosts/prod',
+      'devops-symfony/provisioning/hosts/staging',
+      'devops-symfony/provisioning/hosts/vagrant',
+      'devops-symfony/provisioning/vars/main.yml',
+      'devops-symfony/provisioning/vars/ubuntu-xdebug.yml',
+      'devops-symfony/provisioning/playbook.yml',
+   ].map(file => {
+     return this.fs.copyTpl(
+       this.templatePath(file),
+       this.destinationPath(file.replace(/-node|-symfony/, '')),
+       this.answers
+     );
+   }));
+  }
+
+  _addNodeDevopsTemplates () {
+    this.fs.copy(
+      this.templatePath('devops-node/provisioning/roles'),
+      this.destinationPath('devops/provisioning/roles'),
+      this.answers
+    );
+
+    return Promise.all([
+     'docker-compose-node.yml',
+     'Dockerfile-node',
+     'devops-node/docker/nginx.conf',
+     'devops-node/provisioning/group_vars/prod',
+     'devops-node/provisioning/group_vars/staging',
+     'devops-node/provisioning/group_vars/vagrant',
+     'devops-node/provisioning/hosts/prod',
+     'devops-node/provisioning/hosts/staging',
+     'devops-node/provisioning/hosts/vagrant',
+     'devops-node/provisioning/vars/main.yml',
+     'devops-node/provisioning/playbook.yml',
+   ].map(file => {
+     return this.fs.copyTpl(
+       this.templatePath(file),
+       this.destinationPath(file.replace(/-node|-symfony/, '')),
+       this.answers
+     );
+   }));
   }
 
   _addNodeServerTemplates () {

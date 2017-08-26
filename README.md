@@ -52,11 +52,8 @@ You need to install:
 + [Yeoman](http://yeoman.io/): `npm install -g yo`
 
 If you want a server (Symfony or Loopback) with the provisioning and the deployment scripts:
-+ [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-+ [Vagrant](https://www.vagrantup.com/downloads.html)
-+ [Ansible (version 2)](http://docs.ansible.com/ansible/intro_installation.html)
-+ [PHP](http://php.net/manual/en/intro-whatis.php) if you want to use API plateform (Symfony) :
-  - Symfony requires you to configure your [local PHP timezone ](https://stackoverflow.com/questions/20743060/symfony2-and-date-default-timezone-get-it-is-not-safe-to-rely-on-the-system)
++ [docker-compose](https://docs.docker.com/compose/install/#prerequisites) **OR** [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html)
++ [Ansible (version >= 2)](http://docs.ansible.com/ansible/intro_installation.html)
 
 
 ## Installation
