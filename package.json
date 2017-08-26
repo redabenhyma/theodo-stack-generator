@@ -1,7 +1,7 @@
 {
   "name": "generator-theodo-stack",
   "version": "0.1.0",
-  "description": "Generates a Ansible + PHP/Node + Angular/React-Redux application",
+  "description": "Generates a Ansible + PHP/Node +/React-Redux application",
   "keywords": [
     "yeoman-generator"
   ],

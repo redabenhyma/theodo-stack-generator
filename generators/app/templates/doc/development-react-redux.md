@@ -10,11 +10,15 @@ In the client folder, run:
 
 - `yarn test` to launch the tests.
 
-## How to develop using webpack
+## How to develop using webpack with docker
+
+It works well, you don't have anything to do in particular!
+
+## How to develop using webpack with Vagrant
 
  Webpack can watch your frontend files and recompiles the code automatically as soon as you change your code.
 
- :bangbang: The webpack live-reloading is really slow in a virtual machine such as Vagrant. To avoid that, run the webpack-dev-server on your local environment, but run your server in a virtual machine.
+ :bangbang: The webpack live-reloading is really slow in a virtual machine such as Vagrant. To avoid that, run `cd client && yarn start` on your local environment, but run your server in the Vagrant
 
  If you have a server in a Vagrant, consider it as an external API that you will query from your local app.
 

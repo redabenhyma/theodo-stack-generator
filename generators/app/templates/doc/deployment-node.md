@@ -11,4 +11,9 @@
 ./node_modules/.bin/shipit staging deploy
 ```
 
-If deployment fails, it maybe because npm install requires a lot of memory. To bypass this issue, [add some swap file](https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/)
+If deployment fails, it maybe because:
+
+- yarn/npm install requires a lot of memory. To bypass this issue, [add some swap file](https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/)
+
+- yarn don't have enough permissions to write its cache
+  - Try to use npm inside the `shipitfile.js`

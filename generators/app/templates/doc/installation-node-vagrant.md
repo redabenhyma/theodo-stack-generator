@@ -1,6 +1,5 @@
 ## Installation
 
-#### Create the vagrant
 - Launch VM:
 
   - `vagrant up`
@@ -39,7 +38,7 @@ Now, you are set up !
 You can browse a static page served by Loopback at the following url : `https://10.0.0.10`
 You can also browse Loopback's explorer at : `https://10.0.0.10/explorer`
 
-### Migrations:
+#### Migrations:
 
 In your vagrant, run:
 
