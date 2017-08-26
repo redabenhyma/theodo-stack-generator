@@ -26,7 +26,7 @@ Choose a server between:
   - Shipit deployment script
 
 
-Choose a client between:
+Choose if you want the client:
 
 - React-Redux: A boosted [create-react-app](https://github.com/facebookincubator/create-react-app) with
   - redux
@@ -35,9 +35,6 @@ Choose a client between:
   - react-intl with nested translations files!
   - react-router for routing
   - examples of unit and snapshot tests
-
-- Angular 4: The [Angular starter boilerplate](https://github.com/AngularClass/angular-starter)
-
 
 ## What's next ?
 

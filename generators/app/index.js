@@ -24,16 +24,12 @@ class StackGenerator extends Generator {
         name    : 'client',
         message : 'Choose your client',
         default : 'react-redux',
-        choices : ['react-redux', 'angular4', 'none']
+        choices : ['react-redux', 'none']
       },
     ])
     .then(answers => {
       this.answers = answers;
       this.answers.clientPublicDirectory = 'client/build';
-
-      if (this.answers.client === 'angular4') {
-        this.answers.clientPublicDirectory = 'client/dist';
-      }
 
       if (this.answers.backend === 'none') {
         return Promise.resolve();
@@ -128,20 +124,6 @@ class StackGenerator extends Generator {
     this.fs.writeJSON(this.destinationPath('./client/package.json'), content);
   }
 
-  _addAngularBoilerplate() {
-    this.log('Cloning angular starter');
-    this.spawnCommandSync('git', [
-      'clone',
-      '--branch',
-      'v5.2.0',
-      'https://github.com/AngularClass/angular-starter.git',
-      'client'
-    ]);
-
-    this.log('Remove client git history');
-    this.spawnCommandSync('rm', ['-rf', 'client/.git']);
-  }
-
   _addClient() {
     if (this.answers.client === 'none') {
       return Promise.resolve();
@@ -149,10 +131,6 @@ class StackGenerator extends Generator {
 
     if (this.answers.client === 'react-redux') {
       this._addReactBoilerplate()
-    }
-
-    if (this.answers.client === 'angular4') {
-      this._addAngularBoilerplate()
     }
   }
 
@@ -182,12 +160,6 @@ class StackGenerator extends Generator {
         'doc/deployment-symfony.md',
         'doc/database-symfony.md',
         'doc/tests-symfony.md',
-      ]);
-    }
-
-    if (this.answers.client === 'angular4') {
-      files = files.concat([
-        'doc/development-angular.md',
       ]);
     }
 
