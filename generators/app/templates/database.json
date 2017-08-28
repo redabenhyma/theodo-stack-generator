@@ -4,7 +4,7 @@
     "database": "<%= appName %>",
     "user": "<%= appName %>",
     "password": "<%= appName %>",
-    "host": "localhost",
+    "host": "<%= databaseHost %>",
     "port": 5432
   },
   "production": {

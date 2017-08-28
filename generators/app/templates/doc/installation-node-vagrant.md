@@ -1,12 +1,12 @@
 ## Installation
 
-#### Create the vagrant
 - Launch VM:
 
   - `vagrant up`
 
   - If you encounter error `ttyname failed: Inappropriate ioctl for devices`:
     - Update vagrant to the latest version from the website (it works on 1.9.5)
+  - If your vagrant is not synchronized with your local environment, check that the vagrant linux distribution is compatible with your operation system.
 
 - Add your ssh key in the vagrant:
   - `vagrant ssh`
@@ -39,7 +39,7 @@ Now, you are set up !
 You can browse a static page served by Loopback at the following url : `https://10.0.0.10`
 You can also browse Loopback's explorer at : `https://10.0.0.10/explorer`
 
-### Migrations:
+#### Migrations:
 
 In your vagrant, run:
 

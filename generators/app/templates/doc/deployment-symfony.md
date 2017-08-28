@@ -20,6 +20,10 @@
   - The first deployment will create the structure of the project. It will fail because the `parameters.yml` file is not present in the the shared folder, you have to **create it now**.
   - Deploy the code again
 
-@TODO:
-- add `yarn && yarn build` as a deploy task
-- add the symlink between web and build as a deploy task
+
+If deployment fails, it maybe because:
+
+- yarn/npm install requires a lot of memory. To bypass this issue, [add some swap file](https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/)
+
+- yarn don't have enough permissions to write its cache
+  - Try to use npm inside the `shipitfile.js`
