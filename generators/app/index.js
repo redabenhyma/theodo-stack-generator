@@ -17,7 +17,7 @@ class StackGenerator extends Generator {
         name    : 'backend',
         message : 'Choose your backend',
         default : 'No backend',
-        choices : ['No backend', 'API Platform (Symfony)', 'Loopback (nodejs)']
+        choices : ['No backend', 'API Platform (Symfony)', 'API Platform (Django)', 'Loopback (nodejs)']
       },
       {
         type    : 'list',
@@ -35,7 +35,7 @@ class StackGenerator extends Generator {
         return Promise.resolve();
       }
 
-      const serverQuestions = [
+      let serverQuestions = [
         {
           type    : 'input',
           name    : 'stagingDatabasePassword',
@@ -76,6 +76,10 @@ class StackGenerator extends Generator {
           default : 'docker',
           choices : ['docker', 'vagrant']
         })
+      }
+
+      if (this.answers.backend === 'API Platform (Django)') {
+        serverQuestions = [];
       }
       
       return this.prompt(serverQuestions);
@@ -404,11 +408,38 @@ class StackGenerator extends Generator {
     return Promise.resolve();
   }
 
+
+  _addDjangoServer () {
+    this.spawnCommandSync(this.templatePath('django_bootstrap.sh'), [this.answers.appName]);
+    const settingsPath = `${this.answers.appName}/${this.answers.appName}`;
+    const newSettingsPath = `${settingsPath}/settings`;
+    this.spawnCommandSync('mkdir', [`${newSettingsPath}`]);
+    this.spawnCommandSync('mv', [`${settingsPath}/settings.py`, `${newSettingsPath}/base.py`]);
+    const settingsFiles = ['test.py', 'dev.py', 'prod.py']
+    this.spawnCommandSync('touch', [`${newSettingsPath}/__init__.py`]);
+    settingsFiles.forEach((settingsFile => {
+      this.spawnCommandSync('touch', [`${newSettingsPath}/${settingsFile}`]);
+      this.fs.write(`${newSettingsPath}/${settingsFile}`, 'from .base import *');
+    }));
+    const appName = this.answers.appName
+    this.fs.copy(`${appName}/manage.py`, `${appName}/manage.py`, {
+      process: function(content) {
+        var regEx = new RegExp(`auto.settings`, 'g');
+        var newContent = content.toString().replace(regEx, `${appName}.settings.dev`);
+        return newContent;
+      }
+    });
+
+    return Promise.resolve();
+  }
+
   _addServer () {
     if (this.answers.backend === 'Loopback (nodejs)') {
       return this._addNodeServerTemplates();
     } else if (this.answers.backend === 'API Platform (Symfony)') {
       return this._addSymfonyServer();
+    } else if (this.answers.backend === 'API Platform (Django)') {
+      return this._addDjangoServer();
     } else {
       return Promise.resolve();
     }
@@ -416,11 +447,23 @@ class StackGenerator extends Generator {
 
   installProject() {
     return this._addServer()
-    .then(() => this._addConfigurationTemplates())
-    .then(() => this._addDocumentation())
-    .then(() => this._addProvisioningTemplates())
-    .then(() => this._addMigrationsTemplates())
-    .then(() => this._addClient())
+      .then(() => {
+        if (this.answers.backend === 'API Platform (Django)') {
+          return Promise.resolve()
+        } else {
+          return this._addConfigurationTemplates()
+        }
+      })
+      .then(() => this._addDocumentation())
+      .then(() => {
+        if (this.answers.backend === 'API Platform (Django)') {
+          return Promise.resolve()
+        } else {
+          return this._addProvisioningTemplates()
+        }
+      })
+      .then(() => this._addMigrationsTemplates())
+      .then(() => this._addClient())
   }
 
 
