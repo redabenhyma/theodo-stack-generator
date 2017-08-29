@@ -60,8 +60,11 @@ If you want a server (Symfony or Loopback) with the provisioning and the deploym
 
 ### Install the generator
 
+- Install nvm: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+`
 - Install the package:
 ```
+nvm install 8.4.0
 git clone git@github.com:theodo/theodo-stack-generator.git
 cd theodo-stack-generator && yarn && npm link && cd ../
 npm install -g theodo-stack-generator
@@ -75,17 +78,9 @@ mkdir myApp && cd myApp
 yo theodo-stack
 ```
 
-If you choose API Platform, you will be prompt to enter:
-- `database_driver`, enter: `pdo_pgsql` to use postgresql which is already provisioned by ansible.
-- `database_port`, enter: `5432`
-- `database_name`, enter your **app name**.
-- `database_user`, enter your **app name**.
+You will be prompted for a backend. If you just want to create a React-Redux app, choose **none**.
 
 Then follow the generated documentation installation steps.
-
-## Troubleshooting
-
-At the moment, the `xubuntu` distrib doesn't support the vagrant `synced_folder` parameter with `xenial` OS, please choose `trusty` option if you are in that case
 
 ## Contributing to the generator
 
