@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import Home from './Home.component';
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps() {
   return {};
 }
 

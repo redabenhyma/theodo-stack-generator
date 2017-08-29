@@ -9,10 +9,10 @@ describe('The page component', () => {
     intl: {
       formatMessage: jest.fn(),
     },
-  }
+  };
   beforeEach(() => {
     wrapper = shallow(<Page {...props} />);
-  })
+  });
 
   it('should contain one link', () => {
     const links = wrapper.find('Link');
@@ -20,5 +20,5 @@ describe('The page component', () => {
     const link = links.first();
     expect(link.text()).toEqual('<Link />');
     expect(link.prop('to')).toEqual('/');
-  })
-})
+  });
+});
