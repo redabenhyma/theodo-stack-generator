@@ -2,6 +2,4 @@
  * Index for components
  */
 
-import Root from './Root';
-
-export default Root;
+export { default as Root } from './Root'; // eslint-disable-line
