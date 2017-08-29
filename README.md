@@ -1,8 +1,10 @@
 # Theodo stack generator
 
-This generator scripts everything you need to start a project.
+This generator scripts everything you need to start a React-Redux project with either no backend, API Platform (Symfony) or Loopback (nodejs)
 
 Choose a server between:
+
+- No server at all. You just want an awesome frontend.
 
 - [Api platform](https://api-platform.com/) with:
   - Ansible provisioning for:
@@ -33,13 +35,12 @@ Choose if you want the client:
   - redux-saga
   - hot-reloading
   - react-intl with nested translations files!
-  - react-router for routing
+  - react-router for creating multiples pages
   - examples of unit and snapshot tests
+  - Eslint with airbnb linter
 
 ## What's next ?
 
-- Linters
-- Unit tests
 - End-to-end tests
 - Authentication
 - Vault ansible files to be able to commit them.
@@ -47,7 +48,6 @@ Choose if you want the client:
 ## Prerequisites
 
 You need to install:
-+ Node.js 8 + Npm (install it with [nvm](https://github.com/creationix/nvm)): `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
 + [Yarn](https://yarnpkg.com/en/docs/install)
 + [Yeoman](http://yeoman.io/): `npm install -g yo`
 
@@ -60,8 +60,10 @@ If you want a server (Symfony or Loopback) with the provisioning and the deploym
 
 ### Install the generator
 
-- Install nvm: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-`
+- Install nvm: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
+
+- Install Yeoman globally: `npm install -g yo`
+
 - Install the package:
 ```
 nvm install 8.4.0
@@ -78,7 +80,7 @@ mkdir myApp && cd myApp
 yo theodo-stack
 ```
 
-You will be prompted for a backend. If you just want to create a React-Redux app, choose **none**.
+You will be prompted for a backend. If you just want to create a React-Redux app, choose **none** and then React-Redux.
 
 Then follow the generated documentation installation steps.
 
