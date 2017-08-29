@@ -124,6 +124,8 @@ class StackGenerator extends Generator {
     let content = {
       scripts: {
         analyze: 'source-map-explorer build/static/js/main.*',
+        lint: 'eslint --ext .jsx,.js -c .eslintrc src',
+        nsp: 'nsp check',
       },
       dependencies: {
         'enzyme': '2.9.1',
