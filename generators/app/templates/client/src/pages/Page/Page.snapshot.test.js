@@ -8,7 +8,13 @@ describe('The page component', () => {
       intl: {
         formatMessage: jest.fn(),
       },
-    }
+      addItem: jest.fn(),
+      items: [
+        { id: 1, label: 'item 1' },
+        { id: 2, label: 'item 2' },
+        { id: 3, label: 'item 3' },
+      ],
+    };
     const tree = createComponentWithIntl(<Page {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   })

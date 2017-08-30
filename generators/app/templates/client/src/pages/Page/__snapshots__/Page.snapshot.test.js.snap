@@ -13,5 +13,25 @@ exports[`The page component should renders correctly 1`] = `
     </span>
   </a>
   <p />
+  <button
+    onClick={[Function]}
+  >
+    <span>
+      Click sur moi
+    </span>
+  </button>
+  <div
+    className="itemContainer"
+  >
+    <div>
+      item 1
+    </div>
+    <div>
+      item 2
+    </div>
+    <div>
+      item 3
+    </div>
+  </div>
 </div>
 `;
