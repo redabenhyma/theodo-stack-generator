@@ -14,15 +14,12 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "react"
-  ],
   "globals": {
     "jest": false,
     "expect": false
   },
   "rules": {
-    "react/jsx-filename-extension": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": 0,
     "react/require-default-props": 0
   }

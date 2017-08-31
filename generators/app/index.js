@@ -16,22 +16,22 @@ class StackGenerator extends Generator {
         type    : 'list',
         name    : 'backend',
         message : 'Choose your backend',
-        default : 'API Platform (Symfony)',
-        choices : ['API Platform (Symfony)', 'Loopback (nodejs)', 'none']
+        default : 'No backend',
+        choices : ['No backend', 'API Platform (Symfony)', 'Loopback (nodejs)']
       },
       {
         type    : 'list',
         name    : 'client',
         message : 'Choose your client',
         default : 'react-redux',
-        choices : ['react-redux', 'none']
+        choices : ['react-redux', 'No client']
       },
     ])
     .then(answers => {
       this.answers = answers;
       this.answers.clientPublicDirectory = 'client/build';
 
-      if (this.answers.backend === 'none') {
+      if (this.answers.backend === 'No backend') {
         return Promise.resolve();
       }
 
@@ -112,13 +112,8 @@ class StackGenerator extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath('client/eslintrc'),
-      this.destinationPath('client/.eslintrc'),
-    );
-
-    this.fs.copy(
-      this.templatePath('client/eslintignore'),
-      this.destinationPath('client/.eslintignore'),
+      this.templatePath('client/.*'),
+      this.destinationPath('client/'),
     );
 
     let content = {
@@ -141,10 +136,12 @@ class StackGenerator extends Generator {
         'whatwg-fetch': '2.0.3'
       },
       devDependencies: {
-        'babel-eslint':'7.2.3',
-        'eslint': '4.5.0',
-        'eslint-config-airbnb': '15.1.0',
-        'eslint-plugin-react': '7.3.0',
+        'babel-eslint': '7.2.3',
+        'eslint': '^4.3.0',
+        'eslint-config-airbnb': '^15.1.0',
+        'eslint-plugin-import': '^2.7.0',
+        'eslint-plugin-jsx-a11y': '^5.1.1',
+        'eslint-plugin-react': '^7.1.0',
         'nsp': '2.7.0',
       },
     };
@@ -158,7 +155,7 @@ class StackGenerator extends Generator {
   }
 
   _addClient() {
-    if (this.answers.client === 'none') {
+    if (this.answers.client === 'No client') {
       return Promise.resolve();
     }
 
@@ -172,7 +169,7 @@ class StackGenerator extends Generator {
       'README.md',
     ];
 
-    if (this.answers.backend !== 'none') {
+    if (this.answers.backend !== 'No backend') {
       files = files.concat([
         'doc/provisioning.md',
       ]);
@@ -221,7 +218,7 @@ class StackGenerator extends Generator {
   }
 
   _addConfigurationTemplates () {
-    if (this.answers.backend === 'none') {
+    if (this.answers.backend === 'No backend') {
       return Promise.resolve();
     }
 
@@ -277,7 +274,7 @@ class StackGenerator extends Generator {
   }
 
   _addProvisioningTemplates () {
-    if (this.answers.backend === 'none') {
+    if (this.answers.backend === 'No backend') {
       return Promise.resolve();
     }
 
@@ -434,7 +431,7 @@ class StackGenerator extends Generator {
       this.spawnCommandSync('yarn');
     };
 
-    if (this.answers.backend === 'none') {
+    if (this.answers.backend === 'No backend') {
       return Promise.resolve();
     }
 
