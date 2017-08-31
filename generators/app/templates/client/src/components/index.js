@@ -2,4 +2,4 @@
  * Index for components
  */
 
-export { default as Root } from './Root'; // eslint-disable-line
+export { default as Root } from './Root';

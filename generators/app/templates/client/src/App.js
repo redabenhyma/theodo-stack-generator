@@ -6,8 +6,8 @@ import routes from './routes';
 
 class App extends React.Component {
   static propTypes = {
-    store: PropTypes.object.isRequired, // eslint-disable-line
-    history: PropTypes.object.isRequired, // eslint-disable-line
+    store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   };
 
   render() {
