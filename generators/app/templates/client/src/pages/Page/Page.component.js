@@ -6,15 +6,15 @@ import './style.css';
 
 export default class Page extends Component {
   static propTypes = {
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired, // eslint-disable-line
   };
 
   render() {
     const { formatMessage } = this.props.intl;
     return (
-      <div className='page-container'>
-        <Link to='/'>
-          <FormattedMessage id='page.back' />
+      <div className="page-container">
+        <Link to="/">
+          <FormattedMessage id="page.back" />
         </Link>
         <p>{formatMessage({ id: 'page.api-to-translate-example' })}</p>
       </div>

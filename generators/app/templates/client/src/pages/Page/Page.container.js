@@ -5,11 +5,11 @@ import Page from './Page.component';
 
 const PageWithIntl = injectIntl(Page);
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps() {
   return {};
 }
 

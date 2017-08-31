@@ -4,10 +4,10 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import PropTypes from 'prop-types';
 
 import fr from 'react-intl/locale-data/fr';
-import en from 'react-intl/locale-data/fr';
+import en from 'react-intl/locale-data/en';
 import frMessages from '../../translations/fr.json';
 import enMessages from '../../translations/en.json';
-import { flattenMessages } from '../../utils/intl';
+import { flattenMessages } from '../../utils/i18n/intl';
 import logo from './logo.svg';
 import './style.css';
 
@@ -25,10 +25,10 @@ export default class Root extends Component {
 
   render() {
     return (
-      <IntlProvider locale='fr' messages={locales['fr']} >
-        <div className='App'>
-          <div className='App-header'>
-            <img src={logo} className='App-logo' alt='logo' />
+      <IntlProvider locale="fr" messages={locales.fr} >
+        <div className="App">
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
             <h2>Welcome to React</h2>
           </div>
           {this.props.children}

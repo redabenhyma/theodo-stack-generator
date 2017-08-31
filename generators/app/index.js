@@ -16,22 +16,22 @@ class StackGenerator extends Generator {
         type    : 'list',
         name    : 'backend',
         message : 'Choose your backend',
-        default : 'API Platform (Symfony)',
-        choices : ['API Platform (Symfony)', 'Loopback (nodejs)', 'none']
+        default : 'No backend',
+        choices : ['No backend', 'API Platform (Symfony)', 'Loopback (nodejs)']
       },
       {
         type    : 'list',
         name    : 'client',
         message : 'Choose your client',
         default : 'react-redux',
-        choices : ['react-redux', 'none']
+        choices : ['react-redux', 'No client']
       },
     ])
     .then(answers => {
       this.answers = answers;
       this.answers.clientPublicDirectory = 'client/build';
 
-      if (this.answers.backend === 'none') {
+      if (this.answers.backend === 'No backend') {
         return Promise.resolve();
       }
 
@@ -93,51 +93,69 @@ class StackGenerator extends Generator {
   }
 
   _addReactBoilerplate() {
+    this.log('Installing or updating create-react-app');
     this.spawnCommandSync('npm', ['install', '-g', 'create-react-app']);
-    this.log('Using create-react-app');
+    this.spawnCommandSync('npm', ['update', '-g', 'create-react-app']);
+
+    this.log('Starting create-react-app generator');
     this.spawnCommandSync('create-react-app', ['client']);
 
+    this.log('Removing create-react-app generator boilerplate');
     this.spawnCommandSync('rm', ['client/src/App.js']);
     this.spawnCommandSync('rm', ['client/src/App.test.js']);
     this.spawnCommandSync('rm', ['client/src/index.js']);
 
+    this.log('Copying new files for create-react-app');
     this.fs.copy(
       this.templatePath('client/src'),
       this.destinationPath('client/src'),
-      this.answers
-    )
+    );
+
+    this.fs.copy(
+      this.templatePath('client/.*'),
+      this.destinationPath('client/'),
+    );
 
     let content = {
       scripts: {
         analyze: 'source-map-explorer build/static/js/main.*',
+        lint: 'eslint --ext .jsx,.js -c .eslintrc src',
+        nsp: 'nsp check',
       },
       dependencies: {
         'enzyme': '2.9.1',
+        'prop-types': '15.5.10',
         'react-intl': '2.3.0',
         'react-redux': '4.4.6',
         'react-router': '3.0.0',
-        'react-router-redux': '4.0.6',
+        'react-router-redux': '4.0.8',
         'react-test-renderer': '15.6.1',
         'redux':'3.7.2',
         'redux-saga': '0.15.6',
         'source-map-explorer': '^1.4.0',
+        'whatwg-fetch': '2.0.3'
       },
       devDependencies: {
-        'eslint': '3.9.1',
-        'babel-eslint':'7.1.1',
-        'nsp': '2.6.3'
+        'babel-eslint': '7.2.3',
+        'eslint': '^4.3.0',
+        'eslint-config-airbnb': '^15.1.0',
+        'eslint-plugin-import': '^2.7.0',
+        'eslint-plugin-jsx-a11y': '^5.1.1',
+        'eslint-plugin-react': '^7.1.0',
+        'nsp': '2.7.0',
       },
     };
     try {
       let existingPackage = this.fs.readJSON('./client/package.json');
       content = _.merge(content, existingPackage);
     } catch (e) {}
+    this.log('Updating package.json');
     this.spawnCommandSync('rm', ['client/package.json']);
     this.fs.writeJSON(this.destinationPath('./client/package.json'), content);
   }
 
   _addClient() {
-    if (this.answers.client === 'none') {
+    if (this.answers.client === 'No client') {
       return Promise.resolve();
     }
 
@@ -151,7 +169,7 @@ class StackGenerator extends Generator {
       'README.md',
     ];
 
-    if (this.answers.backend !== 'none') {
+    if (this.answers.backend !== 'No backend') {
       files = files.concat([
         'doc/provisioning.md',
       ]);
@@ -200,7 +218,7 @@ class StackGenerator extends Generator {
   }
 
   _addConfigurationTemplates () {
-    if (this.answers.backend === 'none') {
+    if (this.answers.backend === 'No backend') {
       return Promise.resolve();
     }
 
@@ -256,7 +274,7 @@ class StackGenerator extends Generator {
   }
 
   _addProvisioningTemplates () {
-    if (this.answers.backend === 'none') {
+    if (this.answers.backend === 'No backend') {
       return Promise.resolve();
     }
 
@@ -413,7 +431,7 @@ class StackGenerator extends Generator {
       this.spawnCommandSync('yarn');
     };
 
-    if (this.answers.backend === 'none') {
+    if (this.answers.backend === 'No backend') {
       return Promise.resolve();
     }
 

@@ -1,11 +1,11 @@
-import Root from './Root.component';
 import { connect } from 'react-redux';
+import Root from './Root.component';
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps() {
   return {};
 }
 
