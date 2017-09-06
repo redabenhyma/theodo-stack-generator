@@ -6,19 +6,15 @@ import Page from './Page.component';
 
 const PageWithIntl = injectIntl(Page);
 
-function mapStateToProps(state) {
-  return {
-    items: state.page.list,
-  };
-}
+const mapStateToProps = state => ({
+  items: state.page.list,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addItem(item) {
-      dispatch(addItem(item));
-    },
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  addItem(item) {
+    dispatch(addItem(item));
+  },
+});
 
 export default connect(
   mapStateToProps,

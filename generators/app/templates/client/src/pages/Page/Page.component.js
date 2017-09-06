@@ -14,6 +14,13 @@ export default class Page extends Component {
     addItem: PropTypes.func.isRequired,
   };
 
+  handleClick = () => {
+    // "this" is the right instance of this component
+    // For performance reasons, you should avoid<button onClick={() => this.props.addItem('new item')}>
+    // https://medium.com/netscape/react-performance-anti-pattern-creating-functions-in-render-ddeb5ebd2933)
+    this.props.addItem('new item');
+  }
+
   render() {
     const { formatMessage } = this.props.intl;
     return (
@@ -22,7 +29,7 @@ export default class Page extends Component {
           <FormattedMessage id="page.back" />
         </Link>
         <p>{formatMessage({ id: 'page.api-to-translate-example' })}</p>
-        <button onClick={() => this.props.addItem('new item')}>
+        <button onClick={this.handleClick}>
           <FormattedMessage id="home.click-me" />
         </button>
         <div className="itemContainer">
