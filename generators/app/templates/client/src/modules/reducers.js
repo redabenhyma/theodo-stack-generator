@@ -6,6 +6,12 @@
 import { combineReducers } from 'redux';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
+/**
+ * Example of the Page module which should export a reducer.
+ */
+import page from '../pages/Page/module';
+
+
 /*
  * routeReducer
  *
@@ -39,5 +45,6 @@ export default function createReducer(asyncReducers) {
   return combineReducers({
     routing: routeReducer,
     ...asyncReducers,
+    page,
   });
 }
