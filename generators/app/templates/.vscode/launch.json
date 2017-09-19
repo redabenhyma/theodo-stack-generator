@@ -1,0 +1,63 @@
+{
+  "version": "0.1.0",
+  "configurations": [
+    // Python debug configurations
+    {
+      "name": "Python debug",
+      "type": "python",
+      "pythonPath": "${workspaceRoot}/venv/bin/python3",
+      "request": "launch",
+      "stopOnEntry": false,
+      "console": "integratedTerminal",
+      "program": "${workspaceRoot}/backend/manage.py",
+      "args": ["runserver", "--noreload"],
+      "cwd": "${workspaceRoot}/backend",
+      "debugOptions": [
+        // "DebugStdLib", // if you'd like to debug libraries
+        "WaitOnAbnormalExit",
+        "WaitOnNormalExit",
+        "RedirectOutput"
+      ]
+    },
+    // React Native debug configurations
+    {
+      "name": "Debug Android",
+      "type": "reactnative",
+      "request": "launch",
+      "stopOnEntry": false,
+      "console": "integratedTerminal",
+      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+      "platform": "android",
+      "sourceMaps": true,
+      "outFiles": ["${workspaceRoot}/.vscode/.react"]
+    },
+    {
+      "name": "Debug iOS",
+      "type": "reactnative",
+      "request": "launch",
+      "stopOnEntry": false,
+      "console": "integratedTerminal",
+      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+      "platform": "ios",
+      "target": "iPhone 6s",
+      "sourceMaps": true,
+      "outFiles": ["${workspaceRoot}/.vscode/.react"]
+    },
+    {
+      "name": "Attach to packager",
+      "type": "reactnative",
+      "request": "attach",
+      "console": "integratedTerminal",
+      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+      "sourceMaps": true,
+      "outFiles": ["${workspaceRoot}/.vscode/.react"]
+    },
+    {
+      "name": "React",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceRoot}/frontend"
+    }
+  ]
+}

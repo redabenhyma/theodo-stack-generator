@@ -1,0 +1,16 @@
+{
+  // Code formatting
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "autopep8",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "files.trimTrailingWhitespace": true,
+  // Search
+  "search.exclude": {
+    "**/node_modules": false
+  },
+  // Python versions
+  "python.envFile": "${workspaceRoot}/.vscode/.env",
+  "python.venvPath": "${workspaceRoot}/venv",
+  "python.pythonPath": "${workspaceRoot}/venv/bin/python3"
+}
