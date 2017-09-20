@@ -102,6 +102,8 @@ class StackGenerator extends Generator {
 
     this.log('Removing create-react-app generator boilerplate');
     this.spawnCommandSync('rm', ['client/src/App.js']);
+    this.spawnCommandSync('rm', ['client/src/App.css']);
+    this.spawnCommandSync('rm', ['client/src/logo.svg']);
     this.spawnCommandSync('rm', ['client/src/App.test.js']);
     this.spawnCommandSync('rm', ['client/src/index.js']);
 
