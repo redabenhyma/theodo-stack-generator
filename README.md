@@ -49,7 +49,6 @@ Choose if you want the client:
 
 You need to install:
 + [Yarn](https://yarnpkg.com/en/docs/install)
-+ [Yeoman](http://yeoman.io/): `npm install -g yo`
 
 If you want a server (Symfony or Loopback) with the provisioning and the deployment scripts:
 + [docker-compose](https://docs.docker.com/compose/install/#prerequisites) **OR** [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html)
@@ -62,11 +61,12 @@ If you want a server (Symfony or Loopback) with the provisioning and the deploym
 
 - Install nvm: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
 
+- Install node 8.4: `nvm install 8.4.0`
+
 - Install Yeoman globally: `npm install -g yo`
 
 - Install the package:
 ```
-nvm install 8.4.0
 git clone git@github.com:theodo/theodo-stack-generator.git
 cd theodo-stack-generator && yarn && npm link && cd ../
 npm install -g theodo-stack-generator
