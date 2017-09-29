@@ -94,8 +94,7 @@ class StackGenerator extends Generator {
 
   _addReactBoilerplate() {
     this.log('Installing or updating create-react-app');
-    this.spawnCommandSync('npm', ['install', '-g', 'create-react-app']);
-    this.spawnCommandSync('npm', ['update', '-g', 'create-react-app']);
+    this.spawnCommandSync('npm', ['install', '-g', 'create-react-app@1.0.14']);
 
     this.log('Starting create-react-app generator');
     this.spawnCommandSync('create-react-app', ['client']);
@@ -128,8 +127,8 @@ class StackGenerator extends Generator {
         'enzyme': '2.9.1',
         'prop-types': '15.5.10',
         'react-intl': '2.3.0',
-        'react-redux': '4.4.6',
-        'react-router': '3.0.0',
+        'react-redux': '5.0.6',
+        'react-router': '3.2.0',
         'react-router-redux': '4.0.8',
         'react-test-renderer': '15.6.1',
         'redux':'3.7.2',
