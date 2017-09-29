@@ -61,7 +61,10 @@ If you want a server (Symfony or Loopback) with the provisioning and the deploym
 
 - Install nvm: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
 
-- Install node 8.4: `nvm install 8.4.0`
+- Install node 8.4:
+  - `nvm install 8.4.0`
+  - `nvm alias default 8.4`
+  - `nvm use default`
 
 - Install Yeoman globally: `npm install -g yo`
 
