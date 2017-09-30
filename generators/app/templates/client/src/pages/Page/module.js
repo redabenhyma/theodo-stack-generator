@@ -5,23 +5,82 @@
  * 
  */
 
- /**
+/**
  * Constants should be scoped to their module: use the string Page/ADD_ITEM instead of ADD_ITEM
  */
-const ADD_ITEM = 'Page/ADD_ITEM';
 
-export function addItem(item) {
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import request from '../../utils/networking/request';
+
+export const UPDATE_USER_ID = 'Page/UPDATE_USER_ID';
+
+export function updateUserId(userId) {
   return {
-    type: ADD_ITEM,
-    payload: item,
+    type: UPDATE_USER_ID,
+    payload: userId,
   };
 }
 
+
+export const USER_FETCH_REQUEST = 'Page/USER_FETCH_REQUEST';
+export const USER_FETCH_SUCCESS = 'Page/USER_FETCH_SUCCESS';
+export const USER_FETCH_ERROR = 'Page/USER_FETCH_ERROR';
+
+export function fetchUserRequest(userId) {
+  return {
+    type: USER_FETCH_REQUEST,
+    payload: { userId },
+  };
+}
+
+export function fetchUserSuccess(user) {
+  return {
+    type: USER_FETCH_SUCCESS,
+    payload: user,
+  };
+}
+
+export function fetchUserError(error) {
+  return {
+    type: USER_FETCH_ERROR,
+    payload: error.message,
+  };
+}
+
+// worker Saga: will be fired on USER_FETCH_REQUEST actions
+export function* fetchUser(action) {
+  const url = `https://api.github.com/users/${action.payload.userId}`;
+  try {
+    const user = yield call(request, url);
+    yield put(fetchUserSuccess(user));
+  } catch (error) {
+    yield put(fetchUserError(error));
+  }
+}
+
+/*
+  Behavior similar to redux-thunk
+  Starts fetchUser on each dispatched `USER_FETCH_REQUEST` action.
+  Allows concurrent fetches of user.
+*/
+export function* fetchUserSaga() {
+  yield takeEvery(USER_FETCH_REQUEST, fetchUser);
+}
+
+
+/*
+  Alternatively you may use takeLatest.
+
+  Does not allow concurrent fetches of user. If USER_FETCH_REQUEST gets
+  dispatched while a fetch is already pending, that pending fetch is cancelled
+  and only the latest one will be run.
+*/
+export function* fetchUserSagaWithNonConcurrency() {
+  yield takeLatest(USER_FETCH_REQUEST, fetchUser);
+}
+
 const initialState = {
-  list: [
-    { id: 1, label: 'item1' },
-    { id: 2, label: 'item2' },
-  ],
+  userAvatarUrl: null,
 };
 
 /**
@@ -29,13 +88,15 @@ const initialState = {
  */
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_ITEM:
+    case UPDATE_USER_ID:
       return {
         ...state,
-        list: [
-          ...state.list,
-          { id: state.list.length + 1, label: action.payload },
-        ],
+        userId: action.payload,
+      };
+    case USER_FETCH_SUCCESS:
+      return {
+        ...state,
+        userAvatarUrl: action.payload.avatar_url,
       };
     default:
       return state;
