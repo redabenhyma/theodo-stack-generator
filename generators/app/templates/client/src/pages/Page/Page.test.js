@@ -1,20 +1,20 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import Page from './Page.component';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 let wrapper = null;
 
 describe('The page component', () => {
   const props = {
+    userAvatarUrl: 'url',
     intl: {
       formatMessage: jest.fn(),
     },
-    addItem: jest.fn(),
-    items: [
-      { id: 1, label: 'item 1' },
-      { id: 2, label: 'item 2' },
-      { id: 3, label: 'item 3' },
-    ],
+    fetchUser: jest.fn(),
+    updateUserId: jest.fn(),
   };
 
   beforeEach(() => {
@@ -29,16 +29,29 @@ describe('The page component', () => {
     expect(link.prop('to')).toEqual('/');
   });
 
-  it('should display three items', () => {
-    const itemContainer = wrapper.find('.itemContainer');
-    expect(itemContainer.children()).toHaveLength(3);
-    expect(itemContainer.childAt(1).text()).toEqual('item 2');
+  it('should call updateUserId when writing in the text input', () => {
+    const input = wrapper.find('input');
+    expect(props.updateUserId.mock.calls.length).toBe(0);
+    input.simulate('change', { target: { value: 'My new value' } });
+    expect(props.updateUserId.mock.calls.length).toBe(1);
   });
 
-  it('should call addItem when clicking on button', () => {
+  it('should call fetchUser when clicking on button', () => {
     const button = wrapper.find('button');
-    expect(props.addItem.mock.calls.length).toBe(0);
+    expect(props.fetchUser.mock.calls.length).toBe(0);
     button.simulate('click');
-    expect(props.addItem.mock.calls.length).toBe(1);
+    expect(props.fetchUser.mock.calls.length).toBe(1);
+  });
+
+  it('should display an image if userAvatarUrl is set', () => {
+    const image = wrapper.find('img');
+    expect(image).toHaveLength(1);
+    expect(image.prop('src')).toBe('url');
+  });
+
+  it('should not display an image if userAvatarUrl is not set', () => {
+    wrapper.setProps({ userAvatarUrl: null });
+    const image = wrapper.find('img');
+    expect(image).toHaveLength(0);
   });
 });
