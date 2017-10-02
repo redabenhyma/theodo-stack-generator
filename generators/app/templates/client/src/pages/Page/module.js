@@ -9,7 +9,7 @@
  * Constants should be scoped to their module: use the string Page/ADD_ITEM instead of ADD_ITEM
  */
 
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import request from '../../utils/networking/request';
 
 export const UPDATE_USER_ID = 'Page/UPDATE_USER_ID';
@@ -20,7 +20,6 @@ export function updateUserId(userId) {
     payload: userId,
   };
 }
-
 
 export const USER_FETCH_REQUEST = 'Page/USER_FETCH_REQUEST';
 export const USER_FETCH_SUCCESS = 'Page/USER_FETCH_SUCCESS';
@@ -65,18 +64,6 @@ export function* fetchUser(action) {
 */
 export function* fetchUserSaga() {
   yield takeEvery(USER_FETCH_REQUEST, fetchUser);
-}
-
-
-/*
-  Alternatively you may use takeLatest.
-
-  Does not allow concurrent fetches of user. If USER_FETCH_REQUEST gets
-  dispatched while a fetch is already pending, that pending fetch is cancelled
-  and only the latest one will be run.
-*/
-export function* fetchUserSagaWithNonConcurrency() {
-  yield takeLatest(USER_FETCH_REQUEST, fetchUser);
 }
 
 const initialState = {

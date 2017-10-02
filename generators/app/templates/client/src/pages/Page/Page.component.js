@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import './style.css';
 
 export default class Page extends Component {
   static propTypes = {
-    intl: PropTypes.object.isRequired, // eslint-disable-line
+    intl: intlShape.isRequired,
     fetchUser: PropTypes.func.isRequired,
     updateUserId: PropTypes.func.isRequired,
     userAvatarUrl: PropTypes.string,
