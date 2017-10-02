@@ -10,7 +10,7 @@
  */
 
 import { call, put, takeEvery } from 'redux-saga/effects';
-import request from '../../utils/networking/request';
+import request from '../../services/networking/request';
 
 export const UPDATE_USER_ID = 'Page/UPDATE_USER_ID';
 
