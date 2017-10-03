@@ -7,6 +7,8 @@
   },
   "page": {
     "back": "Back",
-    "api-to-translate-example": "This message is translated using directly react-intl API"
+    "api-to-translate-example": "This message is translated using directly react-intl API",
+    "fetch-github-avatar": "Show github avatar",
+    "add-github-username": "Enter a github username"
   }
 }

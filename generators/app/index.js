@@ -94,7 +94,7 @@ class StackGenerator extends Generator {
 
   _addReactBoilerplate() {
     this.log('Installing or updating create-react-app');
-    this.spawnCommandSync('npm', ['install', '-g', 'create-react-app@1.0.14']);
+    this.spawnCommandSync('npm', ['install', '-g', 'create-react-app@1.4.1']);
 
     this.log('Starting create-react-app generator');
     this.spawnCommandSync('create-react-app', ['client']);
@@ -122,27 +122,29 @@ class StackGenerator extends Generator {
         analyze: 'source-map-explorer build/static/js/main.*',
         lint: 'eslint --ext .jsx,.js -c .eslintrc src',
         nsp: 'nsp check',
+        'test:coverage': 'npm run test -- --coverage',
       },
       dependencies: {
-        'enzyme': '2.9.1',
-        'prop-types': '15.5.10',
+        'prop-types': '15.6.0',
         'react-intl': '2.3.0',
         'react-redux': '5.0.6',
         'react-router': '3.2.0',
         'react-router-redux': '4.0.8',
-        'react-test-renderer': '15.6.1',
+        'react-test-renderer': '16.0.0',
         'redux':'3.7.2',
         'redux-saga': '0.15.6',
-        'source-map-explorer': '^1.4.0',
+        'source-map-explorer': '1.4.0',
         'whatwg-fetch': '2.0.3'
       },
       devDependencies: {
         'babel-eslint': '7.2.3',
-        'eslint': '^4.3.0',
-        'eslint-config-airbnb': '^15.1.0',
-        'eslint-plugin-import': '^2.7.0',
-        'eslint-plugin-jsx-a11y': '^5.1.1',
-        'eslint-plugin-react': '^7.1.0',
+        'enzyme': '3.0.0',
+        'enzyme-adapter-react-16': '1.0.0',
+        'eslint': '4.3.0',
+        'eslint-config-airbnb': '15.1.0',
+        'eslint-plugin-import': '2.7.0',
+        'eslint-plugin-jsx-a11y': '5.1.1',
+        'eslint-plugin-react': '7.1.0',
         'nsp': '2.7.0',
       },
     };

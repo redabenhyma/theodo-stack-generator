@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from './Page.component';
-import createComponentWithIntl from '../../utils/i18n/create-component-with-intl';
+import createComponentWithIntl from '../../services/i18n/create-component-with-intl';
 
 describe('The page component', () => {
   it('should renders correctly', () => {
@@ -8,14 +8,10 @@ describe('The page component', () => {
       intl: {
         formatMessage: jest.fn(),
       },
-      addItem: jest.fn(),
-      items: [
-        { id: 1, label: 'item 1' },
-        { id: 2, label: 'item 2' },
-        { id: 3, label: 'item 3' },
-      ],
+      fetchUser: jest.fn(),
+      updateUserId: jest.fn(),
     };
     const tree = createComponentWithIntl(<Page {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
-  })
-})
+  });
+});
