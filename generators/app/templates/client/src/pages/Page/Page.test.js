@@ -1,9 +1,6 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import Page from './Page.component';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 let wrapper = null;
 
