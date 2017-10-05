@@ -17,7 +17,7 @@ class StackGenerator extends Generator {
         name    : 'backend',
         message : 'Choose your backend',
         default : 'No backend',
-        choices : ['No backend', 'API Platform (Symfony)', 'API Platform (Django)', 'Loopback (nodejs)']
+        choices : ['No backend', 'API Platform (Symfony)', 'Django (Python)', 'Loopback (nodejs)']
       },
       {
         type    : 'list',
@@ -78,7 +78,7 @@ class StackGenerator extends Generator {
         })
       }
 
-      if (this.answers.backend === 'API Platform (Django)') {
+      if (this.answers.backend === 'Django (Python)') {
         serverQuestions = [];
       }
       
@@ -438,7 +438,7 @@ class StackGenerator extends Generator {
       return this._addNodeServerTemplates();
     } else if (this.answers.backend === 'API Platform (Symfony)') {
       return this._addSymfonyServer();
-    } else if (this.answers.backend === 'API Platform (Django)') {
+    } else if (this.answers.backend === 'Django (Python)') {
       return this._addDjangoServer();
     } else {
       return Promise.resolve();
@@ -448,7 +448,7 @@ class StackGenerator extends Generator {
   installProject() {
     return this._addServer()
       .then(() => {
-        if (this.answers.backend === 'API Platform (Django)') {
+        if (this.answers.backend === 'Django (Python)') {
           return Promise.resolve()
         } else {
           return this._addConfigurationTemplates()
@@ -456,7 +456,7 @@ class StackGenerator extends Generator {
       })
       .then(() => this._addDocumentation())
       .then(() => {
-        if (this.answers.backend === 'API Platform (Django)') {
+        if (this.answers.backend === 'Django (Python)') {
           return Promise.resolve()
         } else {
           return this._addProvisioningTemplates()
