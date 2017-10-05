@@ -424,7 +424,7 @@ class StackGenerator extends Generator {
     const appName = this.answers.appName
     this.fs.copy(`${appName}/manage.py`, `${appName}/manage.py`, {
       process: function(content) {
-        var regEx = new RegExp(`auto.settings`, 'g');
+        var regEx = new RegExp(`${appName}.settings`, 'g');
         var newContent = content.toString().replace(regEx, `${appName}.settings.dev`);
         return newContent;
       }
