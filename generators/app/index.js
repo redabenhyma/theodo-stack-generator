@@ -411,15 +411,23 @@ class StackGenerator extends Generator {
 
   _addDjangoServer () {
     this.spawnCommandSync(this.templatePath('django_bootstrap.sh'), [this.answers.appName]);
+
+    // Settings per environment.
     const settingsPath = `${this.answers.appName}/${this.answers.appName}`;
     const newSettingsPath = `${settingsPath}/settings`;
     this.spawnCommandSync('mkdir', [`${newSettingsPath}`]);
     this.spawnCommandSync('mv', [`${settingsPath}/settings.py`, `${newSettingsPath}/base.py`]);
     const settingsFiles = ['test.py', 'dev.py', 'prod.py']
     this.spawnCommandSync('touch', [`${newSettingsPath}/__init__.py`]);
+    const settingsDocString = `
+"""
+Django configuration for the dev environment
+"""
+`;
+    const baseImport = 'from .base import * # pylint: disable=wildcard-import,unused-wildcard-import';
     settingsFiles.forEach((settingsFile => {
       this.spawnCommandSync('touch', [`${newSettingsPath}/${settingsFile}`]);
-      this.fs.write(`${newSettingsPath}/${settingsFile}`, 'from .base import *');
+      this.fs.write(`${newSettingsPath}/${settingsFile}`, `${settingsDocString}\n${baseImport}\n`);
     }));
     const appName = this.answers.appName
     this.fs.copy(`${appName}/manage.py`, `${appName}/manage.py`, {
@@ -429,6 +437,9 @@ class StackGenerator extends Generator {
         return newContent;
       }
     });
+
+    // Add base level __init__.py to allow pylint of whole backend.
+    this.spawnCommandSync('touch', [`${this.answers.appName}/__init__.py`]);
 
     return Promise.resolve();
   }
