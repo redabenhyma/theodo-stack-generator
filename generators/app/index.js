@@ -68,7 +68,7 @@ class StackGenerator extends Generator {
         }
       ];
 
-      if (this.answers.backend === 'Loopback (nodejs)') {
+      if (this.answers.backend === 'Loopback (nodejs)' || this.answers.backend === 'API Platform (Symfony)') {
         serverQuestions.unshift({
           type    : 'list',
           name    : 'virtualEnv',
