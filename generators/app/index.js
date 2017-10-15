@@ -144,6 +144,7 @@ class StackGenerator extends Generator {
         'enzyme-adapter-react-16': '1.0.0',
         'eslint': '4.3.0',
         'eslint-config-airbnb': '15.1.0',
+        "eslint-plugin-flowtype": "^2.39.1",
         'eslint-plugin-import': '2.7.0',
         'eslint-plugin-jsx-a11y': '5.1.1',
         'eslint-plugin-react': '7.1.0',
