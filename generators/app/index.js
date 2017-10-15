@@ -120,6 +120,8 @@ class StackGenerator extends Generator {
     let content = {
       scripts: {
         analyze: 'source-map-explorer build/static/js/main.*',
+        flow: 'flow',
+        'flow:coverage': "flow-coverage-report --threshold=75 -i 'src/**/*.js' -t html -t json -t text",
         lint: 'eslint --ext .jsx,.js -c .eslintrc src',
         nsp: 'nsp check',
         'test:coverage': 'npm run test -- --coverage',
@@ -145,6 +147,9 @@ class StackGenerator extends Generator {
         'eslint-plugin-import': '2.7.0',
         'eslint-plugin-jsx-a11y': '5.1.1',
         'eslint-plugin-react': '7.1.0',
+        'flow-bin': '0.57.1',
+        'flow-coverage-report': '0.3.0',
+        'flow-typed': '2.2.0',
         'nsp': '2.7.0',
       },
     };
@@ -432,6 +437,7 @@ class StackGenerator extends Generator {
     if (this.answers.client === 'react-redux') {
       this.destinationRoot('client');
       this.spawnCommandSync('yarn');
+      this.spawnCommandSync('node_modules/.bin/flow-typed', ['install']);
     };
 
     if (this.answers.backend === 'No backend') {
