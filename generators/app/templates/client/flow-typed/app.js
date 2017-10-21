@@ -13,8 +13,8 @@ declare type RoutingStore = {
 };
 
 declare type PageStore = {
-  userAvatarUrl: string,
-  userId: string,
+  userAvatarUrl?: ?string,
+  userId?: string,
 };
 
 declare type Store = {
