@@ -113,6 +113,11 @@ class StackGenerator extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath('client/flow-typed'),
+      this.destinationPath('client/flow-typed'),
+    );
+
+    this.fs.copy(
       this.templatePath('client/.*'),
       this.destinationPath('client/'),
     );
