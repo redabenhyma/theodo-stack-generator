@@ -1,8 +1,8 @@
 /**
  * Following the duck pattern, actions, constants and reducers are in the same file called module.js
- * 
+ *
  * See: https://github.com/erikras/ducks-modular-redux
- * 
+ *
  */
 
 /**
@@ -10,7 +10,7 @@
  */
 
 import { call, put, takeEvery } from 'redux-saga/effects';
-import request from '../../services/networking/request';
+import request from 'services/networking/request';
 
 export const UPDATE_USER_ID = 'Page/UPDATE_USER_ID';
 

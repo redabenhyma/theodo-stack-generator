@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from './Page.component';
-import createComponentWithIntl from '../../services/i18n/create-component-with-intl';
+import createComponentWithIntl from 'services/i18n/create-component-with-intl';
 
 describe('The page component', () => {
   it('should renders correctly', () => {
