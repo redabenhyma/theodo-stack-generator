@@ -1,4 +1,5 @@
 /* eslint-disable */
+import raf from 'tempPolyfills'
 
 /*
 * This code is run before every jest test
