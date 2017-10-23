@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
+import request from 'services/networking/request';
 import * as module from './module';
-import request from '../../services/networking/request';
 
 describe('[Action] Page module', () => {
   describe('updateUserId', () => {

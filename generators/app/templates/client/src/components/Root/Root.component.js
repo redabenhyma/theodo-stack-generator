@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 import fr from 'react-intl/locale-data/fr';
 import en from 'react-intl/locale-data/en';
-import frMessages from '../../translations/fr.json';
-import enMessages from '../../translations/en.json';
-import { flattenMessages } from '../../services/i18n/intl';
+import frMessages from 'translations/fr.json';
+import enMessages from 'translations/en.json';
+import { flattenMessages } from 'services/i18n/intl';
 import logo from './logo.svg';
 import './style.css';
 

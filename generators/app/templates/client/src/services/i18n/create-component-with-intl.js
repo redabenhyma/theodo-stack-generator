@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { IntlProvider } from 'react-intl';
-import frMessages from '../../translations/fr.json';
+import frMessages from 'translations/fr.json';
 
 import { flattenMessages } from './intl';
 
