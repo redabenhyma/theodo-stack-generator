@@ -23,6 +23,8 @@
     "flowtype",
     "import",
     "jsx-a11y",
+    "mysticatea",
+    "prefer-object-spread",
     "prettier",
     "react"
   ],
@@ -40,6 +42,8 @@
         "jsxBracketSameLine": false
       }
     ],
+    "mysticatea/no-useless-rest-spread": "error",
+    "prefer-object-spread/prefer-object-spread": 2,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": 0,
     "react/require-default-props": 0,

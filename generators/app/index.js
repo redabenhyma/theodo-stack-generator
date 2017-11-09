@@ -154,6 +154,8 @@ class StackGenerator extends Generator {
         "eslint-plugin-flowtype": "2.39.1",
         'eslint-plugin-import': '2.7.0',
         'eslint-plugin-jsx-a11y': '5.1.1',
+        'eslint-plugin-mysticatea': '4.2.3',
+        'eslint-plugin-prefer-object-spread': '1.2.1',
         'eslint-plugin-prettier': '2.1.2',
         'eslint-plugin-react': '7.1.0',
         'flow-bin': '0.57.1',
