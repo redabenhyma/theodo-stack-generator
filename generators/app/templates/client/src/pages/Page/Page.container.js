@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { toJS } from '../../services/immutable/toJS';
 import { injectIntl } from 'react-intl';
 import { fetchUserRequest, updateUserId } from './module';
 
@@ -23,4 +24,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PageWithIntl);
+)(toJS(PageWithIntl));
