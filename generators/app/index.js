@@ -137,7 +137,7 @@ class StackGenerator extends Generator {
         'redux-saga': '0.15.6',
         'source-map-explorer': '1.4.0',
         'whatwg-fetch': '2.0.3',
-        'immutable': '4.0.0'
+        'immutable': '3.8.2'
       },
       devDependencies: {
         'babel-eslint': '7.2.3',
