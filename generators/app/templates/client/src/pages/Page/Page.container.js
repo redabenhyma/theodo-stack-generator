@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toJS } from '../../services/immutable/toJS';
+import { toJS } from '../../services/immutable/toJs';
 import { injectIntl } from 'react-intl';
 import { fetchUserRequest, updateUserId } from './module';
 
