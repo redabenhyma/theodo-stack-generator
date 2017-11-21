@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import request from 'services/networking/request';
 import * as module from './module';
 
-describe('[Action] Page module', () => {
+describe('[Action] Avatar module', () => {
   describe('updateUserId', () => {
     it('should return an action', () => {
       expect(module.updateUserId('github')).toEqual({
@@ -42,7 +42,7 @@ describe('[Action] Page module', () => {
   });
 });
 
-describe('[Saga] Page module', () => {
+describe('[Saga] Avatar module', () => {
   describe('fetchUser', () => {
     describe('when request is a success', () => {
       const action = module.fetchUserRequest('me');

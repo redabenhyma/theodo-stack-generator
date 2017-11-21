@@ -3,7 +3,7 @@ import { browserHistory, Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import './style.css';
 
-const goToPage = () => {
+const goToAvatar = () => {
   browserHistory.push('/page');
 };
 
@@ -17,7 +17,7 @@ const Home = () => (
       <code className="intro-code">src/App.js</code>
       <FormattedMessage id="home.save-to-reload" />
     </p>
-    <button onClick={goToPage}>
+    <button onClick={goToAvatar}>
       <FormattedMessage id="home.click-me" />
     </button>
     <Link to="/page">

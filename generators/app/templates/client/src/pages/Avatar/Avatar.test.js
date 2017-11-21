@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Page from './Page.component';
+import Avatar from './Avatar.component';
 
 let wrapper = null;
 
@@ -15,7 +15,7 @@ describe('The page component', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallow(<Page {...props} />);
+    wrapper = shallow(<Avatar {...props} />);
   });
 
   it('should contain one link', () => {

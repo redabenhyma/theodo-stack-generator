@@ -12,14 +12,14 @@ declare type RoutingStore = {
   }
 };
 
-declare type PageStore = {
+declare type AvatarStore = {
   userAvatarUrl?: ?string,
   userId?: string,
 };
 
 declare type Store = {
   routing: RoutingStore,
-  page: PageStore,
+  page: AvatarStore,
 };
 
 declare type History = {

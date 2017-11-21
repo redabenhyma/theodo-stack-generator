@@ -12,7 +12,7 @@ type Props = {
   userId: string,
 };
 
-class Page extends React.Component<Props> {
+class Avatar extends React.Component<Props> {
   onInputChange = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     // "this" is the right instance of this component
     // For performance reasons, you should avoid
@@ -53,4 +53,4 @@ class Page extends React.Component<Props> {
   }
 }
 
-export default Page;
+export default Avatar;

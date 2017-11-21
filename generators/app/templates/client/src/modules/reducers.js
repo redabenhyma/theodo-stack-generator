@@ -8,9 +8,9 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { fromJS } from 'immutable';
 
 /**
- * Example of the Page module which should export a reducer.
+ * Example of the Avatar module which should export a reducer.
  */
-import page from '../pages/Page/module';
+import page from '../pages/Avatar/module';
 
 /*
  * routeReducer

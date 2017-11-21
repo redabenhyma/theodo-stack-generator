@@ -7,14 +7,14 @@
  */
 
 /**
- * Constants should be scoped to their module: use the string Page/ADD_ITEM instead of ADD_ITEM
+ * Constants should be scoped to their module: use the string Avatar/ADD_ITEM instead of ADD_ITEM
  */
 
 import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'services/networking/request';
 import { fromJS } from 'immutable';
 
-export const UPDATE_USER_ID = 'Page/UPDATE_USER_ID';
+export const UPDATE_USER_ID = 'Avatar/UPDATE_USER_ID';
 
 export function updateUserId(userId: string): UpdateUserIdAction {
   return {
@@ -23,9 +23,9 @@ export function updateUserId(userId: string): UpdateUserIdAction {
   };
 }
 
-export const USER_FETCH_REQUEST = 'Page/USER_FETCH_REQUEST';
-export const USER_FETCH_SUCCESS = 'Page/USER_FETCH_SUCCESS';
-export const USER_FETCH_ERROR = 'Page/USER_FETCH_ERROR';
+export const USER_FETCH_REQUEST = 'Avatar/USER_FETCH_REQUEST';
+export const USER_FETCH_SUCCESS = 'Avatar/USER_FETCH_SUCCESS';
+export const USER_FETCH_ERROR = 'Avatar/USER_FETCH_ERROR';
 
 export function fetchUserRequest(userId: string): FetchUserRequestAction {
   return {
@@ -77,7 +77,7 @@ const initialState = fromJS({
 /**
  * Following the duck pattern, the module.js file should export a reducer as a default function
  */
-export default function reducer(state: PageStore = initialState, action: UserAction) {
+export default function reducer(state: AvatarStore = initialState, action: UserAction) {
   switch (action.type) {
     case UPDATE_USER_ID:
       return state.set('userId', action.payload);
