@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { toJS } from '../../services/immutable/toJs';
 import Root from './Root.component';
 
 function mapStateToProps() {
@@ -12,4 +13,4 @@ function mapDispatchToProps() {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Root);
+)(toJS(Root));

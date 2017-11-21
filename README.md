@@ -15,7 +15,7 @@ Choose a server between:
     - postgresql database
     - HTTPS configuration
   - Capistrano deployment script
-  
+
 - [Loopback](http://loopback.io/) (nodejs framework) server:
   - Ansible provisioning for:
     - Node 8
@@ -38,6 +38,7 @@ Choose if you want the client:
   - react-router for creating multiples pages
   - examples of unit and snapshot tests
   - Eslint with airbnb linter
+  - Immutable.JS
 
 ## What's next ?
 

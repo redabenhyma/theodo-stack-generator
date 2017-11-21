@@ -77,7 +77,7 @@ class StackGenerator extends Generator {
           choices : ['docker', 'vagrant']
         })
       }
-      
+
       return this.prompt(serverQuestions);
     })
     .then(serverAnswers => {
@@ -141,7 +141,8 @@ class StackGenerator extends Generator {
         'redux':'3.7.2',
         'redux-saga': '0.15.6',
         'source-map-explorer': '1.4.0',
-        'whatwg-fetch': '2.0.3'
+        'whatwg-fetch': '2.0.3',
+        'immutable': '3.8.2'
       },
       devDependencies: {
         'babel-eslint': '7.2.3',
@@ -256,7 +257,7 @@ class StackGenerator extends Generator {
 
     if (this.answers.virtualEnv === 'vagrant') {
       files = files.concat([
-        'Vagrantfile',        
+        'Vagrantfile',
       ])
     }
 
@@ -444,6 +445,7 @@ class StackGenerator extends Generator {
       this.destinationRoot('client');
       this.spawnCommandSync('yarn');
       this.spawnCommandSync('node_modules/.bin/flow-typed', ['install']);
+      this.log('!!!!!! Please ignore all flow warnings, everything is OK !!!!!!');
     };
 
     if (this.answers.backend === 'No backend') {

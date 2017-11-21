@@ -12,7 +12,7 @@
 
 import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'services/networking/request';
-
+import { fromJS } from 'immutable';
 export const UPDATE_USER_ID = 'Page/UPDATE_USER_ID';
 
 export function updateUserId(userId: string): UpdateUserIdAction {
@@ -67,9 +67,9 @@ export function* fetchUserSaga(): Generator<any, any, any> {
   yield takeEvery(USER_FETCH_REQUEST, fetchUser);
 }
 
-const initialState = {
+const initialState = fromJS({
   userAvatarUrl: null,
-};
+});
 
 /**
  * Following the duck pattern, the module.js file should export a reducer as a default function
@@ -77,15 +77,9 @@ const initialState = {
 export default function reducer(state: PageStore = initialState, action: UserAction) {
   switch (action.type) {
     case UPDATE_USER_ID:
-      return {
-        ...state,
-        userId: action.payload,
-      };
+      return state.set('userId', action.payload);
     case USER_FETCH_SUCCESS:
-      return {
-        ...state,
-        userAvatarUrl: action.payload.avatar_url,
-      };
+      return state.set('userAvatarUrl', action.payload.avatar_url);
     default:
       return state;
   }
