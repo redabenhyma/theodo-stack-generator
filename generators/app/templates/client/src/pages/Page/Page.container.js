@@ -1,3 +1,4 @@
+// @flow
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { fetchUserRequest, updateUserId } from './module';
@@ -6,12 +7,12 @@ import Page from './Page.component';
 
 const PageWithIntl = injectIntl(Page);
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: Store): PageStore => ({
   userId: state.page.userId,
   userAvatarUrl: state.page.userAvatarUrl,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchUser(userId) {
     dispatch(fetchUserRequest(userId));
   },

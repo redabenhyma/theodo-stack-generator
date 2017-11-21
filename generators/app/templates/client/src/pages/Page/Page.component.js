@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+// @flow
+import * as React from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage, intlShape } from 'react-intl';
 import './style.css';
 
-export default class Page extends Component {
-  static propTypes = {
-    intl: intlShape.isRequired,
-    fetchUser: PropTypes.func.isRequired,
-    updateUserId: PropTypes.func.isRequired,
-    userAvatarUrl: PropTypes.string,
-    userId: PropTypes.string,
-  };
+type Props = {
+  intl: intlShape,
+  fetchUser: (userId: string) => void,
+  updateUserId: (value: string) => void,
+  userAvatarUrl: string,
+  userId: string,
+};
 
-  onInputChange = (event) => {
+class Page extends React.Component<Props> {
+  onInputChange = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     // "this" is the right instance of this component
     // For performance reasons, you should avoid
     // <button onClick={() => this.props.addItem('new item')}>
@@ -54,3 +54,5 @@ export default class Page extends Component {
     );
   }
 }
+
+export default Page;
