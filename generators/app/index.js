@@ -3,6 +3,8 @@ const _ = require('lodash');
 
 class StackGenerator extends Generator {
   prompting() {
+    this.conflicter.force = true
+    
     return this.prompt([
       {
         type    : 'input',
@@ -97,14 +99,9 @@ class StackGenerator extends Generator {
     this.spawnCommandSync('npm', ['install', '-g', 'create-react-app@1.4.3']);
 
     this.log('Starting create-react-app generator');
-    this.spawnCommandSync('create-react-app', ['client']);
+    this.spawnCommandSync('create-react-app', ['client', '>', '/dev/null']);
 
     this.log('Removing create-react-app generator boilerplate');
-    this.spawnCommandSync('rm', ['client/src/App.js']);
-    this.spawnCommandSync('rm', ['client/src/App.css']);
-    this.spawnCommandSync('rm', ['client/src/logo.svg']);
-    this.spawnCommandSync('rm', ['client/src/App.test.js']);
-    this.spawnCommandSync('rm', ['client/src/index.js']);
 
     this.log('Copying new files for create-react-app');
     this.fs.copy(
@@ -133,7 +130,7 @@ class StackGenerator extends Generator {
       },
       dependencies: {
         'prop-types': '15.6.0',
-        'react-intl': '2.3.0',
+        'react-intl': '2.4.0',
         'react-redux': '5.0.6',
         'react-router': '3.2.0',
         'react-router-redux': '4.0.8',
@@ -165,8 +162,31 @@ class StackGenerator extends Generator {
       content = _.merge(content, existingPackage);
     } catch (e) {}
     this.log('Updating package.json');
-    this.spawnCommandSync('rm', ['client/package.json']);
+    this.fs.delete('client/package.json');
     this.fs.writeJSON(this.destinationPath('./client/package.json'), content);
+
+    if (this.answers.backend === 'No backend') {
+      //this.fs.move('client/README.md', 'doc/CRA_README.md');
+      // this.fs.move('client/.env', './.env');
+      // this.fs.move('client/.eslintignore', './.eslintignore');
+      // this.fs.move('client/.eslintrc', './.eslintrc');
+      // this.fs.move('client/.flowconfig', './.flowconfig');
+      // this.fs.move('client/.gitignore', './.gitignore');
+      this.fs.move('client/**/*.*', './');
+      this.fs.move('client/.*', './');
+      this.fs.delete('client');
+      // this.fs.delete('client/src/App.js');
+      // this.fs.delete('client/src/App.css');
+      // this.fs.delete('client/src/logo.svg');
+      // this.fs.delete('client/src/App.test.js');
+      // this.fs.delete('client/src/index.js');
+    } else {
+      this.fs.delete('client/src/App.js');
+      this.fs.delete('client/src/App.css');
+      this.fs.delete('client/src/logo.svg');
+      this.fs.delete('client/src/App.test.js');
+      this.fs.delete('client/src/index.js');
+    }
   }
 
   _addClient() {
@@ -442,16 +462,13 @@ class StackGenerator extends Generator {
     this.spawnCommandSync('mv', ['./gitignore', './.gitignore']);
 
     if (this.answers.client === 'react-redux') {
-      this.destinationRoot('client');
+      if (this.answers.backend !== 'No backend') {
+        this.destinationRoot('client');
+      }
+      
       this.spawnCommandSync('yarn');
-      this.spawnCommandSync('node_modules/.bin/flow-typed', ['install']);
-      this.log('!!!!!! Please ignore all flow warnings, everything is OK !!!!!!');
+      this.spawnCommandSync('node_modules/.bin/flow-typed', ['install', '>', '/dev/null']);
     };
-
-    if (this.answers.backend === 'No backend') {
-      return Promise.resolve();
-    }
-
 
     this.log('Everything went well, enjoy your new app!')
   }
