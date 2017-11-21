@@ -440,6 +440,7 @@ class StackGenerator extends Generator {
       this.destinationRoot('client');
       this.spawnCommandSync('yarn');
       this.spawnCommandSync('node_modules/.bin/flow-typed', ['install']);
+      this.log('!!!!!! Please ignore all flow warnings, everything is OK !!!!!!');
     };
 
     if (this.answers.backend === 'No backend') {
