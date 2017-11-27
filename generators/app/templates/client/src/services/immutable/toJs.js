@@ -9,15 +9,17 @@ export const toJS = WrappedComponent => wrappedComponentProps => {
   const VALUE = 1;
 
   const propsJS = Object.entries(
-    wrappedComponentProps
+    wrappedComponentProps,
   ).reduce((newProps, wrappedComponentProp) => {
+    /* eslint-disable no-param-reassign */
     newProps[wrappedComponentProp[KEY]] = Iterable.isIterable(
       wrappedComponentProp[VALUE],
     )
       ? wrappedComponentProp[VALUE].toJS()
       : wrappedComponentProp[VALUE];
+    /* eslint-enable */
     return newProps;
   }, {});
 
   return <WrappedComponent {...propsJS} />;
-}
+};

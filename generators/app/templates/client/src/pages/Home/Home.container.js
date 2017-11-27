@@ -10,7 +10,4 @@ function mapDispatchToProps() {
   return {};
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(toJS(Home));
+export default connect(mapStateToProps, mapDispatchToProps)(toJS(Home));

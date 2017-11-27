@@ -13,6 +13,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'services/networking/request';
 import { fromJS } from 'immutable';
+
 export const UPDATE_USER_ID = 'Page/UPDATE_USER_ID';
 
 export function updateUserId(userId: string): UpdateUserIdAction {
@@ -48,7 +49,9 @@ export function fetchUserError(error: Error): FetchUserErrorAction {
 }
 
 // worker Saga: will be fired on USER_FETCH_REQUEST actions
-export function* fetchUser(action: FetchUserRequestAction): Generator<any, any, any> {
+export function* fetchUser(
+  action: FetchUserRequestAction,
+): Generator<any, any, any> {
   const url = `https://api.github.com/users/${action.payload.userId}`;
   try {
     const user = yield call(request, url);

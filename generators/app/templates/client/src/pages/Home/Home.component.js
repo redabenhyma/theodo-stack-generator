@@ -10,7 +10,10 @@ const goToPage = () => {
 const Home = () => (
   <div>
     <p className="intro">
-      <FormattedMessage id="home.get-started" defaultMessage="To get started, edit" />
+      <FormattedMessage
+        id="home.get-started"
+        defaultMessage="To get started, edit"
+      />
       <code className="intro-code">src/App.js</code>
       <FormattedMessage id="home.save-to-reload" />
     </p>

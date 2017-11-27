@@ -20,9 +20,6 @@ registerServiceWorker();
 if (module.hot) {
   module.hot.accept('./App', () => {
     const NextApp = require('./App').default; // eslint-disable-line
-    ReactDOM.render(
-      <NextApp store={store} history={history} />,
-      rootEl,
-    );
+    ReactDOM.render(<NextApp store={store} history={history} />, rootEl);
   });
 }

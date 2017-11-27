@@ -55,7 +55,9 @@ describe('[Saga] Page module', () => {
 
       it('should call the success action when request is a success', () => {
         const outputMock = {};
-        expect(gen.next(outputMock).value).toEqual(put(module.fetchUserSuccess(outputMock)));
+        expect(gen.next(outputMock).value).toEqual(
+          put(module.fetchUserSuccess(outputMock)),
+        );
       });
     });
 

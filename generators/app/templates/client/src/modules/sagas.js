@@ -3,7 +3,5 @@ import { fetchUserSaga } from 'pages/Page/module';
 
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
-  yield all([
-    fetchUserSaga(),
-  ]);
+  yield all([fetchUserSaga()]);
 }

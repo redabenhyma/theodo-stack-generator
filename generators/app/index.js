@@ -162,6 +162,7 @@ class StackGenerator extends Generator {
         'flow-coverage-report': '0.3.0',
         'flow-typed': '2.2.0',
         'nsp': '2.7.0',
+        'prettier': '1.7.0',
       },
     };
     try {

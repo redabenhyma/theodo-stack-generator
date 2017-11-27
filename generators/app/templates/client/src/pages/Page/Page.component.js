@@ -19,11 +19,11 @@ class Page extends React.Component<Props> {
     // <button onClick={() => this.props.addItem('new item')}>
     // https://medium.com/netscape/react-performance-anti-pattern-creating-functions-in-render-ddeb5ebd2933)
     this.props.updateUserId(event.target.value);
-  }
+  };
 
   fetchUser = () => {
     this.props.fetchUser(this.props.userId);
-  }
+  };
 
   render() {
     const { formatMessage } = this.props.intl;
@@ -47,9 +47,7 @@ class Page extends React.Component<Props> {
             <FormattedMessage id="page.fetch-github-avatar" />
           </button>
         </p>
-        { userAvatarUrl &&
-          <img src={userAvatarUrl} alt="user avatar" />
-        }
+        {userAvatarUrl && <img src={userAvatarUrl} alt="user avatar" />}
       </div>
     );
   }
