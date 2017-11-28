@@ -16,7 +16,7 @@ Choose a server between:
     - HTTPS configuration
   - Capistrano deployment script
 
-- [Loopback](http://loopback.io/) (nodejs framework) server:
+- [Loopback](http://loopback.io/) ([DEPRECATED](http://blog.m33.network/2017/05/stacks-technique-theodo/)):
   - Ansible provisioning for:
     - Node 8
     - Yarn
