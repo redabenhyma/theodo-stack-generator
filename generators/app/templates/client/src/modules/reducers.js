@@ -12,7 +12,6 @@ import { fromJS } from 'immutable';
  */
 import page from '../pages/Page/module';
 
-
 /*
  * routeReducer
  *

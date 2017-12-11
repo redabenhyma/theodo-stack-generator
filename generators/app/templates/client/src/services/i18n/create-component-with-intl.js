@@ -9,13 +9,9 @@ const locales = {
   fr: flattenMessages(frMessages),
 };
 
-
-const createComponentWithIntl = (children, props = { locale: 'fr', messages: locales.fr }) => (
-  renderer.create(
-    <IntlProvider {...props}>
-      {children}
-    </IntlProvider>,
-  )
-);
+const createComponentWithIntl = (
+  children,
+  props = { locale: 'fr', messages: locales.fr },
+) => renderer.create(<IntlProvider {...props}>{children}</IntlProvider>);
 
 export default createComponentWithIntl;

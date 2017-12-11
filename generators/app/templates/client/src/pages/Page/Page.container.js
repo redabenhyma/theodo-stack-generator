@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { toJS } from '../../services/immutable/toJs';
 import { injectIntl } from 'react-intl';
+import { toJS } from '../../services/immutable/toJs';
 import { fetchUserRequest, updateUserId } from './module';
 
 import Page from './Page.component';
@@ -22,7 +22,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(toJS(PageWithIntl));
+export default connect(mapStateToProps, mapDispatchToProps)(toJS(PageWithIntl));
