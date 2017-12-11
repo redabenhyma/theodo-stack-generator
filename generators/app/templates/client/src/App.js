@@ -1,19 +1,27 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import routes from './routes';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Routes from './routes';
+import { Root } from './components';
 
 type Props = {
   store: Store,
-  history: History,
 };
+
+const RootComponentWithRoutes = () => (
+  <Root>
+    <Routes />
+  </Root>
+);
 
 class App extends React.Component<Props> {
   render() {
     return (
       <Provider store={this.props.store}>
-        <Router history={this.props.history} routes={routes} />
+        <Router basename="/">
+          <Route path="/" component={RootComponentWithRoutes} />
+        </Router>
       </Provider>
     );
   }

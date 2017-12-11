@@ -1,25 +1,13 @@
 // @flow
 /* eslint-disable no-undef, flowtype/delimiter-dangle */
 
-declare type RoutingStore = {
-  locationBeforeTransitions: {
-    pathname: string,
-    search: string,
-    hash: string,
-    action: string,
-    key?: string,
-    query: Object,
-  }
-};
-
 declare type AvatarStore = {
   userAvatarUrl?: ?string,
   userId?: string,
 };
 
 declare type Store = {
-  routing: RoutingStore,
-  page: AvatarStore,
+  avatar: AvatarStore,
 };
 
 declare type History = {

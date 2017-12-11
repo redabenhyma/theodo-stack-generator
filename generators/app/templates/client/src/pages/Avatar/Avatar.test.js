@@ -18,14 +18,6 @@ describe('The page component', () => {
     wrapper = shallow(<Avatar {...props} />);
   });
 
-  it('should contain one link', () => {
-    const links = wrapper.find('Link');
-    expect(links).toHaveLength(1);
-    const link = links.first();
-    expect(link.text()).toEqual('<Link />');
-    expect(link.prop('to')).toEqual('/');
-  });
-
   it('should call updateUserId when writing in the text input', () => {
     const input = wrapper.find('input');
     expect(props.updateUserId.mock.calls.length).toBe(0);

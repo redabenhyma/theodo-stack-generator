@@ -1,13 +1,12 @@
 import React from 'react';
-import { IndexRoute, Route } from 'react-router';
-import { Root } from './components';
+import { Switch, Route } from 'react-router-dom';
 import { Home, Avatar } from './pages';
 
-const routes = (
-  <Route path="/" component={Root}>
-    <IndexRoute component={Home} />
-    <Route component={Avatar} path="/page" />
-  </Route>
+const routes = () => (
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Route path="/avatar" component={Avatar} />
+  </Switch>
 );
 
 export default routes;

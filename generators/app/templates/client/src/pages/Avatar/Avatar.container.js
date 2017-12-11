@@ -6,12 +6,12 @@ import { fetchUserRequest, updateUserId } from './module';
 
 import Avatar from './Avatar.component';
 
-const AvatarWithIntl = injectIntl(Avatar);
-
-const mapStateToProps = (state: Store): AvatarStore => ({
-  userId: state.page.userId,
-  userAvatarUrl: state.page.userAvatarUrl,
-});
+const mapStateToProps = (state: Store): AvatarStore => {
+  return {
+    userId: state.avatar.get('userId'),
+    userAvatarUrl: state.avatar.get('userAvatarUrl'),
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchUser(userId) {
@@ -22,4 +22,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(toJS(AvatarWithIntl));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectIntl(toJS(Avatar)),
+);

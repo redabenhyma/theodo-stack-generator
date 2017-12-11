@@ -1,13 +1,13 @@
 import React from 'react';
-import { browserHistory, Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import './style.css';
 
-const goToAvatar = () => {
-  browserHistory.push('/page');
+const navigateTo = history => () => {
+  history.push('/avatar');
 };
 
-const Home = () => (
+const Home = ({ history }) => (
   <div>
     <p className="intro">
       <FormattedMessage
@@ -17,10 +17,10 @@ const Home = () => (
       <code className="intro-code">src/App.js</code>
       <FormattedMessage id="home.save-to-reload" />
     </p>
-    <button onClick={goToAvatar}>
+    <button onClick={navigateTo(history)}>
       <FormattedMessage id="home.click-me" />
     </button>
-    <Link to="/page">
+    <Link to="/avatar">
       <FormattedMessage id="home.use-a-link" />
     </Link>
   </div>
