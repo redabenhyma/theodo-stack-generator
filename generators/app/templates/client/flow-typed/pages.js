@@ -6,24 +6,24 @@ declare type User = {
 };
 
 declare type UpdateUserIdAction = {
-  type: 'Page/UPDATE_USER_ID',
+  type: 'Avatar/UPDATE_USER_ID',
   payload: string,
 };
 
 declare type FetchUserRequestAction = {
-  type: 'Page/USER_FETCH_REQUEST',
+  type: 'Avatar/USER_FETCH_REQUEST',
   payload: {
     userId: string,
   },
 };
 
 declare type FetchUserSuccessAction = {
-  type: 'Page/USER_FETCH_SUCCESS',
+  type: 'Avatar/USER_FETCH_SUCCESS',
   payload: User,
 };
 
 declare type FetchUserErrorAction = {
-  type: 'Page/USER_FETCH_ERROR',
+  type: 'Avatar/USER_FETCH_ERROR',
   payload: string,
 };
 

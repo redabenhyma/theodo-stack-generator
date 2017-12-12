@@ -4,14 +4,14 @@ import { injectIntl } from 'react-intl';
 import { toJS } from '../../services/immutable/toJs';
 import { fetchUserRequest, updateUserId } from './module';
 
-import Page from './Page.component';
+import Avatar from './Avatar.component';
 
-const PageWithIntl = injectIntl(Page);
-
-const mapStateToProps = (state: Store): PageStore => ({
-  userId: state.page.userId,
-  userAvatarUrl: state.page.userAvatarUrl,
-});
+const mapStateToProps = (state: Store): AvatarStore => {
+  return {
+    userId: state.avatar.get('userId'),
+    userAvatarUrl: state.avatar.get('userAvatarUrl'),
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchUser(userId) {
@@ -22,4 +22,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(toJS(PageWithIntl));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectIntl(toJS(Avatar)),
+);

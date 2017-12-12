@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { Link } from 'react-router';
 import { FormattedMessage, intlShape } from 'react-intl';
 import './style.css';
 
@@ -12,7 +11,7 @@ type Props = {
   userId: string,
 };
 
-class Page extends React.Component<Props> {
+class Avatar extends React.Component<Props> {
   onInputChange = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     // "this" is the right instance of this component
     // For performance reasons, you should avoid
@@ -25,14 +24,19 @@ class Page extends React.Component<Props> {
     this.props.fetchUser(this.props.userId);
   };
 
+  navigateTo = path => () => {
+    this.props.history.push(path);
+  };
+
   render() {
     const { formatMessage } = this.props.intl;
     const { userAvatarUrl } = this.props;
+
     return (
       <div className="page-container">
-        <Link to="/">
+        <div role="button" tabIndex={0} onClick={this.navigateTo('/')}>
           <FormattedMessage id="page.back" />
-        </Link>
+        </div>
         <p>{formatMessage({ id: 'page.api-to-translate-example' })}</p>
         <p>
           <input
@@ -53,4 +57,4 @@ class Page extends React.Component<Props> {
   }
 }
 
-export default Page;
+export default Avatar;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from './Page.component';
+import Avatar from './Avatar.component';
 import createComponentWithIntl from 'services/i18n/create-component-with-intl';
 
 describe('The page component', () => {
@@ -11,7 +11,7 @@ describe('The page component', () => {
       fetchUser: jest.fn(),
       updateUserId: jest.fn(),
     };
-    const tree = createComponentWithIntl(<Page {...props} />).toJSON();
+    const tree = createComponentWithIntl(<Avatar {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
