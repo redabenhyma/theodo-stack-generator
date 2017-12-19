@@ -1,0 +1,14 @@
+{
+  "home": {
+    "use-a-link": "Ou utilise un lien",
+    "get-started": "Pour commencer, modifie",
+    "save-to-reload": "et sauvegarde pour recharger.",
+    "click-me": "Click sur moi"
+  },
+  "page": {
+    "back": "Retour",
+    "api-to-translate-example": "Ce message est traduit en utilisant directement l'API react-intl",
+    "fetch-github-avatar": "Affiche l'avatar github",
+    "add-github-username": "Entrer un username github"
+  }
+}

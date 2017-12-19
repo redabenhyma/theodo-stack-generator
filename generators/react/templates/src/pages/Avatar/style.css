@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.itemContainer {
+  margin-top: 30px;
+  color: grey;
+}
+
+.githubAvatarInput {
+  width: 200px;
+}
