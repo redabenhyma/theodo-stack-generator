@@ -78,15 +78,22 @@ npm install -g theodo-stack-generator
 
 ## Usage
 
-- Create a directory and run the generator:
+### React generator
+- Create an **empty** directory and run the generator:
 ```
 mkdir myApp && cd myApp
-yo theodo-stack
+yo theodo-stack:react
 ```
 
-You will be prompted for a backend. If you just want to create a React-Redux app, choose **none** and then React-Redux.
+- Launch your app: `yarn start`
 
-Then follow the generated documentation installation steps.
+### Server generator
+
+- Create an directory and run the generator:
+```
+mkdir myApp && cd myApp
+yo theodo-stack:server
+```
 
 ## Contributing to the generator
 

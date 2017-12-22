@@ -2,7 +2,22 @@ const Generator = require('yeoman-generator');
 const _ = require('lodash');
 
 class StackGenerator extends Generator {
+  prompting() {
+    return this.prompt({
+      type: 'confirm',
+      name: 'empty-folder',
+      message: 'The current folder must be empty, even of hidden files, do you confirm (Y/n) ?',
+      default: true,
+    }).then(answer => {
+      if(!answer['empty-folder']) {
+        this.log('The current folder must be empty');
+        this.env.error('Aborting');
+      }
+    });
+  }
+
   addReactBoilerplate() {
+    this.conflicter.force = true;
     this.log('Installing create-react-app 1.4.3');
     this.spawnCommandSync('npm', ['install', '-g', 'create-react-app@1.4.3']);
 
@@ -35,6 +50,10 @@ class StackGenerator extends Generator {
     let existingPackage = {};
     let content = {
       scripts: {
+        start: 'react-scripts start',
+        build: 'react-scripts build',
+        test: 'react-scripts test --env=jsdom',
+        eject: 'react-scripts eject',
         analyze: 'source-map-explorer build/static/js/main.*',
         flow: 'flow',
         'flow:coverage': "flow-coverage-report --threshold=75 -i 'src/**/*.js' -t html -t json -t text",
@@ -43,22 +62,27 @@ class StackGenerator extends Generator {
         'test:coverage': 'npm run test -- --coverage',
       },
       dependencies: {
+        'react': '16.2.0',
+        'react-dom': '16.2.0',
+        'react-scripts': '1.0.17',
+        'prop-types': '15.6.0',
+        'react-intl': '2.4.0',
         'prop-types': '15.6.0',
         'react-intl': '2.3.0',
         'react-redux': '5.0.6',
         'react-router-dom': '4.2.2',
-        'react-test-renderer': '16.0.0',
+        'react-test-renderer': '16.2.0',
         'redux':'3.7.2',
-        'redux-saga': '0.15.6',
-        'source-map-explorer': '1.4.0',
+        'redux-saga': '0.16.0',
+        'source-map-explorer': '1.5.0',
         'whatwg-fetch': '2.0.3',
         'immutable': '3.8.2'
       },
       devDependencies: {
-        'babel-eslint': '7.2.3',
-        'enzyme': '3.0.0',
+        'babel-eslint': '8.0.3',
+        'enzyme': '3.2.0',
         'enzyme-adapter-react-16': '1.0.0',
-        'eslint': '4.3.0',
+        'eslint': '4.13.1',
         'eslint-config-airbnb': '15.1.0',
         'eslint-config-prettier': '2.3.0',
         'eslint-plugin-flowtype': '2.39.1',
@@ -68,11 +92,11 @@ class StackGenerator extends Generator {
         'eslint-plugin-prefer-object-spread': '1.2.1',
         'eslint-plugin-prettier': '2.1.2',
         'eslint-plugin-react': '7.1.0',
-        'flow-bin': '0.57.1',
-        'flow-coverage-report': '0.3.0',
-        'flow-typed': '2.2.0',
-        'nsp': '2.7.0',
-        'prettier': '1.7.0',
+        'flow-bin': '0.61.0',
+        'flow-coverage-report': '0.4.0',
+        'flow-typed': '2.2.3',
+        'nsp': '3.1.0',
+        'prettier': '1.9.2',
       },
     };
     try {
