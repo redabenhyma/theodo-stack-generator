@@ -1,0 +1,2 @@
+[prod]
+<%= prodIpAddress %> ansible_ssh_user=ubuntu

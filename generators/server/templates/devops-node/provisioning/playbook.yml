@@ -1,0 +1,29 @@
+---
+# It will install python2 if missing (but checks first so no expensive repeated apt updates)
+
+- hosts: all
+  gather_facts: False
+  become: true
+  tasks:
+  - name: install python 2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+
+- name: Provisioning <%= appName %>
+  hosts: all
+  become: true
+  gather_facts: true
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get -y install python-simplejson
+  vars_files:
+    - vars/main.yml
+
+  roles:
+    - ubuntu-apt
+    - create-www-data-user
+    - any-nodejs
+    - fubarhouse.yarn
+    - ubuntu-nodejs-nginx
+    - nginx
+    - ubuntu-postgresql
