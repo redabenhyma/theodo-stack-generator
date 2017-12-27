@@ -63,6 +63,7 @@ class StackGenerator extends Generator {
     [
       { src: 'src', dest: 'src' },
       { src: 'flow-typed', dest: 'flow-typed' },
+      { src: 'scripts', dest: 'scripts' },
       { src: '.*', dest: '' },
     ].forEach(file => this.fs.copyTpl(
       this.templatePath(file.src),
@@ -88,6 +89,7 @@ class StackGenerator extends Generator {
         analyze: 'source-map-explorer build/static/js/main.*',
         flow: 'flow',
         'flow:coverage': "flow-coverage-report --threshold=75 -i 'src/**/*.js' -t html -t json -t text",
+        generate: 'plop --plopfile scripts/generators/index.js',
         lint: 'eslint --ext .jsx,.js -c .eslintrc src',
         "lint:fix": "eslint --fix --ext .jsx,.js -c .eslintrc src",
         nsp: 'nsp check',
@@ -99,6 +101,7 @@ class StackGenerator extends Generator {
         'react-scripts': '1.0.17',
         'prop-types': '15.6.0',
         'react-intl': '2.4.0',
+        'plop': '1.9.1',
         'prop-types': '15.6.0',
         'react-intl': '2.3.0',
         'react-redux': '5.0.6',
@@ -107,6 +110,7 @@ class StackGenerator extends Generator {
         'redux':'3.7.2',
         'redux-saga': '0.16.0',
         'source-map-explorer': '1.5.0',
+        'styled-components': '2.4.0',
         'whatwg-fetch': '2.0.3',
         'immutable': '3.8.2'
       },
