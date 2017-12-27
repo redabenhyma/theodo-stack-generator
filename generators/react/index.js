@@ -3,20 +3,28 @@ const _ = require('lodash');
 
 class StackGenerator extends Generator {
   prompting() {
-    return this.prompt({
-      type: 'confirm',
-      name: 'empty-folder',
-      message: 'The current folder must be empty, even of hidden files, do you confirm (Y/n) ?',
-      default: true,
-    }).then(answer => {
-      if(!answer['empty-folder']) {
-        this.log('The current folder must be empty');
-        this.env.error('Aborting');
-      }
-    });
+    return this.prompt([
+      {
+        type: 'confirm',
+        name: 'empty-folder',
+        message: 'The current folder must be empty, even of hidden files, do you confirm (Y/n) ?',
+        default: true,
+      },
+      {
+        type    : 'confirm',
+        name    : 'react',
+        message : 'Do you want a react client ?',
+      },
+    ]
+  ).then(answers => {
+    this.answers = answers;
+    if(!this.answers['empty-folder']) {
+      this.log('The current folder must be empty');
+      this.env.error('Aborting');
+    }});
   }
 
-  addReactBoilerplate() {
+  _addReactBoilerplate() {
     this.conflicter.force = true;
     this.log('Installing create-react-app 1.4.3');
     this.spawnCommandSync('npm', ['install', '-g', 'create-react-app@1.4.3']);
@@ -25,28 +33,32 @@ class StackGenerator extends Generator {
     this.spawnCommandSync('create-react-app', ['.']);
 
     this.log('Removing create-react-app generator boilerplate');
-    return [
+    [
       'src/App.js',
       'src/App.css',
       'src/logo.svg',
       'src/App.test.js',
       'src/index.js'
     ].forEach(file => this.spawnCommandSync('rm', [file]))
+
+    return Promise.resolve();
   }
 
-  addTemplates() {
+  _addTemplates() {
     this.log('Copying new files for create-react-app');
-    return [
+    [
       { src: 'src', dest: 'src' },
       { src: 'flow-typed', dest: 'flow-typed' },
       { src: '.*', dest: '' },
     ].forEach(file => this.fs.copy(
       this.templatePath(file.src),
       this.destinationPath(file.dest),
-    ))
+    ));
+
+    return Promise.resolve();
   }
 
-  updatePackageJson() {
+  _updatePackageJson() {
     let existingPackage = {};
     let content = {
       scripts: {
@@ -105,11 +117,20 @@ class StackGenerator extends Generator {
     } catch (e) {
       this.log('failed reading package.json')
     }
-    console.log('existingPackage', existingPackage);
     this.log('Updating package.json');
     this.fs.delete('package.json');
-    console.log('content', content);
     return this.fs.writeJSON(this.destinationPath('./package.json'), content);
+  }
+
+  installProject() {
+    if (!this.answers.react) {
+      this.log("Too bad you don't want our awesome React generator!")
+      return;
+    }
+
+    return this._addReactBoilerplate()
+    .then(() => this._addTemplates())
+    .then(() => this._updatePackageJson())
   }
 
   end() {

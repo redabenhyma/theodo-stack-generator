@@ -1,9 +1,15 @@
 const Generator = require('yeoman-generator');
-const _ = require('lodash');
 
 class StackGenerator extends Generator {
   prompting() {
     return this.prompt([
+      {
+        type    : 'list',
+        name    : 'backend',
+        message : 'Do you want a server?',
+        default : 'No backend',
+        choices : ['No backend', 'API Platform (Symfony)']
+      },
       {
         type    : 'input',
         name    : 'appName',
@@ -11,19 +17,13 @@ class StackGenerator extends Generator {
         default : this.appname,
         require : true,
       },
-      {
-        type    : 'list',
-        name    : 'backend',
-        message : 'Choose your backend',
-        default : 'API Platform (Symfony)',
-        choices : ['API Platform (Symfony)', 'Loopback (nodejs)']
-      },
     ])
     .then(answers => {
       this.answers = answers;
       this.answers.clientPublicDirectory = 'client/build';
 
       if (this.answers.backend === 'No backend') {
+        this.log("Maybe next time for the server!")
         return Promise.resolve();
       }
 
@@ -60,17 +60,7 @@ class StackGenerator extends Generator {
         }
       ];
 
-      if (this.answers.backend === 'Loopback (nodejs)') {
-        serverQuestions.unshift({
-          type    : 'list',
-          name    : 'virtualEnv',
-          message : 'Choose between Docker and Vagrant for local development',
-          default : 'docker',
-          choices : ['docker', 'vagrant']
-        });
-      } else {
-        this.answers.virtualEnv = 'vagrant';
-      }
+      this.answers.virtualEnv = 'vagrant';
 
       return this.prompt(serverQuestions);
     })
@@ -97,24 +87,6 @@ class StackGenerator extends Generator {
       ]);
     }
 
-    if (this.answers.backend === 'Loopback (nodejs)') {
-      files = files.concat([
-        'doc/deployment-node.md',
-        'doc/database-node.md',
-        'doc/tests-node.md',
-      ]);
-
-      if (this.answers.virtualEnv === 'vagrant') {
-        files = files.concat([
-          'doc/installation-node-vagrant.md',
-        ]);
-      } else if (this.answers.virtualEnv === 'docker'){
-        files = files.concat([
-          'doc/installation-node-docker.md',
-        ]);
-      }
-    }
-
     if (this.answers.backend === 'API Platform (Symfony)') {
       files = files.concat([
         'doc/installation-symfony.md',
@@ -127,7 +99,7 @@ class StackGenerator extends Generator {
     return Promise.all(files.map(file => {
      return this.fs.copyTpl(
        this.templatePath(file),
-       this.destinationPath(file.replace(/-node|-symfony|-react-redux|-no-client|-vagrant|-docker/, '')),
+       this.destinationPath(file.replace(/-symfony|-react-redux|-no-client|-vagrant|-docker/, '')),
        this.answers
      );
    }));
@@ -142,16 +114,6 @@ class StackGenerator extends Generator {
       'ansible.cfg',
     ];
 
-    if (this.answers.backend === 'Loopback (nodejs)') {
-      files = files.concat([
-        'database.json',
-        'package.json',
-        'yarn.lock',
-        'pm2.yml',
-        'shipitfile.js',
-      ])
-    }
-
     if (this.answers.virtualEnv === 'vagrant') {
       files = files.concat([
         'Vagrantfile',
@@ -161,37 +123,15 @@ class StackGenerator extends Generator {
     return Promise.all(files.map(file => {
      return this.fs.copyTpl(
        this.templatePath(file),
-       this.destinationPath(file.replace(/-node|-symfony/, '')),
+       this.destinationPath(file.replace(/-symfony/, '')),
        this.answers
      );
    }));
   }
 
-  _addMigrationsTemplates () {
-    if (this.answers.backend !== 'Loopback (nodejs)') {
-      return Promise.resolve();
-    }
-
-    return Promise.all([
-     'migrations/20161206103004-create-user.js',
-     'migrations/sqls/20161206103004-create-user-up.sql',
-     'migrations/sqls/20161206103004-create-user-down.sql',
-    ].map(file => {
-      return this.fs.copyTpl(
-        this.templatePath(file),
-        this.destinationPath(file),
-        this.answers
-      );
-    }));
-  }
-
   _addProvisioningTemplates () {
     if (this.answers.backend === 'API Platform (Symfony)') {
       return this._addSymfonyDevopsTemplates();
-    }
-
-    if (this.answers.backend === 'Loopback (nodejs)') {
-      return this._addNodeDevopsTemplates();
     }
   }
 
@@ -223,73 +163,7 @@ class StackGenerator extends Generator {
    ].map(file => {
      return this.fs.copyTpl(
        this.templatePath(file),
-       this.destinationPath(file.replace(/-node|-symfony/, '')),
-       this.answers
-     );
-   }));
-  }
-
-  _addNodeDevopsTemplates () {
-    this.fs.copy(
-      this.templatePath('devops-node/provisioning/roles'),
-      this.destinationPath('devops/provisioning/roles'),
-      this.answers
-    );
-
-    return Promise.all([
-     'docker-compose-node.yml',
-     'Dockerfile-node',
-     'devops-node/docker/nginx.conf',
-     'devops-node/provisioning/group_vars/prod',
-     'devops-node/provisioning/group_vars/staging',
-     'devops-node/provisioning/group_vars/vagrant',
-     'devops-node/provisioning/hosts/prod',
-     'devops-node/provisioning/hosts/staging',
-     'devops-node/provisioning/hosts/vagrant',
-     'devops-node/provisioning/vars/main.yml',
-     'devops-node/provisioning/playbook.yml',
-   ].map(file => {
-     return this.fs.copyTpl(
-       this.templatePath(file),
-       this.destinationPath(file.replace(/-node|-symfony/, '')),
-       this.answers
-     );
-   }));
-  }
-
-  _addNodeServerTemplates () {
-    this.fs.copy(
-      this.templatePath('server/boot'),
-      this.destinationPath('server/boot'),
-      this.answers
-    )
-
-    this.fs.copy(
-      this.templatePath('server/models'),
-      this.destinationPath('server/models'),
-      this.answers
-    )
-
-    this.fs.copy(
-      this.templatePath('tests'),
-      this.destinationPath('tests'),
-      this.answers
-    )
-
-    return Promise.all([
-     'server/.eslintrc',
-     'server/component-config.json',
-     'server/config.json',
-     'server/datasources.json',
-     'server/datasources.local.js',
-     'server/middleware.development.json',
-     'server/middleware.json',
-     'server/model-config.json',
-     'server/server.js',
-   ].map(file => {
-     return this.fs.copyTpl(
-       this.templatePath(file),
-       this.destinationPath(file),
+       this.destinationPath(file.replace(/-symfony/, '')),
        this.answers
      );
    }));
@@ -309,24 +183,15 @@ class StackGenerator extends Generator {
     return Promise.resolve();
   }
 
-  _addServer () {
-    if (this.answers.backend === 'Loopback (nodejs)') {
-      return this._addNodeServerTemplates();
-    } else if (this.answers.backend === 'API Platform (Symfony)') {
-      return this._addSymfonyServer();
-    } else {
-      return Promise.resolve();
-    }
-  }
-
   installProject() {
-    return this._addServer()
-    .then(() => this._addConfigurationTemplates())
+    if (this.answers.backend !== 'API Platform (Symfony)') {
+      return;
+    }
+
+    return this._addConfigurationTemplates()
     .then(() => this._addDocumentation())
     .then(() => this._addProvisioningTemplates())
-    .then(() => this._addMigrationsTemplates())
   }
-
 
   end() {
     // .gitgnore is not included by npm publish https://github.com/npm/npm/issues/3763
