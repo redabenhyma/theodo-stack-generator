@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Home, Avatar } from './pages';
+import { Home<% if (exampleRequired) { %>, Avatar<% } %> } from './pages';
 
 const routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/avatar" component={Avatar} />
+    <% if (exampleRequired) { %><Route path="/avatar" component={Avatar} /><% } %>
   </Switch>
 );
 

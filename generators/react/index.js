@@ -10,19 +10,29 @@ class StackGenerator extends Generator {
   }
 
   prompting() {
-    return this.prompt([
+    const prompt = [
       {
+        type: 'confirm',
+        name: 'exampleRequired',
+        message: 'Do you want a cool page example which demonstrates the best practices (Y/n) ?',
+        default: true,
+      },
+    ];
+
+    // When server is required, the react app is always in a 'client' dolder
+    if (!this.options.serverRequired) {
+      prompt.push({
         type: 'confirm',
         name: 'empty-folder',
         message: 'The current folder must be empty, even of hidden files, do you confirm (Y/n) ?',
         default: true,
-      },
-    ]
-  ).then(answers => {
+      });
+    }
+
+    return this.prompt(prompt).then(answers => {
     this.answers = answers;
     if(!this.answers['empty-folder']) {
-      this.log('The current folder must be empty');
-      this.env.error('Aborting');
+      this.env.error('The current folder must be empty to clone create-react-app');
     }});
   }
 
@@ -52,10 +62,16 @@ class StackGenerator extends Generator {
       { src: 'src', dest: 'src' },
       { src: 'flow-typed', dest: 'flow-typed' },
       { src: '.*', dest: '' },
-    ].forEach(file => this.fs.copy(
+    ].forEach(file => this.fs.copyTpl(
       this.templatePath(file.src),
       this.destinationPath(file.dest),
+      { exampleRequired: this.answers.exampleRequired }
     ));
+
+    if (!this.answers.exampleRequired) {
+      // delete example page
+      this.fs.delete('src/pages/Avatar');
+    }
 
     return Promise.resolve();
   }
@@ -71,6 +87,7 @@ class StackGenerator extends Generator {
         flow: 'flow',
         'flow:coverage': "flow-coverage-report --threshold=75 -i 'src/**/*.js' -t html -t json -t text",
         lint: 'eslint --ext .jsx,.js -c .eslintrc src',
+        "lint:fix": "eslint --fix --ext .jsx,.js -c .eslintrc src",
         nsp: 'nsp check',
         'test:coverage': 'npm run test -- --coverage',
       },
@@ -128,7 +145,9 @@ class StackGenerator extends Generator {
   end() {
     this.spawnCommandSync('yarn');
     this.spawnCommandSync('node_modules/.bin/flow-typed', ['install']);
-    this.log('!!!!!! Please ignore all flow warnings, everything is OK !!!!!!');
+    this.log('Fixing possible linting issues');
+    this.spawnCommandSync('yarn', ['lint:fix']);
+    this.log('! Please ignore all flow warnings, everything is OK !');
 
     this.log('Everything went well for your React app!')
   }
