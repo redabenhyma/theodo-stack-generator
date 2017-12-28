@@ -10,35 +10,26 @@ Choose a server between:
   - Ansible provisioning for:
     - PHP7
     - Yarn
-    - nginx
-    - creating www-data user
-    - postgresql database
-    - HTTPS configuration
-  - Capistrano deployment script
-
-- [Loopback](http://loopback.io/) ([DEPRECATED](http://blog.m33.network/2017/05/stacks-technique-theodo/)):
-  - Ansible provisioning for:
-    - Node 8
-    - Yarn
-    - nginx
-    - creating www-data user
+    - Nginx
+    - Creating www-data user
     - Postgresql database
     - HTTPS configuration
-    - db-migrate and initial loopback migrations
-  - Shipit deployment script
-
+  - Capistrano deployment script
 
 Choose if you want the client:
 
 - React-Redux: A boosted [create-react-app](https://github.com/facebookincubator/create-react-app) with
-  - redux
-  - redux-saga
-  - hot-reloading
-  - react-intl with nested translations files!
-  - react-router for creating multiples pages
-  - examples of unit and snapshot tests
+  - Redux
+  - Redux-saga
+  - Hot-reloading
+  - React-intl with nested translations files!
+  - React-router 4 for creating multiples pages
+  - Examples of unit and snapshot tests
   - Eslint with airbnb linter
   - Immutable.JS
+  - Flow
+  - Prettier
+  - Plop scripts to generate React components
 
 ## What's next ?
 
@@ -55,7 +46,6 @@ If you want a server (Symfony or Loopback) with the provisioning and the deploym
 + [docker-compose](https://docs.docker.com/compose/install/#prerequisites) **OR** [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html)
 + [Ansible (version >= 2)](http://docs.ansible.com/ansible/intro_installation.html)
 
-
 ## Installation
 
 ### Install the generator
@@ -71,6 +61,7 @@ If you want a server (Symfony or Loopback) with the provisioning and the deploym
 
 - Install the package:
 ```
+nvm use 8.4.0
 git clone git@github.com:theodo/theodo-stack-generator.git
 cd theodo-stack-generator && yarn && npm link && cd ../
 npm install -g theodo-stack-generator
@@ -78,25 +69,23 @@ npm install -g theodo-stack-generator
 
 ## Usage
 
-### React generator
 - Create an **empty** directory and run the generator:
 ```
 mkdir myApp && cd myApp
-yo theodo-stack:react
+nvm use 8.4.0
+yo theodo-stack
 ```
 
-- Launch your app: `yarn start`
-
-### Server generator
-
-- Create an directory and run the generator:
-```
-mkdir myApp && cd myApp
-yo theodo-stack:server
-```
+- Launch your React app in the client folder: `yarn start`
 
 ## Contributing to the generator
 
 This generator can be improved in many ways, PR are welcome! [here](https://github.com/theodo/theodo-stack-generator) !
 
-To install it and use it locally, follow the previous documentation.
+- To install it and use it locally, follow the previous documentation.
+- When you make a change to the generator in local, you can use it immediatly with your changes
+- How to develop ?
+  - Change the code
+  - Generate a new project
+  - See if your new project works
+

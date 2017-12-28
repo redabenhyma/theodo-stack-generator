@@ -2,6 +2,13 @@ const Generator = require('yeoman-generator');
 const _ = require('lodash');
 
 class StackGenerator extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+    this.option('appName');
+    this.option('clientRequired');
+    this.option('serverRequired');
+  }
+
   prompting() {
     return this.prompt([
       {
@@ -9,11 +16,6 @@ class StackGenerator extends Generator {
         name: 'empty-folder',
         message: 'The current folder must be empty, even of hidden files, do you confirm (Y/n) ?',
         default: true,
-      },
-      {
-        type    : 'confirm',
-        name    : 'react',
-        message : 'Do you want a react client ?',
       },
     ]
   ).then(answers => {
@@ -33,7 +35,7 @@ class StackGenerator extends Generator {
     this.spawnCommandSync('create-react-app', ['.']);
 
     this.log('Removing create-react-app generator boilerplate');
-    [
+    [ 'package.json',
       'src/App.js',
       'src/App.css',
       'src/logo.svg',
@@ -59,8 +61,7 @@ class StackGenerator extends Generator {
   }
 
   _updatePackageJson() {
-    let existingPackage = {};
-    let content = {
+    const packageContent = {
       scripts: {
         start: 'react-scripts start',
         build: 'react-scripts build',
@@ -111,23 +112,14 @@ class StackGenerator extends Generator {
         'prettier': '1.9.2',
       },
     };
-    try {
-      existingPackage = this.fs.readJSON('package.json');
-      content = _.merge(content, existingPackage);
-    } catch (e) {
-      this.log('failed reading package.json')
-    }
-    this.log('Updating package.json');
-    this.fs.delete('package.json');
-    return this.fs.writeJSON(this.destinationPath('./package.json'), content);
+
+    return this.fs.writeJSON(this.destinationPath('./package.json'), packageContent);
   }
 
   installProject() {
-    if (!this.answers.react) {
-      this.log("Too bad you don't want our awesome React generator!")
-      return;
+    if (this.options.serverRequired) {
+      this.destinationRoot('client');
     }
-
     return this._addReactBoilerplate()
     .then(() => this._addTemplates())
     .then(() => this._updatePackageJson())
@@ -138,7 +130,7 @@ class StackGenerator extends Generator {
     this.spawnCommandSync('node_modules/.bin/flow-typed', ['install']);
     this.log('!!!!!! Please ignore all flow warnings, everything is OK !!!!!!');
 
-    this.log('Everything went well, enjoy your new app!')
+    this.log('Everything went well for your React app!')
   }
 };
 

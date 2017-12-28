@@ -1,69 +1,53 @@
 const Generator = require('yeoman-generator');
 
 class StackGenerator extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+    this.option('appName');
+    this.option('clientRequired');
+    this.option('serverRequired');
+  }
+
   prompting() {
-    return this.prompt([
+    this.answers = { appName: this.options.appName };
+    this.answers.clientPublicDirectory = 'client/build';
+
+    const serverQuestions = [
       {
-        type    : 'list',
-        name    : 'backend',
-        message : 'Do you want a server?',
-        default : 'No backend',
-        choices : ['No backend', 'API Platform (Symfony)']
+        type    : 'input',
+        name    : 'stagingDatabasePassword',
+        message : '[Provisioning] Staging database password',
+        default : this.appname,
       },
       {
         type    : 'input',
-        name    : 'appName',
-        message : 'Your application name',
+        name    : 'prodDatabasePassword',
+        message : '[Provisioning] Production database password',
         default : this.appname,
-        require : true,
       },
-    ])
-    .then(answers => {
-      this.answers = answers;
-      this.answers.clientPublicDirectory = 'client/build';
-
-      if (this.answers.backend === 'No backend') {
-        this.log("Maybe next time for the server!")
-        return Promise.resolve();
+      {
+        type    : 'input',
+        name    : 'repositoryUrl',
+        message : '[Deployment] Your git repository URL',
+        default : '',
+      },
+      {
+        type    : 'input',
+        name    : 'stagingIpAddress',
+        message : '[Provisioning/Deployment] Staging IP address',
+        default : '',
+      },
+      {
+        type    : 'input',
+        name    : 'prodIpAddress',
+        message : '[Provisioning/Deployment](Optionnal) Your production IP address',
+        default : '',
       }
+    ];
 
-      const serverQuestions = [
-        {
-          type    : 'input',
-          name    : 'stagingDatabasePassword',
-          message : '[Provisioning] Staging database password',
-          default : this.appname,
-        },
-        {
-          type    : 'input',
-          name    : 'prodDatabasePassword',
-          message : '[Provisioning] Production database password',
-          default : this.appname,
-        },
-        {
-          type    : 'input',
-          name    : 'repositoryUrl',
-          message : '[Deployment] Your git repository URL',
-          default : '',
-        },
-        {
-          type    : 'input',
-          name    : 'stagingIpAddress',
-          message : '[Provisioning/Deployment] Staging IP address',
-          default : '',
-        },
-        {
-          type    : 'input',
-          name    : 'prodIpAddress',
-          message : '[Provisioning/Deployment](Optionnal) Your production IP address',
-          default : '',
-        }
-      ];
+    this.answers.virtualEnv = 'vagrant';
 
-      this.answers.virtualEnv = 'vagrant';
-
-      return this.prompt(serverQuestions);
-    })
+    return this.prompt(serverQuestions)
     .then(serverAnswers => {
       this.answers = Object.assign(this.answers, serverAnswers);
       if (this.answers.virtualEnv === 'docker') {
@@ -79,22 +63,12 @@ class StackGenerator extends Generator {
   _addDocumentation () {
     let files = [
       'README.md',
+      'doc/provisioning.md',
+      'doc/installation-symfony.md',
+      'doc/deployment-symfony.md',
+      'doc/database-symfony.md',
+      'doc/tests-symfony.md',
     ];
-
-    if (this.answers.backend !== 'No backend') {
-      files = files.concat([
-        'doc/provisioning.md',
-      ]);
-    }
-
-    if (this.answers.backend === 'API Platform (Symfony)') {
-      files = files.concat([
-        'doc/installation-symfony.md',
-        'doc/deployment-symfony.md',
-        'doc/database-symfony.md',
-        'doc/tests-symfony.md',
-      ]);
-    }
 
     return Promise.all(files.map(file => {
      return this.fs.copyTpl(
@@ -130,9 +104,7 @@ class StackGenerator extends Generator {
   }
 
   _addProvisioningTemplates () {
-    if (this.answers.backend === 'API Platform (Symfony)') {
-      return this._addSymfonyDevopsTemplates();
-    }
+    return this._addSymfonyDevopsTemplates();
   }
 
   _addSymfonyDevopsTemplates () {
@@ -141,7 +113,6 @@ class StackGenerator extends Generator {
       this.destinationPath('devops/provisioning/roles'),
       this.answers
     );
-
 
     return Promise.all([
       'Gemfile',
@@ -184,21 +155,16 @@ class StackGenerator extends Generator {
   }
 
   installProject() {
-    if (this.answers.backend !== 'API Platform (Symfony)') {
-      return;
-    }
-
-    return this._addConfigurationTemplates()
+    return this._addSymfonyServer()
+    .then(() => this._addConfigurationTemplates())
     .then(() => this._addDocumentation())
     .then(() => this._addProvisioningTemplates())
   }
 
   end() {
     // .gitgnore is not included by npm publish https://github.com/npm/npm/issues/3763
-    // It can be bypassed by renaming a gitgnore file to .gitignore
+    // It can be bypassed by renaming a gitignore file to .gitignore
     this.spawnCommandSync('mv', ['./gitignore', './.gitignore']);
-
-    this.log('Everything went well, enjoy your new app!')
   }
 };
 
