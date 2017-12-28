@@ -1,0 +1,25 @@
+// @flow
+import { connect } from 'react-redux';
+{{#if wantMessages}}
+import { injectIntl } from 'react-intl';
+{{/if}}
+import { toJS } from '../../services/immutable/toJs';
+
+import {{ properCase name }} from './{{ properCase name }}.component';
+
+const mapStateToProps = (state: Store): {{ properCase name }}Store => ({});
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    editThisFunction() {},
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  {{#if wantMessages}}
+  injectIntl(toJS({{ properCase name }})),
+  {{/if}}
+  {{#unless wantMessages}}
+  toJS({{ properCase name }}),
+  {{/unless}}
+);
