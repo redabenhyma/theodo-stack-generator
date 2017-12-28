@@ -1,10 +1,11 @@
 # Theodo stack generator
 
-This generator scripts everything you need to start a React-Redux project with either no backend, API Platform (Symfony) or Loopback (nodejs)
+This generator scripts everything you need to start a React-Redux project with an API Platform (Symfony) server.
 
-Choose a server between:
 
-- No server at all. You just want an awesome frontend.
+### Choose a server
+
+- No server at all, you want an awesome frontend.
 
 - [Api platform](https://api-platform.com/) with:
   - Ansible provisioning for:
@@ -16,7 +17,7 @@ Choose a server between:
     - HTTPS configuration
   - Capistrano deployment script
 
-Choose if you want the client:
+### Choose a client
 
 - React-Redux: A boosted [create-react-app](https://github.com/facebookincubator/create-react-app) with
   - Redux
@@ -42,7 +43,7 @@ Choose if you want the client:
 You need to install:
 + [Yarn](https://yarnpkg.com/en/docs/install)
 
-If you want a server (Symfony or Loopback) with the provisioning and the deployment scripts:
+If you want a server with the provisioning and the deployment scripts:
 + [docker-compose](https://docs.docker.com/compose/install/#prerequisites) **OR** [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html)
 + [Ansible (version >= 2)](http://docs.ansible.com/ansible/intro_installation.html)
 
