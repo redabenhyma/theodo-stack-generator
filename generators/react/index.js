@@ -1,5 +1,4 @@
 const Generator = require('yeoman-generator');
-const _ = require('lodash');
 
 class StackGenerator extends Generator {
   constructor(args, opts) {
@@ -31,7 +30,10 @@ class StackGenerator extends Generator {
 
     return this.prompt(prompt).then(answers => {
     this.answers = answers;
-    if(!this.answers['empty-folder']) {
+
+    const isClientDirectoryValid = !this.options.serverRequired && !this.answers['empty-folder'];
+
+    if(isClientDirectoryValid) {
       this.env.error('The current folder must be empty to clone create-react-app');
     }});
   }
