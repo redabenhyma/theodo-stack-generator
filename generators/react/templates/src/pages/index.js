@@ -3,4 +3,4 @@
  */
 
 export { default as Home } from './Home';
-export { default as Avatar } from './Avatar';
+<% if (exampleRequired) { %>export { default as Avatar } from './Avatar';<% } %>

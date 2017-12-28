@@ -1,13 +1,16 @@
 // @flow
 /* eslint-disable no-undef, flowtype/delimiter-dangle */
 
-declare type AvatarStore = {
-  userAvatarUrl?: ?string,
-  userId?: string,
-};
+<% if (exampleRequired) { %>
+  declare type AvatarStore = {
+    userAvatarUrl?: ?string,
+    userId?: string,
+  };
+<% } %>
 
+<% if (exampleRequired) { %><% } %>
 declare type Store = {
-  avatar: AvatarStore,
+  <% if (exampleRequired) { %>avatar: AvatarStore,<% } %>
 };
 
 declare type History = {
