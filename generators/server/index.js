@@ -82,9 +82,7 @@ class StackGenerator extends Generator {
   _addConfigurationTemplates () {
     let files = [
       'gitignore',
-      '.yo-rc.json',
       '.editorconfig',
-      '.eslintignore',
       'ansible.cfg',
     ];
 
