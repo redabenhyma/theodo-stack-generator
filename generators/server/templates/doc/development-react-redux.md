@@ -6,9 +6,15 @@ In the client folder, run:
 
 - `yarn start` to start a local dev-server
 
-- `yarn build` to build a minified version of the code.
+- `yarn build` to build a minified version of the code
 
-- `yarn test` to launch the tests.
+- `yarn test` to launch the tests
+
+- `yarn generate` to generate a new component or a new page
+
+- `yarn nsp` to spot security breaches in your application
+
+- `yarn analyze` to analyze the production bundle size
 
 ## How to develop using webpack with docker
 

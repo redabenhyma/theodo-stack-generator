@@ -1,0 +1,15 @@
+import React from 'react';
+import {{ properCase name }} from './{{ properCase name }}.component';
+import createComponentWithIntl from 'services/i18n/create-component-with-intl';
+
+describe('[Snapshot] <{{ properCase name }} />', () => {
+  it('should render correctly', () => {
+    const props = {
+      intl: {
+        formatMessage: jest.fn(),
+      },
+    };
+    const tree = createComponentWithIntl(<{{ properCase name }} {...props} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
