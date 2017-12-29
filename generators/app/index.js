@@ -18,7 +18,7 @@ class StackGenerator extends Generator {
       {
         type    : 'input',
         name    : 'appName',
-        message : 'Your application name',
+        message : 'Your application name (without white space)',
         default : this.appname,
         require : true,
       },
