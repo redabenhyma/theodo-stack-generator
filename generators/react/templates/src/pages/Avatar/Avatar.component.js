@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, intlShape } from 'react-intl';
-import './style.css';
+
+import StyledAvatar from './Avatar.style';
 
 type Props = {
   intl: intlShape,
@@ -33,14 +34,14 @@ class Avatar extends React.Component<Props> {
     const { userAvatarUrl } = this.props;
 
     return (
-      <div className="page-container">
+      <StyledAvatar>
         <div role="button" tabIndex={0} onClick={this.navigateTo('/')}>
           <FormattedMessage id="page.back" />
         </div>
         <p>{formatMessage({ id: 'page.api-to-translate-example' })}</p>
         <p>
           <input
-            className="githubAvatarInput"
+            className="github-avatar-input"
             type="text"
             onChange={this.onInputChange}
             placeholder={formatMessage({ id: 'page.add-github-username' })}
@@ -52,7 +53,7 @@ class Avatar extends React.Component<Props> {
           </button>
         </p>
         {userAvatarUrl && <img src={userAvatarUrl} alt="user avatar" />}
-      </div>
+      </StyledAvatar>
     );
   }
 }
