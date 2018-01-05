@@ -1,7 +1,8 @@
 import React from 'react';
 <% if (exampleRequired) { %>import { Link } from 'react-router-dom';<% } %>
 import { FormattedMessage } from 'react-intl';
-import './style.css';
+
+import StyledIntro from './Home.style';
 
 <% if (exampleRequired) { %>
   const navigateTo = history => () => {
@@ -10,15 +11,15 @@ import './style.css';
 <% } %>
 
 const Home = (<% if (exampleRequired) { %>{ history }<% } %>) => (
-  <div>
-    <p className="intro">
+  <React.Fragment>
+    <StyledIntro>
       <FormattedMessage
         id="home.get-started"
         defaultMessage="To get started, edit"
       />
       <code className="intro-code">src/App.js</code>
       <FormattedMessage id="home.save-to-reload" />
-    </p>
+    </StyledIntro>
     <% if (exampleRequired) { %>
           <button onClick={navigateTo(history)}>
           <FormattedMessage id="home.click-me" />
@@ -27,7 +28,7 @@ const Home = (<% if (exampleRequired) { %>{ history }<% } %>) => (
           <FormattedMessage id="home.use-a-link" />
         </Link>
     <% } %>
-  </div>
+  </React.Fragment>
 );
 
 export default Home;
