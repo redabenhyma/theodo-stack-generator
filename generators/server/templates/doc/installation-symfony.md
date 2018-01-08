@@ -1,6 +1,7 @@
-## Installation
+# Installation
 
-#### Create the vagrant
+### Create and provision the vagrant
+
 - Launch VM:
   - `vagrant up`
   - If you encounter error `ttyname failed: Inappropriate ioctl for devices`:
@@ -16,8 +17,10 @@
     - `ssh-keygen -R 10.0.0.10 && ssh ubuntu@10.0.0.10`
     - exit the vagrant
 
+### Build your frontend code
 
-If you have a static frontend:
+- If you have a static frontend such as React:
+
   - Connect to the vagrant: `vagrant ssh`
 
   - Build the frontend code: `cd /var/www/<%= appName %>/current/client && yarn build`
@@ -27,6 +30,8 @@ If you have a static frontend:
   - Browse your static frontend: https://10.0.0.10
 
 
+### Update your database configuration
+
 Change the driver to `pdo_pgsql`in `app/config.yml`:
 ```
 # Doctrine Configuration
@@ -35,23 +40,26 @@ doctrine:
         driver:   pdo_pgsql
 ```
 
-- Install the project
+### Install the server
 
-  - Connect to the vagrant as www-data:
-    - `vagrant ssh`
-    - `sudo su www-data`
+- Connect to the vagrant as www-data:
+  - `vagrant ssh`
+  - `sudo su www-data`
 
-  - Install dependencies
-    - `cd /var/www/<%= appName %>/current && php composer.phar install`
+- Install dependencies
+  - `cd /var/www/<%= appName %>/current && php composer.phar install`
 
-  - Create the database schema
-    - `cd /var/www/<%= appName %>/current && bin/console doctrine:schema:create`
+- Create the database schema
+  - `cd /var/www/<%= appName %>/current && bin/console doctrine:schema:create`
 
-  - Run migrations:
-    - `cd /var/www/<%= appName %>/current && bin/console doctrine:generate:entities AppBundle`
+- Run migrations:
+  - `cd /var/www/<%= appName %>/current && bin/console doctrine:generate:entities AppBundle`
 
 
-  - Browse your API: https://10.0.0.10/app_dev.php
+- Browse your API: https://10.0.0.10/app_dev.php
+
+
+### Update your API base path
 
 In the `app/config/routing.yml` add a prefix for your api, it can be somethings like that:
 

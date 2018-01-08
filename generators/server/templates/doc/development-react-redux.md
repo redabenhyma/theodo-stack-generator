@@ -1,26 +1,4 @@
-## Getting started
-
-In the client folder, run:
-
-- `yarn` to install dependencies
-
-- `yarn start` to start a local dev-server
-
-- `yarn build` to build a minified version of the code
-
-- `yarn test` to launch the tests
-
-- `yarn generate` to generate a new component or a new page
-
-- `yarn nsp` to spot security breaches in your application
-
-- `yarn analyze` to analyze the production bundle size
-
-## How to develop using webpack with docker
-
-It works well, you don't have anything to do in particular!
-
-## How to develop using webpack with Vagrant
+# How to develop using webpack with Vagrant
 
  Webpack can watch your frontend files and recompiles the code automatically as soon as you change your code.
 

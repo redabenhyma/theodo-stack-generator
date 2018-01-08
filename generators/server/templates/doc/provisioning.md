@@ -1,6 +1,6 @@
-## The provisioning
+# The provisioning
 
-### Provisioning of a remote server
+## Provisioning of a remote server
 
 To provision a remote machine, you need ssh access to the server as root.
 
