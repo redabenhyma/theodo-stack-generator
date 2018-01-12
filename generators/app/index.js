@@ -1,7 +1,17 @@
-const Generator = require('yeoman-generator');
+const Generator = require("yeoman-generator");
+const chalk = require("chalk");
 
 class StackGenerator extends Generator {
   prompting() {
+    if (this.appname.toLowerCase() != this.appname) {
+      this.log(
+        chalk.red(
+          "The react app cannot be created in a folder with a name containing capital letters"
+        )
+      );
+      this.env.error("Please rename your client folder to a lowercase name");
+    }
+
     return this.prompt([
       {
         type: 'confirm',
