@@ -61,6 +61,7 @@ class StackGenerator extends Generator {
       "src/App.css",
       "src/logo.svg",
       "src/App.test.js",
+      "public/favicon.ico",
       "src/index.js"
     ].forEach(file => this.spawnCommandSync("rm", [file]));
 
@@ -81,6 +82,11 @@ class StackGenerator extends Generator {
         this.destinationPath(file.dest),
         { exampleRequired: this.answers.exampleRequired }
       )
+    );
+    this.log("Copying Theodo's favicon");
+    this.fs.copy(
+      this.templatePath('public/favicon.ico'),
+      this.destinationPath('public/favicon.ico')
     );
 
     if (!this.answers.exampleRequired) {
