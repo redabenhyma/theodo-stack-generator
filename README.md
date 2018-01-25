@@ -79,6 +79,8 @@ yo theodo-stack
 
 - Launch your React app in the client folder: `yarn start`
 
+For the client, you may need to source the .env file (`source .env`) if you want to use absolute PATH. Also see: https://github.com/facebook/create-react-app/issues/2300 
+
 ## Contributing to the generator
 
 This generator can be improved in many ways, PR are welcome! [here](https://github.com/theodo/theodo-stack-generator) !
