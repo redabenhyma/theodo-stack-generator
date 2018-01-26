@@ -92,6 +92,7 @@ class StackGenerator extends Generator {
     if (!this.answers.exampleRequired) {
       // delete example page
       this.fs.delete("src/pages/Avatar");
+      this.fs.delete("src/redux/Avatar");
     }
 
     return Promise.resolve();

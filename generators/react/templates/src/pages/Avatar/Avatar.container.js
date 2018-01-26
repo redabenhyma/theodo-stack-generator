@@ -1,24 +1,22 @@
 // @flow
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
-import { toJS } from '../../services/immutable/toJs';
-import { fetchUserRequest, updateUserId } from './module';
+import { toJS } from 'services/immutable/toJs';
+import { actions } from 'redux/Avatar';
 
 import Avatar from './Avatar.component';
 
-const mapStateToProps = (state: Store): AvatarStore => {
-  return {
-    userId: state.avatar.get('userId'),
-    userAvatarUrl: state.avatar.get('userAvatarUrl'),
-  };
-};
+const mapStateToProps = (state: Store): AvatarStore => ({
+  userId: state.avatar.get('userId'),
+  userAvatarUrl: state.avatar.get('userAvatarUrl'),
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchUser(userId) {
-    dispatch(fetchUserRequest(userId));
+    dispatch(actions.fetchUserRequest(userId));
   },
   updateUserId(userId) {
-    dispatch(updateUserId(userId));
+    dispatch(actions.updateUserId(userId));
   },
 });
 
