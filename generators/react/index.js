@@ -47,7 +47,7 @@ class StackGenerator extends Generator {
 
   _addReactBoilerplate() {
     this.conflicter.force = true;
-    this.log("Installing create-react-app 1.4.3");
+    this.log("Installing create-react-app 1.5.1");
     this.spawnCommandSync("npm", ["install", "-g", "create-react-app@1.4.3"]);
 
     this.log("Starting create-react-app generator");
