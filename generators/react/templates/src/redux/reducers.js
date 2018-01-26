@@ -6,12 +6,11 @@
 import { combineReducers } from 'redux';
 
 <% if (exampleRequired) { %>
-  /**
+/**
  * Example of the Avatar module which should export a reducer.
  */
-import avatar from '../pages/Avatar/module';
+import { reducer as avatar } from './Avatar';
 <% } %>
-
 
 /**
  * Creates the main reducer with the asynchronously loaded ones

@@ -2,7 +2,7 @@
 
 exports[`The page component should renders correctly 1`] = `
 <div
-  className="page-container"
+  className="sc-bdVaJa hiBQnU"
 >
   <div
     onClick={[Function]}
@@ -16,7 +16,7 @@ exports[`The page component should renders correctly 1`] = `
   <p />
   <p>
     <input
-      className="githubAvatarInput"
+      className="github-avatar-input"
       onChange={[Function]}
       placeholder={undefined}
       type="text"
