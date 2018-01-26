@@ -13,14 +13,28 @@ import StyledIntro from './Home.style';
 const Home = (<% if (exampleRequired) { %>{ history }<% } %>) => (
   <React.Fragment>
     <StyledIntro>
-      <FormattedMessage
-        id="home.get-started"
-        defaultMessage="To get started, edit"
-      />
-      <code className="intro-code">src/App.js</code>
-      <FormattedMessage id="home.save-to-reload" />
-    </StyledIntro>
-    <% if (exampleRequired) { %>
+      <p>
+        <FormattedMessage
+          id="home.get-started"
+          defaultMessage="To get started, edit"
+        />
+        <code className="intro-code">src/App.js</code>
+        <FormattedMessage id="home.save-to-reload" />
+      </p>
+      <p>
+        <FormattedMessage id="home.create-route" />
+      </p>
+      <p>
+        <FormattedMessage id="home.generate-component" />
+        <code className="intro-code">yarn generate</code>
+      </p>
+      <p>
+        <FormattedMessage id="home.generate-module" />
+      </p>
+      <p>
+        <FormattedMessage id="home.readme" />
+      </p>
+      <% if (exampleRequired) { %>
           <button onClick={navigateTo(history)}>
           <FormattedMessage id="home.click-me" />
         </button>
@@ -28,6 +42,7 @@ const Home = (<% if (exampleRequired) { %>{ history }<% } %>) => (
           <FormattedMessage id="home.use-a-link" />
         </Link>
     <% } %>
+    </StyledIntro>
   </React.Fragment>
 );
 
