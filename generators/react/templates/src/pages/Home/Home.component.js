@@ -38,7 +38,7 @@ const Home = (<% if (exampleRequired) { %>{ history }<% } %>) => (
           <button onClick={navigateTo(history)}>
           <FormattedMessage id="home.click-me" />
         </button>
-        <Link to="/avatar">
+        <Link to="/avatar" href="/avatar">
           <FormattedMessage id="home.use-a-link" />
         </Link>
     <% } %>

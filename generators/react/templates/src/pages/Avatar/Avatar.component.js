@@ -32,9 +32,9 @@ class Avatar extends React.Component<Props> {
 
     return (
       <StyledAvatar>
-        <div role="button" tabIndex={0} onClick={this.navigateTo('/')}>
+        <button tabIndex={0} onClick={this.navigateTo('/')}>
           <FormattedMessage id="page.back" />
-        </div>
+        </button>
         <p>{formatMessage({ id: 'page.api-to-translate-example' })}</p>
         <p>
           <input
