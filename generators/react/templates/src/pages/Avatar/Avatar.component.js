@@ -6,6 +6,7 @@ import StyledAvatar from './Avatar.style';
 
 type Props = {
   intl: intlShape,
+  history: History,
   fetchUser: (userId: string) => void,
   updateUserId: (value: string) => void,
   userAvatarUrl: string,
@@ -14,18 +15,14 @@ type Props = {
 
 class Avatar extends React.Component<Props> {
   onInputChange = (event: SyntheticInputEvent<HTMLInputElement>): void => {
-    // "this" is the right instance of this component
-    // For performance reasons, you should avoid
-    // <button onClick={() => this.props.addItem('new item')}>
-    // https://medium.com/netscape/react-performance-anti-pattern-creating-functions-in-render-ddeb5ebd2933)
     this.props.updateUserId(event.target.value);
   };
 
-  fetchUser = () => {
+  fetchUser = (): void => {
     this.props.fetchUser(this.props.userId);
   };
 
-  navigateTo = path => () => {
+  navigateTo = (path: string) => () => {
     this.props.history.push(path);
   };
 
