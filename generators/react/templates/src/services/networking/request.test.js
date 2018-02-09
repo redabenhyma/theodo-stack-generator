@@ -1,3 +1,4 @@
+// @flow
 /**
  * Test the request function
  */

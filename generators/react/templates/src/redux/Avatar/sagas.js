@@ -1,3 +1,4 @@
+// @flow
 import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'services/networking/request';
 import { fetchUserSuccess, fetchUserError } from './actions';

@@ -1,3 +1,4 @@
+// @flow
 import {
   UPDATE_USER_ID,
   USER_FETCH_REQUEST,

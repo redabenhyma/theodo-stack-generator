@@ -1,3 +1,4 @@
+// @flow
 /**
  * Index for containers
  */

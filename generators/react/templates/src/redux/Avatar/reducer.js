@@ -1,3 +1,4 @@
+// @flow
 import { fromJS } from 'immutable';
 import { UPDATE_USER_ID, USER_FETCH_SUCCESS } from './constant';
 
