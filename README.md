@@ -2,6 +2,7 @@
 
 This generator scripts everything you need to start a React-Redux project with an API Platform (Symfony) server.
 
+**Objective: launch a project in 2 hours - make an [issue](https://github.com/theodo/theodo-stack-generator/issues) if you don't succeed !**
 
 ### Choose a server
 
