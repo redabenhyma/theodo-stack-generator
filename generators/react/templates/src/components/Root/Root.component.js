@@ -1,6 +1,6 @@
+// @flow
 import React, { Component } from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import PropTypes from 'prop-types';
 import fr from 'react-intl/locale-data/fr';
 import en from 'react-intl/locale-data/en';
 
@@ -17,11 +17,11 @@ const locales = {
 
 addLocaleData([...fr, ...en]);
 
-export default class Root extends Component {
-  static propTypes = {
-    children: PropTypes.element,
-  };
+type Props = {
+  children: React$Element<*>,
+};
 
+export default class Root extends React.Component<Props> {
   render() {
     return (
       <IntlProvider locale="fr" messages={locales.fr}>

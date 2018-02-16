@@ -39,7 +39,7 @@ class StackGenerator extends Generator {
 
       if (isClientDirectoryValid) {
         this.env.error(
-          'The current folder must be empty to clone create-react-app'
+          'The current folder must be empty to clone create-react-app',
         );
       }
     });
@@ -80,13 +80,13 @@ class StackGenerator extends Generator {
       this.fs.copyTpl(
         this.templatePath(file.src),
         this.destinationPath(file.dest),
-        { exampleRequired: this.answers.exampleRequired }
-      )
+        { exampleRequired: this.answers.exampleRequired },
+      ),
     );
     this.log("Copying Theodo's favicon");
     this.fs.copy(
       this.templatePath('public/favicon.ico'),
-      this.destinationPath('public/favicon.ico')
+      this.destinationPath('public/favicon.ico'),
     );
 
     if (!this.answers.exampleRequired) {
@@ -117,71 +117,68 @@ class StackGenerator extends Generator {
       },
       jest: {
         collectCoverageFrom: [
-          "src/**/*.js",
-          "!src/**/*.test.js",
-          "!src/**/index.js",
-          "!src/**/*.container.js",
-          "!src/index.js",
-          "!src/tempPolyfills.js",
-          "!src/setupTests.js",
-          "!src/redux/reducers.js",
-          "!src/redux/sagas.js",
-          "!src/redux/store.js"
+          'src/**/*.js',
+          '!src/**/*.test.js',
+          '!src/**/index.js',
+          '!src/**/*.container.js',
+          '!src/index.js',
+          '!src/tempPolyfills.js',
+          '!src/setupTests.js',
+          '!src/redux/reducers.js',
+          '!src/redux/sagas.js',
+          '!src/redux/store.js',
         ],
         coverageThreshold: {
           global: {
             statements: 100,
             branches: 100,
             functions: 100,
-            lines: 100
+            lines: 100,
           },
         },
       },
       dependencies: {
+        immutable: '^3.8.2',
+        plop: '^1.9.1',
         react: '^16.2.0',
         'react-dom': '^16.2.0',
-        'react-scripts': '^1.1.0',
-        'prop-types': '^15.6.0',
         'react-intl': '^2.4.0',
-        plop: '^1.9.1',
-        'prop-types': '^15.6.0',
-        'react-intl': '^2.3.0',
-        'react-redux': '^5.0.6',
+        'react-redux': '^5.0.7',
         'react-router-dom': '^4.2.2',
+        'react-scripts': '^1.1.1',
         'react-test-renderer': '^16.2.0',
         redux: '^3.7.2',
         'redux-saga': '^0.16.0',
         'source-map-explorer': '^1.5.0',
-        'styled-components': '3.1.16',
+        'styled-components': '3.1.6',
         'whatwg-fetch': '^2.0.3',
-        immutable: '^3.8.2',
       },
       devDependencies: {
         'babel-eslint': '^8.2.1',
+        enzyme: '^3.3.0',
         'enzyme-adapter-react-16': '^1.1.1',
         'enzyme-to-json': '^3.3.0',
+        eslint: '^4.18.0',
         'eslint-config-airbnb': '^16.1.0',
         'eslint-config-prettier': '^2.9.0',
-        'eslint-plugin-flowtype': '^2.42.0',
+        'eslint-plugin-flowtype': '^2.44.0',
         'eslint-plugin-import': '^2.8.0',
         'eslint-plugin-jsx-a11y': '^6.0.3',
         'eslint-plugin-mysticatea': '^4.2.4',
         'eslint-plugin-prefer-object-spread': '^1.2.1',
         'eslint-plugin-prettier': '^2.6.0',
         'eslint-plugin-react': '^7.6.1',
-        'flow-bin': '^0.65.0',
+        'flow-bin': '^0.66.0',
         'flow-coverage-report': '^0.4.1',
         'flow-typed': '^2.3.0',
-        enzyme: '^3.3.0',
-        eslint: '^4.17.0',
-        nsp: '^3.1.0',
+        nsp: '^3.2.1',
         prettier: '^1.10.2',
       },
     };
 
     return this.fs.writeJSON(
       this.destinationPath('./package.json'),
-      packageContent
+      packageContent,
     );
   }
 
@@ -203,8 +200,8 @@ class StackGenerator extends Generator {
 
     this.log(
       chalk.black.bgGreen(
-        '! Please ignore all flow warnings, everything is OK !'
-      )
+        '! Please ignore all flow warnings, everything is OK !',
+      ),
     );
     this.log(chalk.black.bgGreen('Everything went well for your React app!'));
   }
