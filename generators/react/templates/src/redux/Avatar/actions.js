@@ -27,7 +27,7 @@ export function fetchUserSuccess(user: User): FetchUserSuccessAction {
   };
 }
 
-export function fetchUserError(error: Error): FetchUserErrorAction {
+export function fetchUserError(error: ErrorType): FetchUserErrorAction {
   return {
     type: USER_FETCH_ERROR,
     payload: error.message,
