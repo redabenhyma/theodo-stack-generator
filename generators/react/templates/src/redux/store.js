@@ -1,3 +1,4 @@
+// @flow
 /**
  * Create the store with asynchronously loaded reducers
  */

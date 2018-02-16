@@ -14,18 +14,18 @@ declare type Store = {
 };
 
 declare type History = {
-  createHref: () => {},
-  createKey: () => {},
-  createLocation: () => {},
-  createPath: () => {},
-  getCurrentLocation: () => {},
-  go: () => {},
-  goBack: () => {},
-  goForward: () => {},
-  listen: () => {},
-  listenBefore: () => {},
-  push: () => {},
-  replace: () => {},
-  transitionTo: () => {},
-  unsubscribe: () => {},
+  length: number,
+  action: string,
+  location: {
+    pathname: string,
+    search: string,
+    hash: string,
+    state: string,
+  },
+  push: (path: string) => void,
+  replace: (path: s,tring) => void,
+  go: (n: number) => void,
+  goBack: () => void,
+  goForward: () => void,
+  block: (prompt: any) => void,
 };
