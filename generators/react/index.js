@@ -71,6 +71,7 @@ class StackGenerator extends Generator {
   _addTemplates() {
     this.log('Copying new files for create-react-app');
     [
+      { src: '__mocks__', dest: '__mocks__' },
       { src: 'src', dest: 'src' },
       { src: 'flow-typed', dest: 'flow-typed' },
       { src: 'scripts', dest: 'scripts' },
