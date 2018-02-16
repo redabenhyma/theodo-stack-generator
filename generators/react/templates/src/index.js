@@ -11,12 +11,17 @@ const store = configureStore(initialState);
 
 const rootEl = document.getElementById('root');
 
-ReactDOM.render(<App store={store} />, rootEl);
-registerServiceWorker();
+if (rootEl) {
+  ReactDOM.render(<App store={store} />, rootEl);
+  registerServiceWorker();
+}
 
 if (module.hot) {
+  // $FlowFixMe
   module.hot.accept('./App', () => {
     const NextApp = require('./App').default; // eslint-disable-line
-    ReactDOM.render(<NextApp store={store} />, rootEl);
+    if (rootEl) {
+      ReactDOM.render(<NextApp store={store} />, rootEl);
+    }
   });
 }
