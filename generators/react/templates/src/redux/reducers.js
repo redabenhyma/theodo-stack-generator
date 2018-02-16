@@ -5,6 +5,7 @@
  */
 
 import { combineReducers } from 'redux';
+import type { Reducer } from 'Redux';
 
 <% if (exampleRequired) { %>
 /**
@@ -16,7 +17,7 @@ import { reducer as avatar } from './Avatar';
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
-export default function createReducer(asyncReducers) {
+export default function createReducer(asyncReducers: { [string]: Reducer }) {
   return combineReducers({
     ...asyncReducers,
     <% if (exampleRequired) { %>avatar,<% } %>

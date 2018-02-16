@@ -6,10 +6,7 @@ const initialState = fromJS({
   userAvatarUrl: null,
 });
 
-export default function reducer(
-  state: AvatarStore = initialState,
-  action: UserAction,
-) {
+export default function reducer(state: AvatarStore = initialState, action: UserAction) {
   switch (action.type) {
     case UPDATE_USER_ID:
       return state.set('userId', action.payload);
