@@ -1,4 +1,6 @@
 [ignore]
+.*/node_modules/flow-coverage-report/*.
+.*/node_modules/immutable/*.
 
 [include]
 
@@ -9,3 +11,6 @@ flow-typed
 
 [options]
 module.name_mapper='^\(\/?.*\)$' -> '<PROJECT_ROOT>/src/\1'
+
+[version]
+0.66.0

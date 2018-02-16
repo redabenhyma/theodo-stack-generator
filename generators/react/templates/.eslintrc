@@ -1,35 +1,37 @@
 {
+  "parser": "babel-eslint",
   "extends": [
     "airbnb",
     "plugin:flowtype/recommended",
     "prettier",
-    "prettier/react",
-    "prettier/flowtype" 
+    "prettier/flowtype",
+    "prettier/react"
   ],
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true,
-    "mocha": true
-  },
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
   "plugins": [
     "flowtype",
     "import",
+    "jest",
     "jsx-a11y",
     "mysticatea",
     "prefer-object-spread",
     "prettier",
     "react"
   ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "jest/globals": true,
+    "mocha": true,
+    "node": true
+  },
   "globals": {
-    "jest": false,
-    "expect": false
+    "alert": true,
+    "document": true,
+    "localStorage": true,
+    "navigator": true,
+    "window": true,
+    "HTMLElement": true
   },
   "rules": {
     "prettier/prettier": [

@@ -163,6 +163,7 @@ class StackGenerator extends Generator {
         'eslint-config-prettier': '^2.9.0',
         'eslint-plugin-flowtype': '^2.44.0',
         'eslint-plugin-import': '^2.8.0',
+        'eslint-plugin-jest': '^21.12.1',
         'eslint-plugin-jsx-a11y': '^6.0.3',
         'eslint-plugin-mysticatea': '^4.2.4',
         'eslint-plugin-prefer-object-spread': '^1.2.1',
