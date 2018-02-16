@@ -196,7 +196,10 @@ class StackGenerator extends Generator {
   end() {
     this.spawnCommandSync('yarn');
     this.spawnCommandSync('node_modules/.bin/flow-typed', ['install']);
-    this.spawnCommandSync('node_modules/.bin/flow-typed', ['install jest']);
+    this.spawnCommandSync('node_modules/.bin/flow-typed', [
+      'install',
+      'jest@20.0.4',
+    ]);
     this.log('Fixing possible linting issues');
     this.spawnCommandSync('yarn', ['lint:fix']);
 
