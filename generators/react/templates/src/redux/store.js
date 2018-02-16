@@ -1,4 +1,3 @@
-// @flow
 /**
  * Create the store with asynchronously loaded reducers
  */
@@ -27,11 +26,7 @@ export default function configureStore(initialState = {}) {
       : compose;
   /* eslint-enable */
 
-  const store = createStore(
-    createReducer(),
-    initialState,
-    composeEnhancers(...enhancers),
-  );
+  const store = createStore(createReducer(), initialState, composeEnhancers(...enhancers));
 
   sagaMiddleware.run(rootSaga);
   // Extensions
