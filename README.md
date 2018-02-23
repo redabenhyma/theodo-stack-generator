@@ -45,7 +45,7 @@ You need to install:
 + [Yarn](https://yarnpkg.com/en/docs/install)
 
 If you want a server with the provisioning and the deployment scripts:
-+ [docker-compose](https://docs.docker.com/compose/install/#prerequisites) **OR** [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html)
+[VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html)
 + [Ansible (version >= 2)](http://docs.ansible.com/ansible/intro_installation.html)
 
 ## Installation

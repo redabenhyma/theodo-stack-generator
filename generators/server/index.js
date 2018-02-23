@@ -50,13 +50,7 @@ class StackGenerator extends Generator {
     return this.prompt(serverQuestions)
     .then(serverAnswers => {
       this.answers = Object.assign(this.answers, serverAnswers);
-      if (this.answers.virtualEnv === 'docker') {
-        // docker database host is postgresql
-        this.answers.databaseHost = 'postgresql';
-      } else {
-        // vagrant database host is localhost
-        this.answers.databaseHost = 'localhost';
-      }
+      this.answers.databaseHost = 'localhost';
     })
   }
 
@@ -73,7 +67,7 @@ class StackGenerator extends Generator {
     return Promise.all(files.map(file => {
      return this.fs.copyTpl(
        this.templatePath(file),
-       this.destinationPath(file.replace(/-symfony|-react-redux|-no-client|-vagrant|-docker/, '')),
+       this.destinationPath(file.replace(/-symfony|-react-redux|-no-client|-vagrant/, '')),
        this.answers
      );
    }));
