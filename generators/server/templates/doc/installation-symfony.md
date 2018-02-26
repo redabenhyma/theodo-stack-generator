@@ -25,7 +25,7 @@
 
   - Build the frontend code: `cd /var/www/<%= appName %>/current/client && yarn build`
 
-  - Symlink the frontend code in the web directory: `cd /var/www/<%= appName %>/current/web && ln -s ../client/build/ build`
+  - Symlink the frontend code in the web directory: `cd /var/www/<%= appName %>/current/api/public && ln -s ../../client/build/ build`
 
   - Browse your static frontend: https://10.0.0.10
 
@@ -47,14 +47,13 @@ doctrine:
   - `sudo su www-data`
 
 - Install dependencies
-  - `cd /var/www/<%= appName %>/current && php composer.phar install`
+  - `cd /var/www/<%= appName %>/current/api && php composer install`
 
 - Create the database schema
-  - `cd /var/www/<%= appName %>/current && bin/console doctrine:schema:create`
+  - `cd /var/www/<%= appName %>/current/api && bin/console doctrine:schema:create`
 
 - Run migrations:
-  - `cd /var/www/<%= appName %>/current && bin/console doctrine:generate:entities AppBundle`
-
+  - `cd /var/www/<%= appName %>/current/api && bin/console doctrine:generate:entities AppBundle`
 
 - Browse your API: https://10.0.0.10/app_dev.php
 
