@@ -137,6 +137,7 @@ class StackGenerator extends Generator {
       devDependencies: {
         'babel-eslint': '^8.2.1',
         'enzyme-adapter-react-16': '^1.1.1',
+        'enzyme-to-json': '^3.3.0',
         'eslint-config-airbnb': '^16.1.0',
         'eslint-config-prettier': '^2.9.0',
         'eslint-plugin-flowtype': '^2.42.0',
