@@ -29,17 +29,6 @@
 
   - Browse your static frontend: https://10.0.0.10
 
-
-### Update your database configuration
-
-Change the driver to `pdo_pgsql`in `app/config.yml`:
-```
-# Doctrine Configuration
-doctrine:
-    dbal:
-        driver:   pdo_pgsql
-```
-
 ### Install the server
 
 - Connect to the vagrant as www-data:
@@ -69,5 +58,3 @@ api:
     prefix:   '/api'  # This line can be added
 ```
 Then you api is available at https://10.0.0.10/app_dev.php/api
-
-
