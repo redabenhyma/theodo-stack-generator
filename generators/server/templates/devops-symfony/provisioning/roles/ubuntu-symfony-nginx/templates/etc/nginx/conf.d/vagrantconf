@@ -55,7 +55,7 @@ server {
     # index build/index.html
     #index app.php;
     #try_files $uri @rewrite;
-    
+
     gzip            on;
     gzip_min_length 1000;
     gzip_comp_level 9;
