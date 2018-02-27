@@ -115,6 +115,28 @@ class StackGenerator extends Generator {
         nsp: 'nsp check',
         'test:coverage': 'npm run test -- --coverage',
       },
+      jest: {
+        collectCoverageFrom: [
+          "src/**/*.js",
+          "!src/**/*.test.js",
+          "!src/**/index.js",
+          "!src/**/*.container.js",
+          "!src/index.js",
+          "!src/tempPolyfills.js",
+          "!src/setupTests.js",
+          "!src/redux/reducers.js",
+          "!src/redux/sagas.js",
+          "!src/redux/store.js"
+        ],
+        coverageThreshold: {
+          global: {
+            statements: 100,
+            branches: 100,
+            functions: 100,
+            lines: 100
+          },
+        },
+      },
       dependencies: {
         react: '^16.2.0',
         'react-dom': '^16.2.0',
