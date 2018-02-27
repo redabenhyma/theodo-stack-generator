@@ -1,8 +1,9 @@
 // @flow
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'services/networking/request';
-import { fetchUser } from './sagas';
+import fetchUserSaga, { fetchUser } from './sagas';
 import { fetchUserRequest, fetchUserSuccess, fetchUserError } from './actions';
+import { USER_FETCH_REQUEST } from './constant';
 
 describe('[Saga] Avatar redux', () => {
   describe('fetchUser', () => {
@@ -34,6 +35,15 @@ describe('[Saga] Avatar redux', () => {
           put(fetchUserError({ message: 'error' })),
         );
       });
+    });
+  });
+
+  describe('fetchUserSaga', () => {
+    it('should take every USER_FETCH_REQUEST actions', () => {
+      const gen = fetchUserSaga();
+      expect(gen.next().value).toEqual(
+        takeEvery(USER_FETCH_REQUEST, fetchUser),
+      );
     });
   });
 });
