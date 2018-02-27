@@ -4,7 +4,7 @@ import toJSON from 'enzyme-to-json';
 import Home from './Home.component';
 
 describe('<Home>', () => {
-  it('should renders correctly', () => {
+  it('should render correctly', () => {
     const props = {};
 
     const tree = shallow(<Home {...props} />);
