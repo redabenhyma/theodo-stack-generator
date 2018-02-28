@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Root> should renders correctly 1`] = `
+exports[`<Root> should render correctly 1`] = `
 <IntlProvider
   locale="fr"
   messages={
