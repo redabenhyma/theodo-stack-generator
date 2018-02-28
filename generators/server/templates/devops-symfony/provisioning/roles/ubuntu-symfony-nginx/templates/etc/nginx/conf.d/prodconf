@@ -87,6 +87,10 @@ server {
       return 301 /build/static/$1;
     }
 
+    location ~ ^\/(.[^\/]*\.(json|ico|js))$ {
+      rewrite ^\/(.[^\/]*\.(json|ico|js))$ /build/$1 last;
+    }
+
     location ~* \.(css|txt|xml|js|gif|jpe?g|png|ico)$ {
         expires 1y;
         log_not_found off;
