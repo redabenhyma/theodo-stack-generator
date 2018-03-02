@@ -1,18 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The page component should renders correctly 1`] = `
+exports[`The page component should render correctly 1`] = `
 <div
   className="sc-bdVaJa hiBQnU"
 >
-  <div
+  <button
     onClick={[Function]}
-    role="button"
     tabIndex={0}
   >
     <span>
       Retour
     </span>
-  </div>
+  </button>
   <p />
   <p>
     <input
