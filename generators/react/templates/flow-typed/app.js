@@ -1,16 +1,13 @@
 // @flow
 /* eslint-disable no-undef, flowtype/delimiter-dangle */
+import type { IndexedIterable } from 'immutable';
 
-<% if (exampleRequired) { %>
-  declare type AvatarStore = {
-    userAvatarUrl?: ?string,
-    userId?: string,
-  };
-<% } %>
+declare type AvatarStore = IndexedIterable;
 
-<% if (exampleRequired) { %><% } %>
 declare type Store = {
-  <% if (exampleRequired) { %>avatar: AvatarStore,<% } %>
+  avatar: AvatarStore,
+  runSaga?: any,
+  asyncReducers?: any,
 };
 
 declare type History = {
@@ -23,7 +20,7 @@ declare type History = {
     state: string,
   },
   push: (path: string) => void,
-  replace: (path: s,tring) => void,
+  replace: (path: string) => void,
   go: (n: number) => void,
   goBack: () => void,
   goForward: () => void,

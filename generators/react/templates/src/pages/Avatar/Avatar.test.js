@@ -1,11 +1,15 @@
 // @flow
 import React from 'react';
 import { shallow } from 'enzyme';
+
+import historyProp from '__mocks__/historyProp';
 import Avatar from './Avatar.component';
 
-let wrapper = null;
-
 describe('<Avatar />', () => {
+  let wrapper = {
+    find: jest.fn(),
+    setProps: jest.fn(),
+  };
   const props = {
     userId: 16,
     userAvatarUrl: 'url',
@@ -14,13 +18,10 @@ describe('<Avatar />', () => {
     },
     fetchUser: jest.fn(),
     updateUserId: jest.fn(),
-    history: {
-      push: jest.fn(),
-    }
+    history: historyProp,
   };
 
   describe('render', () => {
-
     beforeEach(() => {
       wrapper = shallow(<Avatar {...props} />);
     });
