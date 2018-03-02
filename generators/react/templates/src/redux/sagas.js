@@ -6,5 +6,5 @@ import type { Saga } from 'redux-saga';
 
 // single entry point to start all Sagas at once
 export default function* rootSaga(): Saga<*> {
-  yield all(<% if (exampleRequired) { %>avatarSagas()<% } %>);
+  yield all(<% if (exampleRequired) { %>[avatarSagas()]<% } %>);
 }
