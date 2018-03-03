@@ -120,6 +120,7 @@ class StackGenerator extends Generator {
           'src/**/*.js',
           '!src/**/*.test.js',
           '!src/**/index.js',
+          '!src/**/registerServiceWorker.js',
           '!src/**/*.container.js',
           '!src/index.js',
           '!src/tempPolyfills.js',
