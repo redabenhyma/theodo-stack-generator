@@ -6,5 +6,6 @@ import type { Saga } from 'redux-saga';
 
 // single entry point to start all Sagas at once
 export default function* rootSaga(): Saga<*> {
+  // $FlowFixMe
   yield all(<% if (exampleRequired) { %>[avatarSagas()]<% } %>);
 }
