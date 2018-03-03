@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
@@ -23,8 +24,7 @@ describe('<App>', () => {
         store: {
           subscribe: () => {},
           dispatch: () => {},
-          getState
-            : () => {},
+          getState: () => {},
         },
       };
 
@@ -32,5 +32,5 @@ describe('<App>', () => {
       const route = tree.find('Route');
       expect(route.prop('component')()).toMatchSnapshot();
     });
-  })
+  });
 });

@@ -11,7 +11,7 @@ describe('<Avatar />', () => {
     setProps: jest.fn(),
   };
   const props = {
-    userId: 16,
+    userId: 'Juste Leblanc',
     userAvatarUrl: 'url',
     intl: {
       formatMessage: jest.fn(),
@@ -28,11 +28,13 @@ describe('<Avatar />', () => {
 
     it('should call onInputChange when writing in the text input', () => {
       const input = wrapper.find('input');
+      // $FlowFixMe
       expect(input.prop('onChange')).toBe(wrapper.instance().onInputChange);
     });
 
     it('should call fetchUser when clicking on button', () => {
       const button = wrapper.find('button').last();
+      // $FlowFixMe
       expect(button.prop('onClick')).toBe(wrapper.instance().fetchUser);
     });
 
@@ -54,6 +56,7 @@ describe('<Avatar />', () => {
       const avatar = new Avatar(props);
 
       expect(props.updateUserId.mock.calls.length).toBe(0);
+      // $FlowFixMe
       avatar.onInputChange({ target: { value: 'value' } });
       expect(props.updateUserId.mock.calls.length).toBe(1);
       expect(props.updateUserId.mock.calls[0][0]).toBe('value');

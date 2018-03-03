@@ -9,7 +9,7 @@ describe('The page component', () => {
   const props = {
     history: {
       push: jest.fn(),
-    }
+    },
   };
 
   beforeEach(() => {
@@ -17,6 +17,7 @@ describe('The page component', () => {
   });
 
   it('should redirect to the /avatar page', () => {
+    // $FlowFixMe
     const input = wrapper.find('button');
     expect(props.history.push.mock.calls.length).toBe(0);
     input.simulate('click');
