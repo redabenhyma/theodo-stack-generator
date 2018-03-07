@@ -47,7 +47,7 @@ server {
 
     # OCSP Configuration END
 
-    root /var/www/{{ project_name }}/current/web;
+    root /var/www/{{ project_name }}/current/api/public;
 
     error_log /var/log/nginx/{{ project_name }}.error.log;
     access_log /var/log/nginx/{{ project_name }}.access.log;
@@ -55,7 +55,7 @@ server {
     # index build/index.html
     #index app.php;
     #try_files $uri @rewrite;
-    
+
     gzip            on;
     gzip_min_length 1000;
     gzip_comp_level 9;

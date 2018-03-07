@@ -47,7 +47,7 @@ server {
 
     # OCSP Configuration END
 
-    root /var/www/{{ project_name }}/current/web;
+    root /var/www/{{ project_name }}/current/api/public;
 
     error_log /var/log/nginx/{{ project_name }}.error.log;
     access_log /var/log/nginx/{{ project_name }}.access.log;
@@ -66,21 +66,21 @@ server {
         try_files $uri /build/index.html;
     }
 
-    location @rewrite {
-        rewrite ^/?(.*)$ /app.php/$1 last;
+    location ~ ^/index.php {
+        fastcgi_pass unix:/var/run/php/php-fpm.sock;
+        fastcgi_param  SCRIPT_FILENAME  $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+        fastcgi_buffer_size       128k;
+        fastcgi_buffers           4 256k;
+        fastcgi_busy_buffers_size 256k;
+        # To determinate if the request is HTTP or HTTPS
+        fastcgi_param HTTPS $https if_not_empty;
+        include fastcgi_params;
+        internal;
     }
 
-    location ~ ^/(app|app_dev)\.php {
-      fastcgi_index $1.php;
-      fastcgi_pass unix:/var/run/php/php-fpm.sock;
-      fastcgi_param  SCRIPT_FILENAME  $realpath_root$fastcgi_script_name;
-      fastcgi_param DOCUMENT_ROOT $realpath_root;
-      fastcgi_buffer_size       128k;
-      fastcgi_buffers           4 256k;
-      fastcgi_busy_buffers_size 256k;
-      # To determinate if the request is HTTP or HTTPS
-      fastcgi_param HTTPS $https if_not_empty;
-      include fastcgi_params;
+    location ~ \.php$ {
+        return 404;
     }
 
     location ~ ^/static/(.*) {

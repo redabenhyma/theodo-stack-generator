@@ -1,4 +1,4 @@
-$HOSTNAME = "<%= appName %>.dev"
+$HOSTNAME = "<%= appName %>.local"
 $BOX = "ubuntu/xenial64"
 $IP = "10.0.0.10"
 $MEMORY = ENV.has_key?('VM_MEMORY') ? ENV['VM_MEMORY'] : "2048"
