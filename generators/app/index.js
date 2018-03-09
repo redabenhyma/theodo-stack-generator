@@ -14,15 +14,16 @@ class StackGenerator extends Generator {
 
     return this.prompt([
       {
-        type: 'confirm',
+        type: 'list',
         name: 'serverRequired',
-        message: 'Do you need an API Platform server?',
-        default: true,
+        message: 'Which backend would suit you?',
+        default: 'API Platform (Symfony)',
+        choices: ['API Platform (Symfony)', 'Django (Python)', 'No Backend']
       },
       {
         type: 'confirm',
         name: 'clientRequired',
-        message: 'Do you need react redux client?',
+        message: 'Do you need a react redux client?',
         default: true,
       },
       {
@@ -48,11 +49,17 @@ class StackGenerator extends Generator {
     ) {
       this.env.error('The react app cannot be created in a folder called react, react-scripts or react-dom');
     }
+    if (
+      this.options.serverRequired === 'Django (Python)' &&
+      RegExp('-|_|\\s', 'g').test(this.appname)
+    ) {
+      this.env.error('Your django app folder name cannot contain an hyphen, lodash or whitespace');
+    }
     this.config.save();
   }
 
   installServer() {
-    if (!this.options.serverRequired) {
+    if (!this.options.serverRequired || this.options.serverRequired === 'No Backend') {
       return;
     }
     const server = require.resolve('../server');
