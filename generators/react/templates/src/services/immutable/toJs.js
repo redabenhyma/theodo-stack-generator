@@ -5,17 +5,17 @@ import React from 'react';
 import { Iterable } from 'immutable';
 
 export const toJS = WrappedComponent => wrappedComponentProps => {
-  const KEY = 0;
-  const VALUE = 1;
-
-  const propsJS = Object.entries(wrappedComponentProps).reduce((newProps, wrappedComponentProp) => {
-    /* eslint-disable no-param-reassign */
-    newProps[wrappedComponentProp[KEY]] = Iterable.isIterable(wrappedComponentProp[VALUE])
-      ? wrappedComponentProp[VALUE].toJS()
-      : wrappedComponentProp[VALUE];
-    /* eslint-enable */
-    return newProps;
-  }, {});
+  const propsJS = Object.keys(wrappedComponentProps).reduce(
+    (newProps, propKey) => {
+      /* eslint-disable no-param-reassign */
+      newProps[propKey] = Iterable.isIterable(wrappedComponentProps[propKey])
+        ? wrappedComponentProps[propKey].toJS()
+        : wrappedComponentProps[propKey];
+      /* eslint-enable */
+      return newProps;
+    },
+    {},
+  );
 
   return <WrappedComponent {...propsJS} />;
 };
