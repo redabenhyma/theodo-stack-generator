@@ -15,7 +15,7 @@ class StackGenerator extends Generator {
         type: 'confirm',
         name: 'exampleRequired',
         message:
-          'Do you want a cool page example which demonstrates the best practices (Y/n) ?',
+          'Do you want a cool page example which demonstrates the best practices?',
         default: true,
       },
     ];
@@ -26,7 +26,7 @@ class StackGenerator extends Generator {
         type: 'confirm',
         name: 'empty-folder',
         message:
-          'The current folder must be empty, even of hidden files, do you confirm (Y/n) ?',
+          'The current folder must be empty, even of hidden files, do you confirm?',
         default: true,
       });
     }
