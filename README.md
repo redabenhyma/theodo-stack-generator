@@ -73,7 +73,7 @@ npm install -g theodo-stack-generator
 
 - Create an **empty** directory and run the generator:
 ```
-mkdir myApp && cd myApp
+mkdir my-app && cd my-app
 nvm use 8.4.0
 yo theodo-stack
 ```
@@ -92,4 +92,3 @@ This generator can be improved in many ways, PR are welcome! [here](https://gith
   - Change the code
   - Generate a new project
   - See if your new project works
-
