@@ -80,7 +80,7 @@ class StackGenerator extends Generator {
       'ansible.cfg',
     ];
 
-    if (this.answers.virtualEnv === 'vagrant') {
+    if (this.answers.virtualEnv !== 'docker') {
       files = files.concat([
         'Vagrantfile',
       ])
