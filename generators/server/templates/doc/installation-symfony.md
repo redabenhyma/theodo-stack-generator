@@ -24,7 +24,7 @@
 
   - Connect to the vagrant: `vagrant ssh`
 
-  - Build the frontend code: `cd /var/www/<%= appName %>/current/client && yarn build`
+  - Build the frontend code: `cd /var/www/<%= appName %>/current/client && source .env && yarn build`
 
   - Symlink the frontend code in the web directory: `cd /var/www/<%= appName %>/current/api/public && ln -s ../../client/build/ build`
 
