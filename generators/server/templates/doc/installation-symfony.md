@@ -32,6 +32,9 @@
 
 ### Install the server
 
+- Create your Symfony application `composer create-project symfony/skeleton api` from your local
+- Add API Platform if you need it `composer req api`
+
 - Connect to the vagrant as www-data:
   - `vagrant ssh`
   - `sudo su www-data`
@@ -39,14 +42,15 @@
 - Install dependencies
   - `cd /var/www/<%= appName %>/current/api && php composer install`
 
-- Create the database schema
-  - `cd /var/www/<%= appName %>/current/api && bin/console doctrine:schema:create`
+- Create the database
+  - `bin/console doctrine:database:create`
 
-- Run migrations:
-  - `cd /var/www/<%= appName %>/current/api && bin/console doctrine:generate:entities AppBundle`
+- Create the database schema
+  - `bin/console doctrine:schema:create`
 
 - Browse your API: https://10.0.0.10/app_dev.php
 
+- That's it! You can now [create your first entity](https://api-platform.com/docs/distribution#bringing-your-own-model).
 
 ### Update your API base path
 
