@@ -12,9 +12,10 @@
   - `vim .ssh/authorized_keys` and copy-paste your public key.
 
 - Launch the provisionning
+  - Install [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html#installation) on your machine if you do not have it already
   - `ansible-playbook devops/provisioning/playbook.yml -i devops/provisioning/hosts/vagrant`
   - If the command fails, run:
-    - `ssh-keygen -R 10.0.0.10 && ssh ubuntu@10.0.0.10`
+    - `ssh-keygen -R 10.0.0.10 && ssh vagrant@10.0.0.10`
     - exit the vagrant
 
 ### Build your frontend code
@@ -23,7 +24,7 @@
 
   - Connect to the vagrant: `vagrant ssh`
 
-  - Build the frontend code: `cd /var/www/<%= appName %>/current/client && yarn build`
+  - Build the frontend code: `cd /var/www/<%= appName %>/current/client && source .env && yarn build`
 
   - Symlink the frontend code in the web directory: `cd /var/www/<%= appName %>/current/api/public && ln -s ../../client/build/ build`
 

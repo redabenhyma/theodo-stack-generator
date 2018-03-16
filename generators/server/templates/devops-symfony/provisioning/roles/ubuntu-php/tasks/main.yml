@@ -1,4 +1,9 @@
 ---
+
+- name: Add PHP PPA repository
+  apt_repository:
+    repo: 'ppa:ondrej/php'
+
 - name: Install PHP Packages
   become: yes
   apt: pkg={{ item }} state=latest update_cache=yes
