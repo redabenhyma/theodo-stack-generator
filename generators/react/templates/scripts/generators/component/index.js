@@ -96,6 +96,12 @@ module.exports = {
         templateFile: `./component/style.${styleExtension}.hbs`,
         abortOnFail: true,
       },
+      {
+        type: 'add',
+        path: `../../src/${componentType}/{{properCase name}}/index.js`,
+        templateFile: './component/index.js.hbs',
+        abortOnFail: true,
+      }
     ];
 
     if (data.wantConnect) {
@@ -106,20 +112,7 @@ module.exports = {
           templateFile: './component/container.js.hbs',
           abortOnFail: true,
         },
-        {
-          type: 'add',
-          path: `../../src/${componentType}/{{properCase name}}/index.js`,
-          templateFile: './component/index.connect.js.hbs',
-          abortOnFail: true,
-        },
       );
-    } else {
-      actions.push({
-        type: 'add',
-        path: `../../src/${componentType}/{{properCase name}}/index.js`,
-        templateFile: './component/index.js.hbs',
-        abortOnFail: true,
-      });
     }
 
     if (data.wantSnapshotTests) {
