@@ -1,4 +1,7 @@
 // @flow
-import {{ properCase name }} from './{{ properCase name }}.component';
-
-export default {{ properCase name }};
+{{#unless wantConnect}}
+export { default } from './{{ properCase name }}.component';
+{{/unless}}
+{{#if wantConnect}}
+export { default } from './{{ properCase name }}.container';
+{{/if}}
