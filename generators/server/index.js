@@ -74,17 +74,12 @@ class StackGenerator extends Generator {
   }
 
   _addConfigurationTemplates () {
-    let files = [
+    const files = [
       'gitignore',
       '.editorconfig',
       'ansible.cfg',
+      'Vagrantfile',
     ];
-
-    if (this.answers.virtualEnv !== 'docker') {
-      files = files.concat([
-        'Vagrantfile',
-      ])
-    }
 
     return Promise.all(files.map(file => {
      return this.fs.copyTpl(
