@@ -4,9 +4,6 @@ const chalk = require('chalk');
 class StackGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
-    this.option('appName');
-    this.option('clientRequired');
-    this.option('serverRequired');
   }
 
   prompting() {
