@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  test_frontend:
+    working_directory: ~/<%= appName %>
+    docker:
+      - image: circleci/node:8.4.0
+    steps:
+      - checkout
+      - run:
+          name: Install yarn
+          command: 'sudo npm install -g yarn@latest'
+      - restore_cache:
+          key: front-dependency-cache-{{ checksum "~/<%= appName %>/package.json" }}
+      - run:
+          name: Install front dependencies
+          command: cd ~/<%= appName %> && yarn install
+      - save_cache:
+          key: front-dependency-cache-{{ checksum "~/<%= appName %>/package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Test
+          command: cd  ~/<%= appName %> && yarn test:coverage
+      - store_artifacts:
+          path: ~/<%= appName %>/coverage
+
+workflows:
+  version: 2
+  test_frontend:
+    jobs:
+      - test_frontend

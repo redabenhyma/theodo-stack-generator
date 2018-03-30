@@ -93,6 +93,23 @@ class StackGenerator extends Generator {
     return Promise.resolve();
   }
 
+  _addCircleCiConfig() {
+    if (!this.options.serverRequired) {
+      this.log('Copying circleci config');
+      [
+        { src: '.circleci', dest: '.circleci' },
+      ].forEach(file =>
+        this.fs.copyTpl(
+          this.templatePath(file.src),
+          this.destinationPath(file.dest),
+          { appName: this.options.appName },
+        ),
+      );
+    }
+
+    return Promise.resolve();
+  }
+
   _updatePackageJson() {
     const packageContent = {
       scripts: {
@@ -184,7 +201,8 @@ class StackGenerator extends Generator {
     }
     return this._addReactBoilerplate()
       .then(() => this._addTemplates())
-      .then(() => this._updatePackageJson());
+      .then(() => this._updatePackageJson())
+      .then(() => this._addCircleCiConfig());
   }
 
   end() {
