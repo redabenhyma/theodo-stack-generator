@@ -34,32 +34,30 @@
 
 - Create your Symfony application `composer create-project symfony/skeleton api` from your local
 - Add API Platform if you need it `composer req api`
-
 - Connect to the vagrant as www-data:
-  - `vagrant ssh`
-  - `sudo su www-data`
-
-- Install dependencies
-  - `cd /var/www/<%= appName %>/current/api && php composer install`
-
-- Create the database
-  - `bin/console doctrine:database:create`
-
-- Create the database schema
-  - `bin/console doctrine:schema:create`
-
-- Browse your API: https://10.0.0.10/app_dev.php
-
+    ```bash
+    vagrant ssh
+    sudo su - www-data
+    ```
+- Update your .env
+    ```
+    TRUSTED_PROXIES=10.0.0.0/8
+    TRUSTED_HOSTS=<%= appName %>.local, localhost, api
+    ```
+- Install dependencies `cd /var/www/<%= appName %>/current/api && php composer install`
+- Create the database `bin/console doctrine:database:create`
+- Create the database schema `bin/console doctrine:schema:create`
+- Browse your API: `http://10.0.0.10/app_dev.php/api`
 - That's it! You can now [create your first entity](https://api-platform.com/docs/distribution#bringing-your-own-model).
 
 ### Update your API base path
 
-In the `app/config/routing.yml` add a prefix for your api, it can be somethings like that:
+In the `app/config/routing.yaml` add a prefix for your api, it can be somethings like that:
 
-```
+```yaml
 api:
     resource: '.'
     type:     'api_platform'
     prefix:   '/api'  # This line can be added
 ```
-Then you api is available at https://10.0.0.10/app_dev.php/api
+Then your API is available at https://10.0.0.10/app_dev.php/api
