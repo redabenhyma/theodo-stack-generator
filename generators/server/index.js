@@ -3,6 +3,42 @@ const Generator = require('yeoman-generator');
 class StackGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
+
+    this.option(
+      'stagingDatabasePassword',
+      {
+        description: 'Database password for staging environment',
+        type: String
+      }
+    );
+    this.option(
+      'prodDatabasePassword',
+      {
+        description: 'Database password for production environment',
+        type: String,
+      }
+    );
+    this.option(
+      'repositoryUrl',
+      {
+        description: 'GIT repository URL',
+        type: String,
+      }
+    );
+    this.option(
+      'stagingIpAddress',
+      {
+        description: 'IP address for production environment',
+        type: String,
+      }
+    );
+    this.option(
+      'prodIpAddress',
+      {
+        description: 'IP address for production environment',
+        type: String,
+      }
+    );
   }
 
   prompting() {
@@ -15,30 +51,45 @@ class StackGenerator extends Generator {
         name    : 'stagingDatabasePassword',
         message : '[Provisioning] Staging database password',
         default : this.appname,
+        when: (answers) => {
+          return 'stagingDatabasePassword' in this.options === false;
+        }
       },
       {
         type    : 'input',
         name    : 'prodDatabasePassword',
         message : '[Provisioning] Production database password',
         default : this.appname,
+        when: (answers) => {
+          return 'prodDatabasePassword' in this.options === false;
+        }
       },
       {
         type    : 'input',
         name    : 'repositoryUrl',
         message : '[Deployment] Your git repository URL',
         default : '',
+        when: (answers) => {
+          return 'repositoryUrl' in this.options === false;
+        }
       },
       {
         type    : 'input',
         name    : 'stagingIpAddress',
         message : '[Provisioning/Deployment] Staging IP address',
         default : '',
+        when: (answers) => {
+          return 'stagingIpAddress' in this.options === false;
+        }
       },
       {
         type    : 'input',
         name    : 'prodIpAddress',
         message : '[Provisioning/Deployment](Optionnal) Your production IP address',
         default : '',
+        when: (answers) => {
+          return 'prodIpAddress' in this.options === false;
+        }
       }
     ];
 
@@ -46,7 +97,7 @@ class StackGenerator extends Generator {
 
     return this.prompt(serverQuestions)
     .then(serverAnswers => {
-      this.answers = Object.assign(this.answers, serverAnswers);
+      this.answers = Object.assign(this.answers, serverAnswers, this.options);
       this.answers.databaseHost = 'localhost';
     })
   }

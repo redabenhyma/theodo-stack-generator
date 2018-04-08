@@ -4,6 +4,22 @@ const chalk = require('chalk');
 class StackGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
+
+    this.option(
+      'exampleRequired',
+      {
+        description: 'Add a cool page example which demonstrates the best practices?',
+        type: Boolean
+      },
+    );
+
+    this.option(
+      'empty-folder',
+      {
+        description: 'Empty the client folder',
+        type: Boolean
+      }
+    );
   }
 
   prompting() {
@@ -14,25 +30,28 @@ class StackGenerator extends Generator {
         message:
           'Do you want a cool page example which demonstrates the best practices?',
         default: true,
+        when: (answers) => {
+          return 'exampleRequired' in this.options === false;
+        }
       },
-    ];
-
-    // When server is required, the react app is always in a 'client' dolder
-    if (!this.options.serverRequired) {
-      prompt.push({
+      // When server is required, the react app is always in a 'client' folder
+      {
         type: 'confirm',
         name: 'empty-folder',
         message:
           'The current folder must be empty, even of hidden files, do you confirm?',
         default: true,
-      });
-    }
+        when: (answers) => {
+          return !this.options.serverRequired && !this.options['empty-folder'];
+        }
+      }
+    ];
 
     return this.prompt(prompt).then(answers => {
-      this.answers = answers;
+      this.answers = Object.assign({}, answers, this.options);
 
       const isClientDirectoryValid =
-        !this.options.serverRequired && !this.answers['empty-folder'];
+        !this.options.serverRequired && this.answers['empty-folder'] === false;
 
       if (isClientDirectoryValid) {
         this.env.error(

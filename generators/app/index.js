@@ -34,7 +34,9 @@ class StackGenerator extends Generator {
       },
     ])
     .then(answers => {
-      this.options = answers;
+      this.options.serverRequired = answers.serverRequired;
+      this.options.clientRequired = answers.clientRequired;
+      this.options.appName = answers.appName;
     })
   }
 
