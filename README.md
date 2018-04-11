@@ -4,7 +4,7 @@ This generator scripts everything you need to start a React-Redux project with a
 
 **Objective: launch a project in 2 hours - make an [issue](https://github.com/theodo/theodo-stack-generator/issues) if you don't succeed !**
 
-### Choose a server
+## Choose a server
 
 - No server at all, you want an awesome frontend.
 
@@ -18,7 +18,7 @@ This generator scripts everything you need to start a React-Redux project with a
     - HTTPS configuration
   - Capistrano deployment script
 
-### Choose a client
+## Choose a client
 
 - React-Redux: A boosted [create-react-app](https://github.com/facebookincubator/create-react-app) with
   - Redux
@@ -32,7 +32,7 @@ This generator scripts everything you need to start a React-Redux project with a
   - Prettier
   - Plop scripts to generate React components
 
-## What's next ?
+## What's next
 
 - End-to-end tests
 - Authentication
@@ -41,11 +41,13 @@ This generator scripts everything you need to start a React-Redux project with a
 ## Prerequisites
 
 You need to install:
-+ [Yarn](https://yarnpkg.com/en/docs/install)
+
+- [Yarn](https://yarnpkg.com/en/docs/install)
 
 If you want a server with the provisioning and the deployment scripts:
 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html)
-+ [Ansible (version >= 2)](http://docs.ansible.com/ansible/intro_installation.html)
+
+- [Ansible (version >= 2)](http://docs.ansible.com/ansible/intro_installation.html)
 
 ## Installation
 
@@ -61,7 +63,8 @@ If you want a server with the provisioning and the deployment scripts:
 - Install Yeoman globally: `npm install -g yo`
 
 - Install the package:
-```
+
+```bash
 nvm use 8.4.0
 git clone git@github.com:theodo/theodo-stack-generator.git
 cd theodo-stack-generator && yarn && npm link && cd ../
@@ -70,22 +73,29 @@ cd theodo-stack-generator && yarn && npm link && cd ../
 ## Usage
 
 - Create an **empty** directory and run the generator:
-```
+
+``` bash
 mkdir my-app && cd my-app
 nvm use 8.4.0
 yo theodo-stack
 ```
 
-- Launch your React app in the client folder: `yarn start`
+- Clean your NODE_PATH and Launch your React app in the client folder:
 
-For the client, you may need to source the .env file (`source .env`) if you want to use absolute PATH. Also see: https://github.com/facebook/create-react-app/issues/2300
+```bash
+unset NODE_PATH
+yarn start
+```
+
+For the client, you may need to source the .env file (`source .env`) if you want to use absolute PATH. Also see: [this issue on create-react-app repository](https://github.com/facebook/create-react-app/issues/2300)
 
 ## Update the generator
 
 You only need to pull the latest changes from your theodo-stack-directory. npm link created a symlink to your installation so it is automatic.
 
 - From the theodo-stack-generator directory
-```
+
+``` bash
 git pull
 ```
 
