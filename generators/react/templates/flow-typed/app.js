@@ -1,8 +1,10 @@
 // @flow
 /* eslint-disable no-undef, flowtype/delimiter-dangle */
-import type { IndexedIterable } from 'immutable';
 
-declare type AvatarStore = IndexedIterable;
+declare type AvatarStore = {
+  userId: string | null,
+  userAvatarUrl: string | null,
+};
 
 declare type Store = {
   avatar: AvatarStore,

@@ -28,7 +28,6 @@ This generator scripts everything you need to start a React-Redux project with a
   - React-router 4 for creating multiples pages
   - Examples of unit and snapshot tests
   - Eslint with airbnb linter
-  - Immutable.JS
   - Flow
   - Prettier
   - Plop scripts to generate React components
@@ -80,7 +79,7 @@ yo theodo-stack
 
 - Launch your React app in the client folder: `yarn start`
 
-For the client, you may need to source the .env file (`source .env`) if you want to use absolute PATH. Also see: https://github.com/facebook/create-react-app/issues/2300 
+For the client, you may need to source the .env file (`source .env`) if you want to use absolute PATH. Also see: https://github.com/facebook/create-react-app/issues/2300
 
 ## Contributing to the generator
 
