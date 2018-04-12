@@ -36,7 +36,7 @@ class StackGenerator extends Generator {
 
       if (isClientDirectoryValid) {
         this.env.error(
-          'The current folder must be empty to clone create-react-app',
+          'The current folder must be empty to clone create-react-app'
         );
       }
     });
@@ -77,13 +77,13 @@ class StackGenerator extends Generator {
       this.fs.copyTpl(
         this.templatePath(file.src),
         this.destinationPath(file.dest),
-        { exampleRequired: this.answers.exampleRequired },
-      ),
+        { exampleRequired: this.answers.exampleRequired }
+      )
     );
     this.log("Copying Theodo's favicon");
     this.fs.copy(
       this.templatePath('public/favicon.ico'),
-      this.destinationPath('public/favicon.ico'),
+      this.destinationPath('public/favicon.ico')
     );
 
     if (!this.answers.exampleRequired) {
@@ -177,7 +177,7 @@ class StackGenerator extends Generator {
 
     return this.fs.writeJSON(
       this.destinationPath('./package.json'),
-      packageContent,
+      packageContent
     );
   }
 
@@ -202,8 +202,8 @@ class StackGenerator extends Generator {
 
     this.log(
       chalk.black.bgGreen(
-        '! Please ignore all flow warnings, everything is OK !',
-      ),
+        '! Please ignore all flow warnings, everything is OK !'
+      )
     );
     this.log(chalk.black.bgGreen('Everything went well for your React app!'));
   }
