@@ -8,7 +8,7 @@ declare type User = {
 
 declare type UpdateUserIdAction = {
   type: 'Avatar/UPDATE_USERNAME',
-  payload: string,
+  payload: { username: string },
 };
 
 declare type FetchUserRequestAction = {

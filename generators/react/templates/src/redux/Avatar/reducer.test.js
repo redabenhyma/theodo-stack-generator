@@ -10,7 +10,10 @@ describe('[Reducer] Avatar reducer', () => {
   });
 
   it('should set username', () => {
-    const state = reducer(undefined, { type: UPDATE_USERNAME, payload: 16 });
+    const state = reducer(undefined, {
+      type: UPDATE_USERNAME,
+      payload: { username: 'juste_leblanc' },
+    });
     expect(state.toJS()).toEqual({
       userAvatarUrl: null,
       username: 16,

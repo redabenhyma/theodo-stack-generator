@@ -9,7 +9,7 @@ import {
 export function updateUserId(username: string): UpdateUserIdAction {
   return {
     type: UPDATE_USERNAME,
-    payload: username,
+    payload: { username },
   };
 }
 

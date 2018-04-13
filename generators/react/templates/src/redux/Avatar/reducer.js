@@ -11,7 +11,7 @@ export default function reducer(state: AvatarState = initialState, action: UserA
     case UPDATE_USERNAME:
       return {
         ...state,
-        username: action.payload,
+        username: action.payload.username,
       };
     case USER_FETCH_SUCCESS:
       return {
