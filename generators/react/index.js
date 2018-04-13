@@ -59,6 +59,8 @@ class StackGenerator extends Generator {
       'src/logo.svg',
       'src/App.test.js',
       'public/favicon.ico',
+      'public/index.html',
+      'public/reset.css',
       'src/index.js',
     ].forEach(file => this.spawnCommandSync('rm', [file]));
 
@@ -71,6 +73,7 @@ class StackGenerator extends Generator {
       { src: 'src', dest: 'src' },
       { src: 'flow-typed', dest: 'flow-typed' },
       { src: 'scripts', dest: 'scripts' },
+      { src: 'public/*', dest: 'public' },
       { src: '.*', dest: '' },
       { src: '*.md', dest: '' },
     ].forEach(file =>
@@ -79,11 +82,6 @@ class StackGenerator extends Generator {
         this.destinationPath(file.dest),
         { exampleRequired: this.answers.exampleRequired },
       ),
-    );
-    this.log("Copying Theodo's favicon");
-    this.fs.copy(
-      this.templatePath('public/favicon.ico'),
-      this.destinationPath('public/favicon.ico'),
     );
 
     if (!this.answers.exampleRequired) {
