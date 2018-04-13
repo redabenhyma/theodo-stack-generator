@@ -1,27 +1,34 @@
+// @flow
+import { fromJS } from 'immutable';
+
 import reducer from './reducer';
 import { UPDATE_USERNAME, USER_FETCH_SUCCESS } from './constant';
 
 describe('[Reducer] Avatar reducer', () => {
-  it('should return the inital state when passing no state', () => {
-    const state = reducer(undefined, { type: 'FAKE_TYPE' });
-    expect(state.toJS()).toEqual({
-      userAvatarUrl: null,
-    });
-  });
-
-  it('should set username', () => {
-    const state = reducer(undefined, {
+  it('should set the usename if passing an empty state', () => {
+    const state = reducer(fromJS({ userAvatarUrl: null }), {
       type: UPDATE_USERNAME,
       payload: { username: 'juste_leblanc' },
     });
     expect(state.toJS()).toEqual({
       userAvatarUrl: null,
-      username: 16,
+      username: 'juste_leblanc',
+    });
+  });
+
+  it('should set username when passing no state', () => {
+    const state = reducer(fromJS(undefined), {
+      type: UPDATE_USERNAME,
+      payload: { username: 'juste_leblanc' },
+    });
+    expect(state.toJS()).toEqual({
+      userAvatarUrl: null,
+      username: 'juste_leblanc',
     });
   });
 
   it('should set userAvatarUrl', () => {
-    const state = reducer(undefined, {
+    const state = reducer(fromJS(undefined), {
       type: USER_FETCH_SUCCESS,
       payload: { user: { avatar_url: 'avatar_url' } },
     });
