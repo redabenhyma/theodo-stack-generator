@@ -36,7 +36,7 @@ describe('[Action] Avatar', () => {
       const error = { message: 'unauthorized' };
       expect(actions.fetchUserError(error)).toEqual({
         type: cst.USER_FETCH_ERROR,
-        payload: error.message,
+        payload: { error: error.message },
       });
     });
   });

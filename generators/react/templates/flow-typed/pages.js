@@ -23,7 +23,7 @@ declare type FetchUserSuccessAction = {
 
 declare type FetchUserErrorAction = {
   type: 'Avatar/USER_FETCH_ERROR',
-  payload: string,
+  payload: { error: string },
 };
 
 declare type UserAction =
