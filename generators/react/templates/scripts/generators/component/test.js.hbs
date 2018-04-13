@@ -4,8 +4,6 @@ import { shallow } from 'enzyme';
 
 import {{ properCase name }} from './{{ properCase name }}.component';
 
-let wrapper = null;
-
 /*
 This file contains all unit tests. The standard is:
   - The name of the test is explicit.
@@ -14,19 +12,15 @@ This file contains all unit tests. The standard is:
   - The test can fail.
 */
 describe('[Component] <{{ properCase name }} />', () => {
-  const props = {
-    {{#if wantMessages}}
-    intl: {
-      formatMessage: jest.fn(),
-    },
-    {{/if}}
-  };
-
-  beforeEach(() => {
-    wrapper = shallow(<{{ properCase name }} {...props} />);
-  });
-
   it('should be a test with an explicit name', () => {
+    const props = {
+      {{#if wantMessages}}
+      intl: {
+        formatMessage: jest.fn(),
+      },
+      {{/if}}
+    };
+    const wrapper = shallow(<{{ properCase name }} {...props} />);
     expect(wrapper.exists()).toEqual(true);
   });
 });
