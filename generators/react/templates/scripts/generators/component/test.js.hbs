@@ -1,19 +1,26 @@
 // @flow
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import {{ properCase name }} from './{{ properCase name }}.component';
 
 let wrapper = null;
 
 describe('[Component] <{{ properCase name }} />', () => {
-  const props = {};
+  const props = {
+    {{#if wantMessages}}
+    intl: {
+      formatMessage: jest.fn(),
+    },
+    {{/if}}
+  };
 
   beforeEach(() => {
     wrapper = shallow(<{{ properCase name }} {...props} />);
   });
 
-  it('should exist', () => {
+  it('should be a test with an explicit name', () => {
     expect(wrapper.exists()).toEqual(true);
   });
 });

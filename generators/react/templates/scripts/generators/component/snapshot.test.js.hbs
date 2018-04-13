@@ -4,13 +4,15 @@ import {{ properCase name }} from './{{ properCase name }}.component';
 import createComponentWithIntl from 'services/i18n/create-component-with-intl';
 
 describe('[Snapshot] <{{ properCase name }} />', () => {
-  it('should render correctly', () => {
+  it('should render a button with a label', () => {
     const props = {
+      {{#if wantMessages}}
       intl: {
         formatMessage: jest.fn(),
       },
+      {{/if}}
     };
-    const tree = createComponentWithIntl(<{{ properCase name }} {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const wrapper = shallow(<{{ properCase name }} {...props} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
