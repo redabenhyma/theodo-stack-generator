@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, intlShape } from 'react-intl';
+import type { RouterHistory } from 'react-router-dom';
 
 import StyledAvatar from './Avatar.style';
 
 type Props = {
   intl: intlShape,
-  history: History,
+  history: RouterHistory,
   fetchUser: (userId: string) => void,
   updateUserId: (value: string) => void,
   userAvatarUrl: string,

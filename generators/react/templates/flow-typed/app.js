@@ -11,20 +11,3 @@ declare type Store = {
   runSaga?: any,
   asyncReducers?: any,
 };
-
-declare type History = {
-  length: number,
-  action: string,
-  location: {
-    pathname: string,
-    search: string,
-    hash: string,
-    state: string,
-  },
-  push: (path: string) => void,
-  replace: (path: string) => void,
-  go: (n: number) => void,
-  goBack: () => void,
-  goForward: () => void,
-  block: (prompt: any) => void,
-};
