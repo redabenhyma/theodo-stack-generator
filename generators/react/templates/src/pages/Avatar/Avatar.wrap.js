@@ -5,7 +5,7 @@ import { actions } from 'redux/Avatar';
 
 import Avatar from './Avatar';
 
-const mapStateToProps = (state: Store): AvatarStore => ({
+const mapStateToProps = (state: Store): AvatarState => ({
   userId: state.avatar.userId,
   userAvatarUrl: state.avatar.userAvatarUrl,
 });
@@ -19,6 +19,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectIntl(Avatar),
-);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Avatar));
