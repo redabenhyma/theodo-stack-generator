@@ -181,7 +181,7 @@ class StackGenerator extends Generator {
         'eslint-plugin-prefer-object-spread': '^1.2.1',
         'eslint-plugin-prettier': '^2.6.0',
         'eslint-plugin-react': '^7.6.1',
-        'flow-bin': '^0.66.0',
+        'flow-bin': '^0.68.0',
         'flow-coverage-report': '^0.4.1',
         'flow-typed': '^2.3.0',
         nsp: '^3.2.1',
