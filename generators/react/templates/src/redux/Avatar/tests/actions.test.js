@@ -5,18 +5,18 @@ import * as cst from '../constant';
 describe('[Action] Avatar', () => {
   describe('updateUserId', () => {
     it('should return an action', () => {
-      expect(actions.updateUserId('github')).toEqual({
+      expect(actions.updateUserId('juste_leblanc')).toEqual({
         type: cst.UPDATE_USERNAME,
-        payload: { username: 'github' },
+        payload: { username: 'juste_leblanc' },
       });
     });
   });
 
   describe('fetchUserRequest', () => {
     it('should return an action', () => {
-      expect(actions.fetchUserRequest('github')).toEqual({
+      expect(actions.fetchUserRequest('juste_leblanc')).toEqual({
         type: cst.USER_FETCH_REQUEST,
-        payload: { username: 'github' },
+        payload: { username: 'juste_leblanc' },
       });
     });
   });
