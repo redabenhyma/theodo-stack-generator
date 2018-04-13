@@ -2,6 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import intlShape from '__mocks__/intlShape';
 import historyProp from '__mocks__/historyProp';
 import Avatar from '../Avatar';
 
@@ -13,9 +14,7 @@ describe('<Avatar />', () => {
   const props = {
     username: 'Juste Leblanc',
     userAvatarUrl: 'url',
-    intl: {
-      formatMessage: jest.fn(),
-    },
+    intl: intlShape,
     fetchUser: jest.fn(),
     updateUserId: jest.fn(),
     history: historyProp,
