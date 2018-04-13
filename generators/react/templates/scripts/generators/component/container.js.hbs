@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 {{#if wantMessages}}
 import { injectIntl } from 'react-intl';
 {{/if}}
-import { toJS } from '../../services/immutable/toJs';
 
 import {{ properCase name }} from './{{ properCase name }}.component';
 
@@ -17,9 +16,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   {{#if wantMessages}}
-  injectIntl(toJS({{ properCase name }})),
+  injectIntl({{ properCase name }}),
   {{/if}}
   {{#unless wantMessages}}
-  toJS({{ properCase name }}),
+  {{ properCase name }},
   {{/unless}}
 );
