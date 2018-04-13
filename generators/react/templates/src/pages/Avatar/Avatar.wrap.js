@@ -1,8 +1,9 @@
 // @flow
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
-import { actions } from 'redux/Avatar';
+import type { Dispatch } from 'redux';
 
+import { actions } from 'redux/Avatar';
 import Avatar from './Avatar';
 
 const mapStateToProps = (state: Store): AvatarState => ({
@@ -10,7 +11,7 @@ const mapStateToProps = (state: Store): AvatarState => ({
   userAvatarUrl: state.avatar.userAvatarUrl,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch<*>): Object => ({
   fetchUser(username) {
     dispatch(actions.fetchUserRequest(username));
   },
