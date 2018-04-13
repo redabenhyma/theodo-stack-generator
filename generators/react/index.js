@@ -119,8 +119,7 @@ class StackGenerator extends Generator {
         eject: 'react-scripts eject',
         analyze: 'source-map-explorer build/static/js/main.*',
         flow: 'flow',
-        'flow:coverage':
-          "flow-coverage-report --threshold=75 -i 'src/**/*.js' -t html -t json -t text",
+        "flow:coverage": "flow-coverage-report --config=.flowcoverageconfig",
         generate: 'plop --plopfile scripts/generators/index.js',
         lint: 'eslint --ext .jsx,.js -c .eslintrc src',
         'lint:fix': 'eslint --fix --ext .jsx,.js -c .eslintrc src',
