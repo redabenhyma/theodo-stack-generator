@@ -16,6 +16,7 @@ if (rootEl) {
   registerServiceWorker();
 }
 
+// $FlowFixMe
 if (module.hot) {
   // $FlowFixMe
   module.hot.accept('./App', () => {
