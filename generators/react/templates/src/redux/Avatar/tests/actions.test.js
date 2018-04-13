@@ -26,7 +26,7 @@ describe('[Action] Avatar', () => {
       const user = { name: 'me' };
       expect(actions.fetchUserSuccess(user)).toEqual({
         type: cst.USER_FETCH_SUCCESS,
-        payload: user,
+        payload: { user },
       });
     });
   });

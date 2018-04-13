@@ -13,14 +13,12 @@ declare type UpdateUserIdAction = {
 
 declare type FetchUserRequestAction = {
   type: 'Avatar/USER_FETCH_REQUEST',
-  payload: {
-    username: string,
-  },
+  payload: { username: string },
 };
 
 declare type FetchUserSuccessAction = {
   type: 'Avatar/USER_FETCH_SUCCESS',
-  payload: User,
+  payload: { user: User },
 };
 
 declare type FetchUserErrorAction = {

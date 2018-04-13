@@ -16,7 +16,7 @@ export default function reducer(state: AvatarState = initialState, action: UserA
     case USER_FETCH_SUCCESS:
       return {
         ...state,
-        userAvatarUrl: action.payload.avatar_url,
+        userAvatarUrl: action.payload.user.avatar_url,
       };
     default:
       return state;

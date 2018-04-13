@@ -23,7 +23,7 @@ describe('[Reducer] Avatar reducer', () => {
   it('should set userAvatarUrl', () => {
     const state = reducer(undefined, {
       type: USER_FETCH_SUCCESS,
-      payload: { avatar_url: 'avatar_url' },
+      payload: { user: { avatar_url: 'avatar_url' } },
     });
     expect(state.toJS()).toEqual({
       userAvatarUrl: 'avatar_url',

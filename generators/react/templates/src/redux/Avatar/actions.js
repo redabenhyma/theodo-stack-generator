@@ -23,7 +23,7 @@ export function fetchUserRequest(username: string): FetchUserRequestAction {
 export function fetchUserSuccess(user: User): FetchUserSuccessAction {
   return {
     type: USER_FETCH_SUCCESS,
-    payload: user,
+    payload: { user },
   };
 }
 
