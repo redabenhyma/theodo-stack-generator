@@ -16,7 +16,7 @@ describe('[Action] Avatar', () => {
     it('should return an action', () => {
       expect(actions.fetchUserRequest('github')).toEqual({
         type: cst.USER_FETCH_REQUEST,
-        payload: { userId: 'github' },
+        payload: { username: 'github' },
       });
     });
   });

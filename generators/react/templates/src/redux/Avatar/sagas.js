@@ -9,7 +9,7 @@ import { USER_FETCH_REQUEST } from './constant';
 export function* fetchUser(
   action: FetchUserRequestAction,
 ): Saga<*> {
-  const url = `https://api.github.com/users/${action.payload.userId}`;
+  const url = `https://api.github.com/users/${action.payload.username}`;
   try {
     const user = yield call(request, url);
     yield put(fetchUserSuccess(user));

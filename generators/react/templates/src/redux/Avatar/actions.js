@@ -6,17 +6,17 @@ import {
   USER_FETCH_ERROR,
 } from './constant';
 
-export function updateUserId(userId: string): UpdateUserIdAction {
+export function updateUserId(username: string): UpdateUserIdAction {
   return {
     type: UPDATE_USER_ID,
-    payload: userId,
+    payload: username,
   };
 }
 
-export function fetchUserRequest(userId: string): FetchUserRequestAction {
+export function fetchUserRequest(username: string): FetchUserRequestAction {
   return {
     type: USER_FETCH_REQUEST,
-    payload: { userId },
+    payload: { username },
   };
 }
 

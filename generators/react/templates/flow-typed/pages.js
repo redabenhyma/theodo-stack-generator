@@ -14,7 +14,7 @@
   declare type FetchUserRequestAction = {
     type: 'Avatar/USER_FETCH_REQUEST',
     payload: {
-      userId: string,
+      username: string,
     },
   };
 

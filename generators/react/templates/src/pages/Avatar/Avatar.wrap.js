@@ -6,16 +6,16 @@ import { actions } from 'redux/Avatar';
 import Avatar from './Avatar';
 
 const mapStateToProps = (state: Store): AvatarState => ({
-  userId: state.avatar.userId,
+  username: state.avatar.username,
   userAvatarUrl: state.avatar.userAvatarUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchUser(userId) {
-    dispatch(actions.fetchUserRequest(userId));
+  fetchUser(username) {
+    dispatch(actions.fetchUserRequest(username));
   },
-  updateUserId(userId) {
-    dispatch(actions.updateUserId(userId));
+  updateUserId(username) {
+    dispatch(actions.updateUserId(username));
   },
 });
 

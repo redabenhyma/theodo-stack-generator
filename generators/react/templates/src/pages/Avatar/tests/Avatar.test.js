@@ -11,7 +11,7 @@ describe('<Avatar />', () => {
     setProps: jest.fn(),
   };
   const props = {
-    userId: 'Juste Leblanc',
+    username: 'Juste Leblanc',
     userAvatarUrl: 'url',
     intl: {
       formatMessage: jest.fn(),
@@ -70,7 +70,7 @@ describe('<Avatar />', () => {
       expect(props.fetchUser.mock.calls.length).toBe(0);
       avatar.fetchUser();
       expect(props.fetchUser.mock.calls.length).toBe(1);
-      expect(props.fetchUser.mock.calls[0][0]).toBe(props.userId);
+      expect(props.fetchUser.mock.calls[0][0]).toBe(props.username);
     });
   });
 

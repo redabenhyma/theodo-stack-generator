@@ -8,10 +8,10 @@ import StyledAvatar from './Avatar.style';
 type Props = {
   intl: intlShape,
   history: RouterHistory,
-  fetchUser: (userId: string) => void,
+  fetchUser: (username: string) => void,
   updateUserId: (value: string) => void,
   userAvatarUrl: string,
-  userId: string,
+  username: string,
 };
 
 class Avatar extends React.Component<Props> {
@@ -20,7 +20,7 @@ class Avatar extends React.Component<Props> {
   };
 
   fetchUser = (): void => {
-    this.props.fetchUser(this.props.userId);
+    this.props.fetchUser(this.props.username);
   };
 
   navigateTo = (path: string) => () => {
