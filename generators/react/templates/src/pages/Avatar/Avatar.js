@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+import type { IntlShape } from 'react-intl';
 import type { RouterHistory } from 'react-router-dom';
 
 import StyledAvatar from './Avatar.style';
 
 type Props = {
-  intl: intlShape,
+  intl: IntlShape,
   history: RouterHistory,
   fetchUser: (username: string) => void,
   updateUserId: (value: string) => void,
@@ -23,7 +24,7 @@ class Avatar extends React.Component<Props> {
     this.props.fetchUser(this.props.username);
   };
 
-  navigateTo = (path: string) => () => {
+  navigateTo = (path: string): (() => void) => (): void => {
     this.props.history.push(path);
   };
 
