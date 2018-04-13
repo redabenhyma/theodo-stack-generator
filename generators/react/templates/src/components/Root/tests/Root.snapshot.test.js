@@ -6,9 +6,11 @@ import Root from '../Root';
 describe('<Root>', () => {
   it('should render correctly', () => {
     const props = {
-      children: <div>
-        <span>test</span>
-      </div>
+      children: (
+        <div>
+          <span>test</span>
+        </div>
+      ),
     };
     const tree = shallow(<Root {...props} />);
     expect(toJSON(tree)).toMatchSnapshot();
