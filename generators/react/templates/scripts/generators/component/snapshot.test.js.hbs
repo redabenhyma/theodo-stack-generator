@@ -3,6 +3,10 @@ import React from 'react';
 import {{ properCase name }} from './{{ properCase name }}.component';
 import createComponentWithIntl from 'services/i18n/create-component-with-intl';
 
+/*
+Snapshot tests allow you to easily lock the comportment of a component.
+Given props, it renders the component and compares it to the saved snapshot.
+*/
 describe('[Snapshot] <{{ properCase name }} />', () => {
   it('should render a button with a label', () => {
     const props = {
