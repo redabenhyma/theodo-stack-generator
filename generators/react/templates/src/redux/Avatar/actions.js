@@ -1,6 +1,6 @@
 // @flow
 import {
-  UPDATE_USER_ID,
+  UPDATE_USERNAME,
   USER_FETCH_REQUEST,
   USER_FETCH_SUCCESS,
   USER_FETCH_ERROR,
@@ -8,7 +8,7 @@ import {
 
 export function updateUserId(username: string): UpdateUserIdAction {
   return {
-    type: UPDATE_USER_ID,
+    type: UPDATE_USERNAME,
     payload: username,
   };
 }

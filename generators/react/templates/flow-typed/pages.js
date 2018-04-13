@@ -7,7 +7,7 @@ declare type User = {
 };
 
 declare type UpdateUserIdAction = {
-  type: 'Avatar/UPDATE_USER_ID',
+  type: 'Avatar/UPDATE_USERNAME',
   payload: string,
 };
 

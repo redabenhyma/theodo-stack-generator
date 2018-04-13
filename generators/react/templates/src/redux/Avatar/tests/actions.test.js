@@ -6,7 +6,7 @@ describe('[Action] Avatar', () => {
   describe('updateUserId', () => {
     it('should return an action', () => {
       expect(actions.updateUserId('github')).toEqual({
-        type: cst.UPDATE_USER_ID,
+        type: cst.UPDATE_USERNAME,
         payload: 'github',
       });
     });
