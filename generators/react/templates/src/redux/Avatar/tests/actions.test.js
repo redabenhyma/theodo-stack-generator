@@ -1,6 +1,6 @@
 // @flow
-import * as actions from './actions';
-import * as cst from './constant';
+import * as actions from '../actions';
+import * as cst from '../constant';
 
 describe('[Action] Avatar', () => {
   describe('updateUserId', () => {

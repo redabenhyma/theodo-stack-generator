@@ -1,5 +1,5 @@
-import reducer from './reducer';
-import { UPDATE_USER_ID, USER_FETCH_SUCCESS } from './constant';
+import reducer from '../reducer';
+import { UPDATE_USER_ID, USER_FETCH_SUCCESS } from '../constant';
 
 describe('[Reducer] Avatar reducer', () => {
   const previousState = {
