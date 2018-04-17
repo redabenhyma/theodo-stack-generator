@@ -86,7 +86,7 @@ module.exports = {
       },
       {
         type: 'add',
-        path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.component.js`,
+        path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.js`,
         templateFile: componentTemplate,
         abortOnFail: true,
       },

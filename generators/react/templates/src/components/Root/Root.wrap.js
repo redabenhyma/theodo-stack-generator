@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Root from './Root.component';
+import Root from './Root';
 
 function mapStateToProps() {
   return {};
