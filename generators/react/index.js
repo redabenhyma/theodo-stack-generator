@@ -136,7 +136,6 @@ class StackGenerator extends Generator {
         },
       },
       dependencies: {
-        immutable: '^3.8.2',
         plop: '^1.9.1',
         react: '^16.2.0',
         'react-dom': '^16.2.0',
