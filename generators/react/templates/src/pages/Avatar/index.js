@@ -1,2 +1,2 @@
 // @flow
-export { default } from './Avatar.container';
+export { default } from './Avatar.wrap';

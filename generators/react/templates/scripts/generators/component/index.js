@@ -86,7 +86,7 @@ module.exports = {
       },
       {
         type: 'add',
-        path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.component.js`,
+        path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.js`,
         templateFile: componentTemplate,
         abortOnFail: true,
       },
@@ -108,8 +108,8 @@ module.exports = {
       actions.push(
         {
           type: 'add',
-          path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.container.js`,
-          templateFile: './component/container.js.hbs',
+          path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.wrap.js`,
+          templateFile: './component/wrap.js.hbs',
           abortOnFail: true,
         },
       );

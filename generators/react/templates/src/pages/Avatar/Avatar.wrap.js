@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { actions } from 'redux/Avatar';
 
-import Avatar from './Avatar.component';
+import Avatar from './Avatar';
 
 const mapStateToProps = (state: Store): AvatarStore => ({
   userId: state.avatar.userId,

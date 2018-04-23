@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '../Avatar.component';
+import Avatar from './Avatar';
 import createComponentWithIntl from 'services/i18n/create-component-with-intl';
 
 describe('The page component', () => {

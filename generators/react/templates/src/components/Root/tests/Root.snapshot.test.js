@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
-import Root from '../Root.component';
+import Root from './Root';
 
 describe('<Root>', () => {
   it('should render correctly', () => {
