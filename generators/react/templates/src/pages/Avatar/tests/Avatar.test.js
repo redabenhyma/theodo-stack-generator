@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import historyProp from '__mocks__/historyProp';
-import Avatar from './Avatar.component';
+import Avatar from '../Avatar.component';
 
 describe('<Avatar />', () => {
   let wrapper = {

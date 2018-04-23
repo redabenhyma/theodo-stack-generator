@@ -1,9 +1,9 @@
 // @flow
 import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'services/networking/request';
-import fetchUserSaga, { fetchUser } from './sagas';
-import { fetchUserRequest, fetchUserSuccess, fetchUserError } from './actions';
-import { USER_FETCH_REQUEST } from './constant';
+import fetchUserSaga, { fetchUser } from '../sagas';
+import { fetchUserRequest, fetchUserSuccess, fetchUserError } from '../actions';
+import { USER_FETCH_REQUEST } from '../constant';
 
 describe('[Saga] Avatar redux', () => {
   describe('fetchUser', () => {

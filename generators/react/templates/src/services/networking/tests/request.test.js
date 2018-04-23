@@ -3,7 +3,7 @@
  * Test the request function
  */
 
-import request from './request';
+import request from '../request';
 
 describe('request', () => {
   // Before each test, stub the fetch function

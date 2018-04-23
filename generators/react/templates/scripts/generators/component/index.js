@@ -80,7 +80,7 @@ module.exports = {
     const actions = [
       {
         type: 'add',
-        path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.test.js`,
+        path: `../../src/${componentType}/{{properCase name}}/tests/{{properCase name}}.test.js`,
         templateFile: './component/test.js.hbs',
         abortOnFail: true,
       },
@@ -118,7 +118,7 @@ module.exports = {
     if (data.wantSnapshotTests) {
       actions.push({
         type: 'add',
-        path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.snapshot.test.js`,
+        path: `../../src/${componentType}/{{properCase name}}/tests/{{properCase name}}.snapshot.test.js`,
         templateFile: './component/snapshot.test.js.hbs',
         abortOnFail: true,
       });
