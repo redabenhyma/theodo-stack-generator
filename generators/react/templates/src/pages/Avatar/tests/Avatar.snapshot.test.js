@@ -1,6 +1,6 @@
 import React from 'react';
-import Avatar from './Avatar';
 import createComponentWithIntl from 'services/i18n/create-component-with-intl';
+import Avatar from '../Avatar';
 
 describe('The page component', () => {
   it('should render correctly', () => {
