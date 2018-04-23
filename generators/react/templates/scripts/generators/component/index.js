@@ -108,8 +108,8 @@ module.exports = {
       actions.push(
         {
           type: 'add',
-          path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.container.js`,
-          templateFile: './component/container.js.hbs',
+          path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.wrap.js`,
+          templateFile: './component/wrap.js.hbs',
           abortOnFail: true,
         },
       );

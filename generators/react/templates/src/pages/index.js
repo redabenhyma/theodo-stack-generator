@@ -1,6 +1,6 @@
 // @flow
 /**
- * Index for containers
+ * Index for wrappers
  */
 
 export { default as Home } from './Home';
