@@ -1,0 +1,57 @@
+version: 2
+jobs:
+  install:
+    working_directory: ~/<%= appName %>
+    docker:
+      - image: circleci/node:8.4.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: front-dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install front dependencies
+          command: yarn install
+      - save_cache:
+          key: front-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
+  test:
+    working_directory: ~/<%= appName %>
+    docker:
+      - image: circleci/node:8.4.0
+    environment:
+      NODE_ENV: test
+    steps:
+      - checkout
+      - restore_cache:
+          key: front-dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Test
+          command: yarn test:coverage
+      - store_artifacts:
+          path: coverage
+
+  build:
+    working_directory: ~/<%= appName %>
+    docker:
+      - image: circleci/node:8.4.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: front-dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Build production app
+          command: yarn build
+
+workflows:
+  version: 2
+  frontend:
+    jobs:
+      - install
+      - test:
+          requires:
+            - install
+      - build:
+          requires:
+            - install
