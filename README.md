@@ -81,6 +81,14 @@ yo theodo-stack
 
 For the client, you may need to source the .env file (`source .env`) if you want to use absolute PATH. Also see: https://github.com/facebook/create-react-app/issues/2300
 
+## Update the generator
+
+- From the theodo-stack-generator directory
+```
+git pull
+npm update -g theodo-stack-generator
+```
+
 ## Contributing to the generator
 
 This generator can be improved in many ways, PR are welcome! [here](https://github.com/theodo/theodo-stack-generator) !
