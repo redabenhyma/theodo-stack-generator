@@ -65,7 +65,6 @@ If you want a server with the provisioning and the deployment scripts:
 nvm use 8.4.0
 git clone git@github.com:theodo/theodo-stack-generator.git
 cd theodo-stack-generator && yarn && npm link && cd ../
-npm install -g theodo-stack-generator
 ```
 
 ## Usage
@@ -80,6 +79,15 @@ yo theodo-stack
 - Launch your React app in the client folder: `yarn start`
 
 For the client, you may need to source the .env file (`source .env`) if you want to use absolute PATH. Also see: https://github.com/facebook/create-react-app/issues/2300
+
+## Update the generator
+
+You only need to pull the latest changes from your theodo-stack-directory. npm link created a symlink to your installation so it is automatic.
+
+- From the theodo-stack-generator directory
+```
+git pull
+```
 
 ## Contributing to the generator
 
