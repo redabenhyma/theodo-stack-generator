@@ -82,6 +82,8 @@ For the client, you may need to source the .env file (`source .env`) if you want
 
 ## Update the generator
 
+You only need to pull the latest changes from your theodo-stack-directory. npm link created a symlink to your installation so it is automatic.
+
 - From the theodo-stack-generator directory
 ```
 git pull
