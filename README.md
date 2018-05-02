@@ -65,7 +65,6 @@ If you want a server with the provisioning and the deployment scripts:
 nvm use 8.4.0
 git clone git@github.com:theodo/theodo-stack-generator.git
 cd theodo-stack-generator && yarn && npm link && cd ../
-npm install -g theodo-stack-generator
 ```
 
 ## Usage
@@ -86,7 +85,6 @@ For the client, you may need to source the .env file (`source .env`) if you want
 - From the theodo-stack-generator directory
 ```
 git pull
-npm update -g theodo-stack-generator
 ```
 
 ## Contributing to the generator
