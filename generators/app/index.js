@@ -2,8 +2,30 @@ const Generator = require("yeoman-generator");
 const chalk = require("chalk");
 
 class StackGenerator extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+
+    this.argument('appname', { type: String, required: true });
+
+    this.option(
+      'serverRequired',
+      {
+        description: 'Add a Symfony app',
+        type: Boolean
+      },
+    );
+
+    this.option(
+      'clientRequired',
+      {
+        description: 'Add a React/Redux app',
+        type: Boolean
+      }
+    );
+  }
+
   prompting() {
-    if (this.appname.toLowerCase() != this.appname) {
+    if (this.options.appname.toLowerCase() != this.options.appname) {
       this.log(
         chalk.red(
           "The react app cannot be created in a folder with a name containing capital letters"
@@ -18,30 +40,28 @@ class StackGenerator extends Generator {
         name: 'serverRequired',
         message: 'Do you need an API Platform server?',
         default: true,
+        when: (answers) => {
+          return this.options.serverRequired === undefined;
+        }
       },
       {
         type: 'confirm',
         name: 'clientRequired',
         message: 'Do you need react redux client?',
         default: true,
-      },
-      {
-        type    : 'input',
-        name    : 'appName',
-        message : 'Your application name (without white space)',
-        default : this.appname,
-        require : true,
+        when: (answers) => {
+          return this.options.clientRequired === undefined;
+        }
       },
     ])
     .then(answers => {
-      this.options.serverRequired = answers.serverRequired;
-      this.options.clientRequired = answers.clientRequired;
-      this.options.appName = answers.appName;
+      this.options.serverRequired = answers.serverRequired || this.options.serverRequired;
+      this.options.clientRequired = answers.clientRequired || this.options.clientRequired;
     })
   }
 
   writeYorc() {
-    this.config.set('appName', this.options.appName);
+    this.config.set('appName', this.options.appname);
     this.config.set('clientRequired', this.options.clientRequired);
     this.config.set('serverRequired', this.options.serverRequired);
     if (
@@ -65,8 +85,8 @@ class StackGenerator extends Generator {
     if (!this.options.clientRequired) {
       return;
     }
-    const client = require.resolve('../react');
 
+    const client = require.resolve('../react');
     this.composeWith(client, this.options);
   }
 };
