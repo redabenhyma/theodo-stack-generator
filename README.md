@@ -77,7 +77,7 @@ cd theodo-stack-generator && yarn && npm link && cd ../
 ``` bash
 mkdir my-app && cd my-app
 nvm use 8.4.0
-yo theodo-stack
+yo theodo-stack my-app
 ```
 
 - Clean your NODE_PATH and Launch your React app in the client folder:
