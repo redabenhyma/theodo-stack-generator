@@ -42,7 +42,7 @@ class StackGenerator extends Generator {
           'The current folder must be empty, even of hidden files, do you confirm?',
         default: true,
         when: (answers) => {
-          return !this.options.serverRequired && !this.options['empty-folder'];
+          return !this.options['server-required'] && !this.options['empty-folder'];
         }
       }
     ];
@@ -51,7 +51,7 @@ class StackGenerator extends Generator {
       this.answers = Object.assign({}, answers, this.options);
 
       const isClientDirectoryValid =
-        !this.options.serverRequired && this.answers['empty-folder'] === false;
+        !this.options['server-required'] && this.answers['empty-folder'] === false;
 
       if (isClientDirectoryValid) {
         this.env.error(
@@ -113,7 +113,7 @@ class StackGenerator extends Generator {
   }
 
   _addCircleCiConfig() {
-    if (!this.options.serverRequired) {
+    if (!this.options['server-required']) {
       this.log('Copying circleci config');
       [
         { src: '.circleci', dest: '.circleci' },
@@ -214,7 +214,7 @@ class StackGenerator extends Generator {
   }
 
   installProject() {
-    if (this.options.serverRequired) {
+    if (this.options['server-required']) {
       this.destinationRoot('client');
     }
     return this._addReactBoilerplate()

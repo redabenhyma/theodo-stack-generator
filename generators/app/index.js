@@ -8,17 +8,19 @@ class StackGenerator extends Generator {
     this.argument('appname', { type: String, required: true });
 
     this.option(
-      'serverRequired',
+      'server-required',
       {
         description: 'Add a Symfony app',
+        alias: 'server',
         type: Boolean
       },
     );
 
     this.option(
-      'clientRequired',
+      'client-required',
       {
         description: 'Add a React/Redux app',
+        alias: 'client',
         type: Boolean
       }
     );
@@ -37,35 +39,35 @@ class StackGenerator extends Generator {
     return this.prompt([
       {
         type: 'confirm',
-        name: 'serverRequired',
+        name: 'server-required',
         message: 'Do you need an API Platform server?',
         default: true,
         when: (answers) => {
-          return this.options.serverRequired === undefined;
+          return this.options['server-required'] === undefined;
         }
       },
       {
         type: 'confirm',
-        name: 'clientRequired',
+        name: 'client-required',
         message: 'Do you need react redux client?',
         default: true,
         when: (answers) => {
-          return this.options.clientRequired === undefined;
+          return this.options['client-required'] === undefined;
         }
       },
     ])
     .then(answers => {
-      this.options.serverRequired = answers.serverRequired || this.options.serverRequired;
-      this.options.clientRequired = answers.clientRequired || this.options.clientRequired;
+      this.options['server-required'] = answers['server-required'] || this.options['server-required'];
+      this.options['client-required'] = answers['client-required'] || this.options['client-required'];
     })
   }
 
   writeYorc() {
     this.config.set('appName', this.options.appname);
-    this.config.set('clientRequired', this.options.clientRequired);
-    this.config.set('serverRequired', this.options.serverRequired);
+    this.config.set('client-required', this.options['client-required']);
+    this.config.set('server-required', this.options['server-required']);
     if (
-      this.options.clientRequired &&
+      this.options['client-required'] &&
       ['react', 'react-scripts', 'react-dom'].indexOf(this.appname) >= 0
     ) {
       this.env.error('The react app cannot be created in a folder called react, react-scripts or react-dom');
@@ -74,7 +76,7 @@ class StackGenerator extends Generator {
   }
 
   installServer() {
-    if (!this.options.serverRequired) {
+    if (!this.options['server-required']) {
       return;
     }
     const server = require.resolve('../server');
@@ -82,7 +84,7 @@ class StackGenerator extends Generator {
   }
 
   installClient() {
-    if (!this.options.clientRequired) {
+    if (!this.options['client-required']) {
       return;
     }
 
