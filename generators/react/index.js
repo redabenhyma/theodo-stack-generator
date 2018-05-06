@@ -31,7 +31,7 @@ class StackGenerator extends Generator {
           'Do you want a cool page example which demonstrates the best practices?',
         default: true,
         when: (answers) => {
-          return 'exampleRequired' in this.options === false;
+          return this.options.exampleRequired === undefined;
         }
       },
       // When server is required, the react app is always in a 'client' folder
@@ -42,7 +42,7 @@ class StackGenerator extends Generator {
           'The current folder must be empty, even of hidden files, do you confirm?',
         default: true,
         when: (answers) => {
-          return !this.options['server-required'] && !this.options['empty-folder'];
+          return !this.options['server-required'] && this.options['empty-folder'] == undefined;
         }
       }
     ];
@@ -50,10 +50,7 @@ class StackGenerator extends Generator {
     return this.prompt(prompt).then(answers => {
       this.answers = Object.assign({}, answers, this.options);
 
-      const isClientDirectoryValid =
-        !this.options['server-required'] && this.answers['empty-folder'] === false;
-
-      if (isClientDirectoryValid) {
+      if (this.options['server-required'] === false && this.answers['empty-folder'] === false) {
         this.env.error(
           'The current folder must be empty to clone create-react-app',
         );
@@ -217,6 +214,7 @@ class StackGenerator extends Generator {
     if (this.options['server-required']) {
       this.destinationRoot('client');
     }
+
     return this._addReactBoilerplate()
       .then(() => this._addTemplates())
       .then(() => this._updatePackageJson())
