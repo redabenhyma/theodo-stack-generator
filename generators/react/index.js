@@ -6,7 +6,7 @@ class StackGenerator extends Generator {
     super(args, opts);
 
     this.option(
-      'exampleRequired',
+      'add-example',
       {
         description: 'Add a cool page example which demonstrates the best practices?',
         type: Boolean
@@ -26,12 +26,12 @@ class StackGenerator extends Generator {
     const prompt = [
       {
         type: 'confirm',
-        name: 'exampleRequired',
+        name: 'add-example',
         message:
           'Do you want a cool page example which demonstrates the best practices?',
         default: true,
         when: (answers) => {
-          return this.options.exampleRequired === undefined;
+          return this.options['add-example'] === undefined;
         }
       },
       // When server is required, the react app is always in a 'client' folder
@@ -96,11 +96,11 @@ class StackGenerator extends Generator {
       this.fs.copyTpl(
         this.templatePath(file.src),
         this.destinationPath(file.dest),
-        { exampleRequired: this.answers.exampleRequired },
+        { add-example: this.answers['add-example'] },
       ),
     );
 
-    if (!this.answers.exampleRequired) {
+    if (!this.answers['add-example']) {
       // delete example page
       this.fs.delete('src/pages/Avatar');
       this.fs.delete('src/redux/Avatar');

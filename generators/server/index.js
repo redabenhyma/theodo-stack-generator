@@ -5,35 +5,35 @@ class StackGenerator extends Generator {
     super(args, opts);
 
     this.option(
-      'stagingDatabasePassword',
+      'staging-database-password',
       {
         description: 'Database password for staging environment',
         type: String
       }
     );
     this.option(
-      'prodDatabasePassword',
+      'prod-database-password',
       {
         description: 'Database password for production environment',
         type: String,
       }
     );
     this.option(
-      'repositoryUrl',
+      'repository-url',
       {
         description: 'GIT repository URL',
         type: String,
       }
     );
     this.option(
-      'stagingIpAddress',
+      'staging-ip-address',
       {
         description: 'IP address for production environment',
         type: String,
       }
     );
     this.option(
-      'prodIpAddress',
+      'prod-ip-address',
       {
         description: 'IP address for production environment',
         type: String,
@@ -48,47 +48,47 @@ class StackGenerator extends Generator {
     const serverQuestions = [
       {
         type    : 'input',
-        name    : 'stagingDatabasePassword',
+        name    : 'staging-database-password',
         message : '[Provisioning] Staging database password',
         default : this.appname,
         when: (answers) => {
-          return 'stagingDatabasePassword' in this.options === false;
+          return this.options['staging-database-password'] == undefined;
         }
       },
       {
         type    : 'input',
-        name    : 'prodDatabasePassword',
+        name    : 'prod-database-password',
         message : '[Provisioning] Production database password',
         default : this.appname,
         when: (answers) => {
-          return 'prodDatabasePassword' in this.options === false;
+          return this.options['prod-database-password'] == undefined;
         }
       },
       {
         type    : 'input',
-        name    : 'repositoryUrl',
+        name    : 'repository-url',
         message : '[Deployment] Your git repository URL',
         default : '',
         when: (answers) => {
-          return 'repositoryUrl' in this.options === false;
+          return this.options['repository-url'] == undefined;
         }
       },
       {
         type    : 'input',
-        name    : 'stagingIpAddress',
+        name    : 'staging-ip-address',
         message : '[Provisioning/Deployment] Staging IP address',
         default : '',
         when: (answers) => {
-          return 'stagingIpAddress' in this.options === false;
+          return this.options['staging-ip-address'] == undefined;
         }
       },
       {
         type    : 'input',
-        name    : 'prodIpAddress',
+        name    : 'prod-ip-address',
         message : '[Provisioning/Deployment](Optionnal) Your production IP address',
         default : '',
         when: (answers) => {
-          return 'prodIpAddress' in this.options === false;
+          return this.options['prod-ip-address'] == undefined;
         }
       }
     ];
