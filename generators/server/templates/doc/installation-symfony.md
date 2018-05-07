@@ -1,6 +1,6 @@
 # Installation
 
-### Create and provision the vagrant
+## Create and provision the vagrant
 
 - Launch VM:
   - `vagrant up`
@@ -17,8 +17,30 @@
   - If the command fails, run:
     - `ssh-keygen -R 10.0.0.10 && ssh vagrant@10.0.0.10`
     - exit the vagrant
+  - If it still fails, run `sudo pip install mozdownload`
 
-### Build your frontend code
+## Install the server
+
+- **Connect to the vagrant as www-data**:
+    ```bash
+    vagrant ssh
+    sudo su - www-data
+    ```
+- Update your .env
+    ```bash
+    TRUSTED_PROXIES=10.0.0.0/8
+    TRUSTED_HOSTS=<%= appName %>.local, localhost, api
+    ```
+- Go to your app folder: `cd /var/www/<%= appName %>/current`
+- Create your Symfony application `composer create-project symfony/skeleton api`
+- Add API Platform if you need it `cd api && composer req api`
+- Install and configure the php code sniffer with SymfonyCustom coding standard `composer require --dev vincentlanglet/symfony3-custom-coding-standard && vendor/bin/phpcs --config-set installed_paths ../../vincentlanglet/symfony3-custom-coding-standard`
+- Create the database `bin/console doctrine:database:create`
+- Create the database schema `bin/console doctrine:schema:create`
+- Browse your API: `http://10.0.0.10/app_dev.php/api`
+- That's it! You can now [create your first entity](https://api-platform.com/docs/distribution#bringing-your-own-model).
+
+## Build your frontend code
 
 - If you have a static frontend such as React:
 
@@ -30,27 +52,7 @@
 
   - Browse your static frontend: https://10.0.0.10
 
-### Install the server
-
-- Create your Symfony application `composer create-project symfony/skeleton api` from your local
-- Add API Platform if you need it `composer req api`
-- Connect to the vagrant as www-data:
-    ```bash
-    vagrant ssh
-    sudo su - www-data
-    ```
-- Update your .env
-    ```
-    TRUSTED_PROXIES=10.0.0.0/8
-    TRUSTED_HOSTS=<%= appName %>.local, localhost, api
-    ```
-- Install dependencies `cd /var/www/<%= appName %>/current/api && php composer install`
-- Create the database `bin/console doctrine:database:create`
-- Create the database schema `bin/console doctrine:schema:create`
-- Browse your API: `http://10.0.0.10/app_dev.php/api`
-- That's it! You can now [create your first entity](https://api-platform.com/docs/distribution#bringing-your-own-model).
-
-### Update your API base path
+## Update your API base path
 
 In the `app/config/routing.yaml` add a prefix for your api, it can be somethings like that:
 
@@ -60,4 +62,5 @@ api:
     type:     'api_platform'
     prefix:   '/api'  # This line can be added
 ```
+
 Then your API is available at https://10.0.0.10/app_dev.php/api
