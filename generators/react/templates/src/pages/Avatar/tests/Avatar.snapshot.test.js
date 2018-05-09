@@ -12,7 +12,7 @@ describe('The page component', () => {
       intl: intlShape,
       history: historyProp,
       fetchUser: jest.fn(),
-      updateUserId: jest.fn(),
+      updateUsername: jest.fn(),
       userAvatarUrl: 'https://avatars1.githubusercontent.com/u/9215726?v=4',
       username: 'juste_leblanc',
     };

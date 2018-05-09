@@ -2,8 +2,8 @@
 /* eslint-disable no-undef, flowtype/delimiter-dangle */
 
 declare type AvatarState = {
-  userId: string | null,
-  userAvatarUrl: string | null,
+  username: ?string,
+  userAvatarUrl: ?string,
 };
 
 declare type Store = {

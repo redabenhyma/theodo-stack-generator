@@ -3,9 +3,9 @@ import * as actions from '../actions';
 import * as cst from '../constant';
 
 describe('[Action] Avatar', () => {
-  describe('updateUserId', () => {
+  describe('updateUsername', () => {
     it('should return an action', () => {
-      expect(actions.updateUserId('juste_leblanc')).toEqual({
+      expect(actions.updateUsername('juste_leblanc')).toEqual({
         type: cst.UPDATE_USERNAME,
         payload: { username: 'juste_leblanc' },
       });

@@ -3,7 +3,7 @@ import { UPDATE_USERNAME, USER_FETCH_SUCCESS } from './constant';
 
 const initialState = {
   userAvatarUrl: null,
-  userId: null,
+  username: null,
 };
 
 export default function reducer(state: AvatarState = initialState, action: UserAction) {

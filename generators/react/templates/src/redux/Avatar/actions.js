@@ -6,7 +6,7 @@ import {
   USER_FETCH_ERROR,
 } from './constant';
 
-export function updateUserId(username: string): UpdateUserIdAction {
+export function updateUsername(username: string): UpdateusernameAction {
   return {
     type: UPDATE_USERNAME,
     payload: { username },
@@ -35,7 +35,7 @@ export function fetchUserError(error: ErrorType): FetchUserErrorAction {
 }
 
 export default {
-  updateUserId,
+  updateUsername,
   fetchUserRequest,
   fetchUserSuccess,
   fetchUserError,

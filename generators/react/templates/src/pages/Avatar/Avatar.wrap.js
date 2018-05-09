@@ -15,8 +15,8 @@ const mapDispatchToProps = (dispatch: Dispatch<*>): Object => ({
   fetchUser(username) {
     dispatch(actions.fetchUserRequest(username));
   },
-  updateUserId(username) {
-    dispatch(actions.updateUserId(username));
+  updateUsername(username) {
+    dispatch(actions.updateUsername(username));
   },
 });
 

@@ -16,7 +16,7 @@ describe('<Avatar />', () => {
     userAvatarUrl: 'url',
     intl: intlShape,
     fetchUser: jest.fn(),
-    updateUserId: jest.fn(),
+    updateUsername: jest.fn(),
     history: historyProp,
   };
 
@@ -51,14 +51,14 @@ describe('<Avatar />', () => {
   });
 
   describe('onInputChange', () => {
-    it('should call updateUserId with the event value', () => {
+    it('should call updateUsername with the event value', () => {
       const avatar = new Avatar(props);
 
-      expect(props.updateUserId.mock.calls.length).toBe(0);
+      expect(props.updateUsername.mock.calls.length).toBe(0);
       // $FlowFixMe
       avatar.onInputChange({ target: { value: 'value' } });
-      expect(props.updateUserId.mock.calls.length).toBe(1);
-      expect(props.updateUserId.mock.calls[0][0]).toBe('value');
+      expect(props.updateUsername.mock.calls.length).toBe(1);
+      expect(props.updateUsername.mock.calls[0][0]).toBe('value');
     });
   });
 

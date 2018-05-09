@@ -3,7 +3,7 @@ import { UPDATE_USER_ID, USER_FETCH_SUCCESS } from '../constant';
 
 describe('[Reducer] Avatar reducer', () => {
   const previousState = {
-    userId: null,
+    username: null,
     userAvatarUrl: null,
   };
 
@@ -11,18 +11,18 @@ describe('[Reducer] Avatar reducer', () => {
     const state = reducer(undefined, { type: 'FAKE_TYPE' });
     expect(state).toEqual({
       userAvatarUrl: null,
-      userId: null,
+      username: null,
     });
   });
 
   describe('UPDATE_USER_ID case', () => {
     const action = { type: UPDATE_USER_ID, payload: 16 };
 
-    it('should set userId', () => {
+    it('should set username', () => {
       const state = reducer(undefined, action);
       expect(state).toEqual({
         userAvatarUrl: null,
-        userId: 16,
+        username: 16,
       });
     });
 
@@ -42,7 +42,7 @@ describe('[Reducer] Avatar reducer', () => {
       const state = reducer(undefined, action);
       expect(state).toEqual({
         userAvatarUrl: 'avatar_url',
-        userId: null,
+        username: null,
       });
     });
 

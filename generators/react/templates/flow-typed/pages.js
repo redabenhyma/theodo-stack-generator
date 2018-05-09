@@ -6,7 +6,7 @@ declare type User = {
   avatar_url?: string,
 };
 
-declare type UpdateUserIdAction = {
+declare type UpdateUsernameAction = {
   type: 'Avatar/UPDATE_USERNAME',
   payload: { username: string },
 };
@@ -27,7 +27,7 @@ declare type FetchUserErrorAction = {
 };
 
 declare type UserAction =
-  | UpdateUserIdAction
+  | UpdateUsernameAction
   | FetchUserRequestAction
   | FetchUserSuccessAction
   | FetchUserErrorAction;

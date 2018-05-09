@@ -10,14 +10,14 @@ type Props = {
   intl: IntlShape,
   history: RouterHistory,
   fetchUser: (username: string) => void,
-  updateUserId: (value: string) => void,
+  updateUsername: (value: string) => void,
   userAvatarUrl: string,
   username: string,
 };
 
 class Avatar extends React.Component<Props> {
   onInputChange = (event: SyntheticInputEvent<HTMLInputElement>): void => {
-    this.props.updateUserId(event.target.value);
+    this.props.updateUsername(event.target.value);
   };
 
   fetchUser = (): void => {
