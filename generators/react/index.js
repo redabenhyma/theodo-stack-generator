@@ -96,7 +96,7 @@ class StackGenerator extends Generator {
       this.fs.copyTpl(
         this.templatePath(file.src),
         this.destinationPath(file.dest),
-        { add-example: this.answers['add-example'] },
+        { 'add-example': this.answers['add-example'] },
       ),
     );
 
