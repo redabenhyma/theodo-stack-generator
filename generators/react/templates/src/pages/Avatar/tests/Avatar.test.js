@@ -2,6 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import intlShape from '__mocks__/intlShape';
 import historyProp from '__mocks__/historyProp';
 import Avatar from '../Avatar';
 
@@ -11,13 +12,11 @@ describe('<Avatar />', () => {
     setProps: jest.fn(),
   };
   const props = {
-    userId: 'Juste Leblanc',
+    username: 'Juste Leblanc',
     userAvatarUrl: 'url',
-    intl: {
-      formatMessage: jest.fn(),
-    },
+    intl: intlShape,
     fetchUser: jest.fn(),
-    updateUserId: jest.fn(),
+    updateUsername: jest.fn(),
     history: historyProp,
   };
 
@@ -52,14 +51,14 @@ describe('<Avatar />', () => {
   });
 
   describe('onInputChange', () => {
-    it('should call updateUserId with the event value', () => {
+    it('should call updateUsername with the event value', () => {
       const avatar = new Avatar(props);
 
-      expect(props.updateUserId.mock.calls.length).toBe(0);
+      expect(props.updateUsername.mock.calls.length).toBe(0);
       // $FlowFixMe
       avatar.onInputChange({ target: { value: 'value' } });
-      expect(props.updateUserId.mock.calls.length).toBe(1);
-      expect(props.updateUserId.mock.calls[0][0]).toBe('value');
+      expect(props.updateUsername.mock.calls.length).toBe(1);
+      expect(props.updateUsername.mock.calls[0][0]).toBe('value');
     });
   });
 
@@ -70,7 +69,7 @@ describe('<Avatar />', () => {
       expect(props.fetchUser.mock.calls.length).toBe(0);
       avatar.fetchUser();
       expect(props.fetchUser.mock.calls.length).toBe(1);
-      expect(props.fetchUser.mock.calls[0][0]).toBe(props.userId);
+      expect(props.fetchUser.mock.calls[0][0]).toBe(props.username);
     });
   });
 

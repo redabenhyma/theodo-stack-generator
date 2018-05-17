@@ -1,16 +1,14 @@
 // @flow
 import React from 'react';
 import { shallow } from 'enzyme';
+
+import historyProp from '__mocks__/historyProp';
 import Home from '../Home';
 
 let wrapper = null;
 
 describe('The page component', () => {
-  const props = {
-    history: {
-      push: jest.fn(),
-    },
-  };
+  const props = { history: historyProp };
 
   beforeEach(() => {
     wrapper = shallow(<Home {...props} />);

@@ -1,16 +1,24 @@
-import React from 'react';
+//@flow
+import * as React from 'react';
 <% if (exampleRequired) { %>import { Link } from 'react-router-dom';<% } %>
 import { FormattedMessage } from 'react-intl';
+import type { RouterHistory } from 'react-router-dom';
 
 import StyledIntro from './Home.style';
 
 <% if (exampleRequired) { %>
-  const navigateTo = history => () => {
+  const navigateTo = (history: RouterHistory): (() => void) => (): void => {
     history.push('/avatar');
   };
 <% } %>
 
-const Home = (<% if (exampleRequired) { %>{ history }<% } %>) => (
+type Props = {
+<% if (exampleRequired) { %>
+  history: RouterHistory,
+<% } %>
+};
+
+const Home = (<% if (exampleRequired) { %>{ history }: Props<% } %>) => (
   <React.Fragment>
     <StyledIntro>
       <p>

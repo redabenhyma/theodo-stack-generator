@@ -1,22 +1,22 @@
 // @flow
-import { UPDATE_USER_ID, USER_FETCH_SUCCESS } from './constant';
+import { UPDATE_USERNAME, USER_FETCH_SUCCESS } from './constant';
 
 const initialState = {
   userAvatarUrl: null,
-  userId: null,
+  username: null,
 };
 
-export default function reducer(state: AvatarStore = initialState, action: UserAction) {
+export default function reducer(state: AvatarState = initialState, action: UserAction) {
   switch (action.type) {
-    case UPDATE_USER_ID:
+    case UPDATE_USERNAME:
       return {
         ...state,
-        userId: action.payload,
+        username: action.payload.username,
       };
     case USER_FETCH_SUCCESS:
       return {
         ...state,
-        userAvatarUrl: action.payload.avatar_url,
+        userAvatarUrl: action.payload.user.avatar_url,
       };
     default:
       return state;

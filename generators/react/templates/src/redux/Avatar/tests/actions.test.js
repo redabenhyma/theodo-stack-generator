@@ -3,20 +3,20 @@ import * as actions from '../actions';
 import * as cst from '../constant';
 
 describe('[Action] Avatar', () => {
-  describe('updateUserId', () => {
+  describe('updateUsername', () => {
     it('should return an action', () => {
-      expect(actions.updateUserId('github')).toEqual({
-        type: cst.UPDATE_USER_ID,
-        payload: 'github',
+      expect(actions.updateUsername('juste_leblanc')).toEqual({
+        type: cst.UPDATE_USERNAME,
+        payload: { username: 'juste_leblanc' },
       });
     });
   });
 
   describe('fetchUserRequest', () => {
     it('should return an action', () => {
-      expect(actions.fetchUserRequest('github')).toEqual({
+      expect(actions.fetchUserRequest('juste_leblanc')).toEqual({
         type: cst.USER_FETCH_REQUEST,
-        payload: { userId: 'github' },
+        payload: { username: 'juste_leblanc' },
       });
     });
   });
@@ -26,7 +26,7 @@ describe('[Action] Avatar', () => {
       const user = { name: 'me' };
       expect(actions.fetchUserSuccess(user)).toEqual({
         type: cst.USER_FETCH_SUCCESS,
-        payload: user,
+        payload: { user },
       });
     });
   });
@@ -36,7 +36,7 @@ describe('[Action] Avatar', () => {
       const error = { message: 'unauthorized' };
       expect(actions.fetchUserError(error)).toEqual({
         type: cst.USER_FETCH_ERROR,
-        payload: error.message,
+        payload: { error: error.message },
       });
     });
   });
