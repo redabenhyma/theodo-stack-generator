@@ -6,7 +6,7 @@ import {
   USER_FETCH_ERROR,
 } from './constant';
 
-export function updateUsername(username: string): UpdateusernameAction {
+export function updateUsername(username: string): UpdateUsernameAction {
   return {
     type: UPDATE_USERNAME,
     payload: { username },
