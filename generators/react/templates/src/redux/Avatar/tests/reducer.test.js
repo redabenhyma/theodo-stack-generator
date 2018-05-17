@@ -1,5 +1,5 @@
 import reducer from '../reducer';
-import { UPDATE_USER_ID, USER_FETCH_SUCCESS } from '../constant';
+import { UPDATE_USERNAME, USER_FETCH_SUCCESS } from '../constant';
 
 describe('[Reducer] Avatar reducer', () => {
   const previousState = {
@@ -15,14 +15,17 @@ describe('[Reducer] Avatar reducer', () => {
     });
   });
 
-  describe('UPDATE_USER_ID case', () => {
-    const action = { type: UPDATE_USER_ID, payload: 16 };
+  describe('UPDATE_USERNAME case', () => {
+    const payload = {
+      username: 'juste_leblanc',
+    };
+    const action = { type: UPDATE_USERNAME, payload };
 
     it('should set username', () => {
       const state = reducer(undefined, action);
       expect(state).toEqual({
         userAvatarUrl: null,
-        username: 16,
+        username: 'juste_leblanc',
       });
     });
 
@@ -35,7 +38,7 @@ describe('[Reducer] Avatar reducer', () => {
   describe('USER_FETCH_SUCCESS case', () => {
     const action = {
       type: USER_FETCH_SUCCESS,
-      payload: { avatar_url: 'avatar_url' },
+      payload: { user: { avatar_url: 'avatar_url', username: null } },
     };
 
     it('should set userAvatarUrl', () => {
