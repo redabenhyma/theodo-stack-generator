@@ -43,6 +43,25 @@ class StackGenerator extends Generator {
     });
   }
 
+  _addTemplates() {
+    this.log('Copying new files for create-react-app');
+    [
+      { src: 'src', dest: 'src' },
+      { src: 'flow-typed', dest: 'flow-typed' },
+      { src: 'scripts', dest: 'scripts' },
+      { src: 'public/*', dest: 'public' },
+      { src: '.*', dest: '' },
+      { src: '*.md', dest: '' },
+    ].forEach(file =>
+      this.fs.copyTpl(
+        this.templatePath(file.src),
+        this.destinationPath(file.dest),
+      ),
+    );
+
+    return Promise.resolve();
+  }
+
   _addReactBoilerplate() {
     this.conflicter.force = true;
     this.log('Installing create-react-app 1.5.1');
@@ -64,25 +83,6 @@ class StackGenerator extends Generator {
       'public/reset.css',
       'src/index.js',
     ].forEach(file => this.spawnCommandSync('rm', [file]));
-
-    return Promise.resolve();
-  }
-
-  _addTemplates() {
-    this.log('Copying new files for create-react-app');
-    [
-      { src: 'src', dest: 'src' },
-      { src: 'flow-typed', dest: 'flow-typed' },
-      { src: 'scripts', dest: 'scripts' },
-      { src: 'public/*', dest: 'public' },
-      { src: '.*', dest: '' },
-      { src: '*.md', dest: '' },
-    ].forEach(file =>
-      this.fs.copyTpl(
-        this.templatePath(file.src),
-        this.destinationPath(file.dest),
-      ),
-    );
 
     return Promise.resolve();
   }
@@ -191,9 +191,48 @@ class StackGenerator extends Generator {
       this.destinationRoot('client');
     }
 
+    this.npmInstall([
+      'plop',
+      'react-intl',
+      'react-redux',
+      'react-router-dom',
+      'react-test-renderer',
+      'redux',
+      'redux-saga',
+      'source-map-explorer',
+      'styled-components',
+      'whatwg-fetch',
+    ]);
+    this.npmInstall(
+      [
+        'babel-eslint',
+        'enzyme',
+        'enzyme-adapter-react-16',
+        'enzyme-to-json',
+        'eslint',
+        'eslint-config-airbnb',
+        'eslint-config-prettier',
+        'eslint-plugin-flowtype',
+        'eslint-plugin-import',
+        'eslint-plugin-jest',
+        'eslint-plugin-jsx-a11y',
+        'eslint-plugin-mysticatea',
+        'eslint-plugin-prefer-object-spread',
+        'eslint-plugin-prettier',
+        'eslint-plugin-react',
+        'flow-bin',
+        'flow-coverage-report',
+        'flow-typed',
+        'nsp',
+        'prettier',
+      ],
+      { 'save-dev': true },
+    );
+    if (this.options.serverRequired) {
+      this.destinationRoot('client');
+    }
     return this._addReactBoilerplate()
       .then(() => this._addTemplates())
-      .then(() => this._updatePackageJson())
       .then(() => this._addCircleCiConfig());
   }
 

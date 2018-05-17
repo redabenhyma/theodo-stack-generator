@@ -51,9 +51,9 @@ If you want a server with the provisioning and the deployment scripts:
 
 - Install nvm: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
 
-- Install node 8.4:
-  - `nvm install 8.4.0`
-  - `nvm alias default 8.4`
+- Install node 9.5:
+  - `nvm install 9.5.0`
+  - `nvm alias default 9.5`
   - `nvm use default`
 
 - Install Yeoman globally: `npm install -g yo`
@@ -61,7 +61,7 @@ If you want a server with the provisioning and the deployment scripts:
 - Install the package:
 
 ```bash
-nvm use 8.4.0
+nvm use 9.5.0
 git clone git@github.com:theodo/theodo-stack-generator.git
 cd theodo-stack-generator && npm install && npm link && cd ../
 ```
@@ -71,9 +71,9 @@ cd theodo-stack-generator && npm install && npm link && cd ../
 - Create an **empty** directory and run the generator:
 
 ``` bash
-nvm use 8.4.0
 mkdir my-app && cd my-app
-yo theodo-stack my-app
+nvm use 9.5.0
+yo theodo-stack
 ```
 
 - Clean your NODE_PATH and Launch your React app in the client folder:
