@@ -97,8 +97,15 @@ class StackGenerator extends Generator {
 
     return this.prompt(serverQuestions)
     .then(serverAnswers => {
-      this.answers = Object.assign(this.answers, serverAnswers, this.options);
-      this.answers.databaseHost = 'localhost';
+      this.provisioningVars = {
+        appName: this.appName,
+        repositoryUrl: serverAnswers['repository-url'] || this.options['repository-url'],
+        databaseHost: 'localhost',
+        stagingIpAddress: serverAnswers['staging-ip-address'] || this.options['staging-ip-address'],
+        prodIpAddress: serverAnswers['prod-ip-address'] || this.options['prod-ip-address'],
+        prodDatabasePassword: serverAnswers['prod-database-password'] || this.options['prod-database-password'],
+        stagingDatabasePassword: serverAnswers['staging-database-password'] || this.options['staging-database-password']
+      };
     })
   }
 
@@ -116,7 +123,7 @@ class StackGenerator extends Generator {
      return this.fs.copyTpl(
        this.templatePath(file),
        this.destinationPath(file.replace(/-symfony|-react-redux|-no-client|-vagrant/, '')),
-       this.answers
+       this.provisioningVars
      );
    }));
   }
@@ -133,7 +140,7 @@ class StackGenerator extends Generator {
      return this.fs.copyTpl(
        this.templatePath(file),
        this.destinationPath(file.replace(/-symfony/, '')),
-       this.answers
+       this.provisioningVars
      );
    }));
   }
@@ -146,7 +153,7 @@ class StackGenerator extends Generator {
     this.fs.copy(
       this.templatePath('devops-symfony/provisioning/roles'),
       this.destinationPath('devops/provisioning/roles'),
-      this.answers
+      this.provisioningVars
     );
 
     return Promise.all([
@@ -170,7 +177,7 @@ class StackGenerator extends Generator {
      return this.fs.copyTpl(
        this.templatePath(file),
        this.destinationPath(file.replace(/-symfony/, '')),
-       this.answers
+       this.provisioningVars
      );
    }));
   }
