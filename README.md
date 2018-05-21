@@ -77,6 +77,7 @@ cd theodo-stack-generator && yarn && npm link && cd ../
 ``` bash
 mkdir my-app && cd my-app
 nvm use 8.4.0
+mkdir my-app && cd my-app
 yo theodo-stack my-app
 ```
 
