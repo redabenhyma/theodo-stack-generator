@@ -125,6 +125,7 @@ class StackGenerator extends Generator {
         'lint:fix': 'eslint --fix --ext .jsx,.js -c .eslintrc src',
         nsp: 'nsp check',
         'test:coverage': 'npm run test -- --coverage',
+        precommit: 'lint-staged',
       },
       jest: {
         collectCoverageFrom: [
@@ -183,8 +184,13 @@ class StackGenerator extends Generator {
         'flow-bin': '^0.68.0',
         'flow-coverage-report': '^0.4.1',
         'flow-typed': '^2.3.0',
+        husky: '^0.14.3',
+        'lint-staged': '^7.1.2',
         nsp: '^3.2.1',
         prettier: '^1.10.2',
+      },
+      'lint-staged': {
+        'src/**/*.{js,jsx}': 'eslint -c .eslintrc',
       },
     };
 
