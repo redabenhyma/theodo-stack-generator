@@ -1,45 +1,21 @@
 // @flow
-import 'whatwg-fetch';
+import request from 'superagent';
 
-/**
- * Parses the JSON returned by a network request
- *
- * @param  {object} response A response from a network request
- *
- * @return {object}          The parsed JSON from the request
- */
-function parseJSON(response: any): Object {
-  return response.json();
-}
+const baseUrl = 'https://api.github.com/';
 
-/**
- * Checks if a network request came back fine, and throws an error if not
- *
- * @param  {object} response   A response from a network request
- *
- * @return {object|undefined} Returns either the response, or throws an error
- */
-function checkStatus(response: any): ?any {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
+export const makeGetRequest = (endpoint: string, data?: Object): Promise<*> => {
+  if (data !== 'undefined') {
+    return request
+      .get(`${baseUrl}${endpoint}`)
+      .query(data)
+      .set('Accept', 'application/json');
   }
 
-  const error = new Error(response.statusText);
-  // $FlowFixMe
-  error.response = response;
-  throw error;
-}
+  return request.get(`${baseUrl}${endpoint}`).set('Accept', 'application/json');
+};
 
-/**
- * Requests a URL, returning a promise
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- *
- * @return {object}           The response data
- */
-export default function request(url: string, options?: Object): Promise<any> {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON);
-}
+export const makePostRequest = (endpoint: string, data: Object): Promise<*> =>
+  request
+    .post(`${baseUrl}${endpoint}`)
+    .send(data)
+    .set('Accept', 'application/json');
