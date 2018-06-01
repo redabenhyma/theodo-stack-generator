@@ -7,7 +7,7 @@ import { USER_FETCH_REQUEST } from './constant';
 
 // worker Saga: will be fired on USER_FETCH_REQUEST actions
 export function* fetchUser(action: FetchUserRequestAction): Saga<*> {
-  const endpoint = `users/${action.payload.username}`;
+  const endpoint = `/users/${action.payload.username}`;
   try {
     const response = yield call(makeGetRequest, endpoint);
     yield put(fetchUserSuccess(response.body));

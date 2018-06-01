@@ -12,7 +12,7 @@ describe('[Saga] Avatar redux', () => {
       const gen = fetchUser(action);
 
       it('should call the github api', () => {
-        const endpoint = 'users/juste_leblanc';
+        const endpoint = '/users/juste_leblanc';
         expect(gen.next().value).toEqual(call(makeGetRequest, endpoint));
       });
 
@@ -28,7 +28,7 @@ describe('[Saga] Avatar redux', () => {
       const gen = fetchUser(action);
 
       it('should call the error action', () => {
-        const endpoint = 'users/juste_leblanc';
+        const endpoint = '/users/juste_leblanc';
         expect(gen.next().value).toEqual(call(makeGetRequest, endpoint));
         expect(gen.throw({ message: 'error' }).value).toEqual(
           put(fetchUserError({ message: 'error' })),
