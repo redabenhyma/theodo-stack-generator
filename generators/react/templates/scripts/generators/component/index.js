@@ -1,4 +1,12 @@
-const { componentExists } = require('../utils/component-exists');
+const {
+  componentAlreadyExists,
+  componentsFolderExists,
+  pagesFolderExists,
+} = require('../utils/component-exists');
+
+const choices = [];
+if (componentsFolderExists()) choices.push('Component');
+if (pagesFolderExists()) choices.push('Page');
 
 module.exports = {
   description: 'Add a component',
@@ -8,7 +16,7 @@ module.exports = {
       name: 'componentType',
       message: 'Do you want a page or a component?',
       default: 'Component',
-      choices: () => ['Component', 'Page'],
+      choices: () => choices,
     },
     {
       type: 'input',
@@ -17,7 +25,7 @@ module.exports = {
       default: 'Form',
       validate: value => {
         if (/.+/.test(value)) {
-          return componentExists(value)
+          return componentAlreadyExists(value)
             ? 'A component or page with this name already exists'
             : true;
         }
@@ -101,18 +109,16 @@ module.exports = {
         path: `../../src/${componentType}/{{properCase name}}/index.js`,
         templateFile: './component/index.js.hbs',
         abortOnFail: true,
-      }
+      },
     ];
 
     if (data.wantConnect) {
-      actions.push(
-        {
+      actions.push({
           type: 'add',
           path: `../../src/${componentType}/{{properCase name}}/{{properCase name}}.wrap.js`,
           templateFile: './component/wrap.js.hbs',
           abortOnFail: true,
-        },
-      );
+      });
     }
 
     if (data.wantSnapshotTests) {
