@@ -145,6 +145,7 @@ class StackGenerator extends Generator {
         'devops-symfony/provisioning/vars/main.yml',
         'devops-symfony/provisioning/vars/ubuntu-xdebug.yml',
         'devops-symfony/provisioning/playbook.yml',
+        'Makefile',
       ].map(file => {
         return this.fs.copyTpl(
           this.templatePath(file),
