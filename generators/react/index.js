@@ -88,16 +88,8 @@ class StackGenerator extends Generator {
   }
 
   _addCircleCiConfig() {
-    if (!this.options['server-required']) {
-      this.log('Copying circleci config');
-      [{ src: '.circleci', dest: '.circleci' }].forEach(file =>
-        this.fs.copyTpl(
-          this.templatePath(file.src),
-          this.destinationPath(file.dest),
-          { appName: this.options.appName },
-        ),
-      );
-    }
+    const client = require.resolve('../react-ci');
+    this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
 
     return Promise.resolve();
   }
