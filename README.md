@@ -101,6 +101,7 @@ git pull
 ```
 
 ## Contributing to the generator
+*Administrators: thibautc@theodo.fr, benjaming@theodo.fr, nicolasb@theodo.fr, georgesb@theodo.fr*
 
 This generator can be improved in many ways, PR are welcome! [here](https://github.com/theodo/theodo-stack-generator) !
 
@@ -110,3 +111,4 @@ This generator can be improved in many ways, PR are welcome! [here](https://gith
   - Change the code
   - Generate a new project
   - See if your new project works
+- To merge a PR **it must have been approved by one of the administrators**
