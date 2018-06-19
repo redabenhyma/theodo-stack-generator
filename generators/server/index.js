@@ -3,6 +3,42 @@ const Generator = require('yeoman-generator');
 class StackGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
+
+    this.option(
+      'staging-database-password',
+      {
+        description: 'Database password for staging environment',
+        type: String
+      }
+    );
+    this.option(
+      'prod-database-password',
+      {
+        description: 'Database password for production environment',
+        type: String,
+      }
+    );
+    this.option(
+      'repository-url',
+      {
+        description: 'GIT repository URL',
+        type: String,
+      }
+    );
+    this.option(
+      'staging-ip-address',
+      {
+        description: 'IP address for production environment',
+        type: String,
+      }
+    );
+    this.option(
+      'prod-ip-address',
+      {
+        description: 'IP address for production environment',
+        type: String,
+      }
+    );
   }
 
   prompting() {
@@ -12,33 +48,48 @@ class StackGenerator extends Generator {
     const serverQuestions = [
       {
         type    : 'input',
-        name    : 'stagingDatabasePassword',
+        name    : 'staging-database-password',
         message : '[Provisioning] Staging database password',
         default : this.appname,
+        when: (answers) => {
+          return this.options['staging-database-password'] == undefined;
+        }
       },
       {
         type    : 'input',
-        name    : 'prodDatabasePassword',
+        name    : 'prod-database-password',
         message : '[Provisioning] Production database password',
         default : this.appname,
+        when: (answers) => {
+          return this.options['prod-database-password'] == undefined;
+        }
       },
       {
         type    : 'input',
-        name    : 'repositoryUrl',
+        name    : 'repository-url',
         message : '[Deployment] Your git repository URL',
         default : '',
+        when: (answers) => {
+          return this.options['repository-url'] == undefined;
+        }
       },
       {
         type    : 'input',
-        name    : 'stagingIpAddress',
+        name    : 'staging-ip-address',
         message : '[Provisioning/Deployment] Staging IP address',
         default : '',
+        when: (answers) => {
+          return this.options['staging-ip-address'] == undefined;
+        }
       },
       {
         type    : 'input',
-        name    : 'prodIpAddress',
+        name    : 'prod-ip-address',
         message : '[Provisioning/Deployment](Optionnal) Your production IP address',
         default : '',
+        when: (answers) => {
+          return this.options['prod-ip-address'] == undefined;
+        }
       }
     ];
 
@@ -46,8 +97,15 @@ class StackGenerator extends Generator {
 
     return this.prompt(serverQuestions)
     .then(serverAnswers => {
-      this.answers = Object.assign(this.answers, serverAnswers);
-      this.answers.databaseHost = 'localhost';
+      this.provisioningVars = {
+        appName: this.appName,
+        repositoryUrl: serverAnswers['repository-url'] || this.options['repository-url'],
+        databaseHost: 'localhost',
+        stagingIpAddress: serverAnswers['staging-ip-address'] || this.options['staging-ip-address'],
+        prodIpAddress: serverAnswers['prod-ip-address'] || this.options['prod-ip-address'],
+        prodDatabasePassword: serverAnswers['prod-database-password'] || this.options['prod-database-password'],
+        stagingDatabasePassword: serverAnswers['staging-database-password'] || this.options['staging-database-password']
+      };
     })
   }
 
@@ -65,7 +123,7 @@ class StackGenerator extends Generator {
      return this.fs.copyTpl(
        this.templatePath(file),
        this.destinationPath(file.replace(/-symfony|-react-redux|-no-client|-vagrant/, '')),
-       this.answers
+       this.provisioningVars
      );
    }));
   }
@@ -82,7 +140,7 @@ class StackGenerator extends Generator {
      return this.fs.copyTpl(
        this.templatePath(file),
        this.destinationPath(file.replace(/-symfony/, '')),
-       this.answers
+       this.provisioningVars
      );
    }));
   }
@@ -95,7 +153,7 @@ class StackGenerator extends Generator {
     this.fs.copy(
       this.templatePath('devops-symfony/provisioning/roles'),
       this.destinationPath('devops/provisioning/roles'),
-      this.answers
+      this.provisioningVars
     );
 
     return Promise.all([
@@ -119,7 +177,7 @@ class StackGenerator extends Generator {
      return this.fs.copyTpl(
        this.templatePath(file),
        this.destinationPath(file.replace(/-symfony/, '')),
-       this.answers
+       this.provisioningVars
      );
    }));
   }
