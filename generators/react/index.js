@@ -88,10 +88,12 @@ class StackGenerator extends Generator {
   }
 
   _addCircleCiConfig() {
-    const client = require.resolve('../react-ci');
-    this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
+    if (!this.options['server-required']) {
+      const client = require.resolve('../react-ci');
+      this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
 
-    return Promise.resolve();
+      return Promise.resolve();
+    }
   }
 
   _updatePackageJson() {
