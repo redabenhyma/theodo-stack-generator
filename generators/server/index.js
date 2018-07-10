@@ -98,7 +98,7 @@ class StackGenerator extends Generator {
     return this.prompt(serverQuestions)
     .then(serverAnswers => {
       this.provisioningVars = {
-        appName: this.appName,
+        appName: this.appname,
         repositoryUrl: serverAnswers['repository-url'] || this.options['repository-url'],
         databaseHost: 'localhost',
         stagingIpAddress: serverAnswers['staging-ip-address'] || this.options['staging-ip-address'],

@@ -5,8 +5,6 @@ class StackGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
 
-    this.argument('appname', { type: String, required: true });
-
     this.option(
       'server-required',
       {
@@ -24,6 +22,8 @@ class StackGenerator extends Generator {
         type: Boolean
       }
     );
+
+    this.options.appname = this.appname;
   }
 
   prompting() {
@@ -79,6 +79,7 @@ class StackGenerator extends Generator {
     if (!this.options['server-required']) {
       return;
     }
+
     const server = require.resolve('../server');
     this.composeWith(server, this.options);
   }
