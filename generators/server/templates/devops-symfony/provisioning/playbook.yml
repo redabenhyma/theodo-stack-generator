@@ -19,9 +19,9 @@
     - create-www-data-user
     - ubuntu-php
     - composer
-    - ubuntu-symfony-nginx
     - nginx
     - ubuntu-postgresql
+    - certbot
     - any-nodejs
     - fubarhouse.yarn
 

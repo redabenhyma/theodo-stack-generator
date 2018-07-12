@@ -14,8 +14,8 @@ server {
 
     # Configure the Certificate and Key you got from your CA (e.g. Lets Encrypt)
     ssl on;
-    ssl_certificate /etc/nginx/fake-data/cert.crt;
-    ssl_certificate_key /etc/nginx/fake-data/key.key;
+    ssl_certificate {{ letsencrypt_dir }}{{ letsencrypt_cert_filename }};
+    ssl_certificate_key {{ letsencrypt_dir }}{{ letsencrypt_privkey_filename }};
 
     # Only use TLS v1.2 as Transport Security Protocol
     ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
@@ -27,11 +27,8 @@ server {
     # Always use server-side offered ciphersuites
     ssl_prefer_server_ciphers on;
 
-    # Basic security headers
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains"; # (15768000 seconds = 6 months)
-    add_header X-Frame-Options "DENY";
-    add_header X-Content-Type-Options "nosniff";
-    add_header X-XSS-Protection "1; mode=block";
+    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
+    add_header Strict-Transport-Security max-age=15768000;
 
     # Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits
     # Uncomment if you want to use your own Diffie-Hellman parameter, which can be generated with: openssl ecparam -genkey -out dhparam.pem -name prime256v1
@@ -55,32 +52,37 @@ server {
     error_log /var/log/nginx/{{ project_name }}.error.log;
     access_log /var/log/nginx/{{ project_name }}.access.log;
 
+    # index build/index.html
     gzip            on;
     gzip_min_length 1000;
     gzip_comp_level 9;
     gzip_proxied    any;
     gzip_types      application/javascript application/x-javascript application/json text/css;
 
+    location /api {
+        # try to serve file directly, fallback to index.php
+        try_files $uri /index.php$is_args$args;
+    }
+
     location / {
         try_files $uri /build/index.html;
     }
 
-    location ~ ^/index.php {
-        proxy_hide_header X-Powered-By; # Hide PHP header
-        fastcgi_pass unix:/var/run/php/php-fpm.sock;
-        fastcgi_param  SCRIPT_FILENAME  $realpath_root$fastcgi_script_name;
-        fastcgi_param DOCUMENT_ROOT $realpath_root;
-        fastcgi_buffer_size       128k;
-        fastcgi_buffers           4 256k;
-        fastcgi_busy_buffers_size 256k;
-        # To determinate if the request is HTTP or HTTPS
-        fastcgi_param HTTPS $https if_not_empty;
-        include fastcgi_params;
-        internal;
+    location @rewrite {
+        rewrite ^/?(.*)$ /index.php/$1 last;
     }
 
-    location ~ \.php$ {
-        return 404;
+    location ~ ^/index.php {
+      fastcgi_index $1.php;
+      fastcgi_pass unix:/var/run/php/php-fpm.sock;
+      fastcgi_param  SCRIPT_FILENAME  $realpath_root$fastcgi_script_name;
+      fastcgi_param DOCUMENT_ROOT $realpath_root;
+      fastcgi_buffer_size       128k;
+      fastcgi_buffers           4 256k;
+      fastcgi_busy_buffers_size 256k;
+      # To determinate if the request is HTTP or HTTPS
+      fastcgi_param HTTPS $https if_not_empty;
+      include fastcgi_params;
     }
 
     location ~ ^/static/(.*) {

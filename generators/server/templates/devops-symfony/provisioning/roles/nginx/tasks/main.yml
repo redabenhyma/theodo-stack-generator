@@ -1,24 +1,27 @@
 ---
-- name: Install the package "apache2-utils"
-  apt:
-    name: apache2-utils
-    state: present
 
-- name: Create directory for fake certificate
-  file:
-    path: /etc/nginx/fake-data
-    state: directory
-    mode: 0644
+- name: Install Nginx
+  apt: name=nginx update_cache={{ update_apt_cache }} state=present
 
-- name: Create fake certificate and key
-  command: openssl req -new -x509 -nodes -subj '/C=AU/ST=Some-State/L=""/O="Internet Widgits Pty Ltd"' -out /etc/nginx/fake-data/cert.crt -keyout /etc/nginx/fake-data/key.key
-  args:
-    creates: /etc/nginx/fake-data/cert.crt
+- name: Remove default site conf
+  file: path=/etc/nginx/sites-available/default state=absent
+  notify: reload nginx
 
-- name: Create enhanced Diffie-Hellman parameters
-  command: openssl dhparam -out /etc/nginx/dhparams.pem 2048
-  args:
-    creates: /etc/nginx/dhparams.pem
+- name: Create the Nginx configuration file - Local
+  template: src=nginx.conf.j2
+            dest=/etc/nginx/site-avalaible/{{ project_name }}.conf
+            backup=yes
+  notify: reload nginx
 
-- name: restart nginx
-  service: name=nginx state=restarted
+- name: Ensure that the default site is disabled
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify: reload nginx
+
+- name: Ensure that the application site is enabled
+  file: src=/etc/nginx/site-avalaible/{{ project_name }}.conf
+        dest=/etc/nginx/sites-enabled/{{ project_name }}.conf
+        state=link
+  notify: reload nginx
+
+- name: Ensure Nginx service is started
+  service: name=nginx state=started enabled=yes
