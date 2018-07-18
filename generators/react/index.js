@@ -161,7 +161,6 @@ class StackGenerator extends Generator {
         'source-map-explorer': '^1.5.0',
         'styled-components': '3.1.6',
         superagent: '^3.8.3',
-        'whatwg-fetch': '^2.0.3',
       },
       devDependencies: {
         'babel-eslint': '^8.2.1',
