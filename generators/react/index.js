@@ -112,9 +112,7 @@ class StackGenerator extends Generator {
   _addCircleCiConfig() {
     if (!this.options['server-required']) {
       this.log('Copying circleci config');
-      [
-        { src: '.circleci', dest: '.circleci' },
-      ].forEach(file =>
+      [{ src: '.circleci', dest: '.circleci' }].forEach(file =>
         this.fs.copyTpl(
           this.templatePath(file.src),
           this.destinationPath(file.dest),
@@ -135,7 +133,7 @@ class StackGenerator extends Generator {
         eject: 'react-scripts eject',
         analyze: 'source-map-explorer build/static/js/main.*',
         flow: 'flow',
-        "flow:coverage": "flow-coverage-report --config=.flowcoverageconfig",
+        'flow:coverage': 'flow-coverage-report --config=.flowcoverageconfig',
         generate: 'plop --plopfile scripts/generators/index.js',
         lint: 'eslint --ext .jsx,.js -c .eslintrc src',
         'lint:fix': 'eslint --fix --ext .jsx,.js -c .eslintrc src',
@@ -178,7 +176,7 @@ class StackGenerator extends Generator {
         'redux-saga': '^0.16.0',
         'source-map-explorer': '^1.5.0',
         'styled-components': '3.1.6',
-        'whatwg-fetch': '^2.0.3',
+        superagent: '^3.8.3',
       },
       devDependencies: {
         'babel-eslint': '^8.2.1',

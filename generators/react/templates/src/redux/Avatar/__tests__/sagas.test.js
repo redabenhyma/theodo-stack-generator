@@ -1,6 +1,6 @@
 // @flow
 import { call, put, takeEvery } from 'redux-saga/effects';
-import request from 'services/networking/request';
+import { makeGetRequest } from 'services/networking/request';
 import fetchUserSaga, { fetchUser } from '../sagas';
 import { fetchUserRequest, fetchUserSuccess, fetchUserError } from '../actions';
 import { USER_FETCH_REQUEST } from '../constant';
@@ -12,13 +12,14 @@ describe('[Saga] Avatar redux', () => {
       const gen = fetchUser(action);
 
       it('should call the github api', () => {
-        const url = 'https://api.github.com/users/juste_leblanc';
-        expect(gen.next().value).toEqual(call(request, url));
+        const endpoint = '/users/juste_leblanc';
+        expect(gen.next().value).toEqual(call(makeGetRequest, endpoint));
       });
 
       it('should call the success action when request is a success', () => {
-        const outputMock = {};
-        expect(gen.next(outputMock).value).toEqual(put(fetchUserSuccess(outputMock)));
+        const githubUser = { avatar_url: 'https://google.com' };
+        const outputMock = { body: githubUser };
+        expect(gen.next(outputMock).value).toEqual(put(fetchUserSuccess(githubUser)));
       });
     });
 
@@ -27,8 +28,8 @@ describe('[Saga] Avatar redux', () => {
       const gen = fetchUser(action);
 
       it('should call the error action', () => {
-        const url = 'https://api.github.com/users/juste_leblanc';
-        expect(gen.next().value).toEqual(call(request, url));
+        const endpoint = '/users/juste_leblanc';
+        expect(gen.next().value).toEqual(call(makeGetRequest, endpoint));
         expect(gen.throw({ message: 'error' }).value).toEqual(
           put(fetchUserError({ message: 'error' })),
         );
