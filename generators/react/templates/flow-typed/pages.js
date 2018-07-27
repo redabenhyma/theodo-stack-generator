@@ -1,7 +1,6 @@
 // @flow
 /* eslint-disable no-undef, flowtype/delimiter-dangle */
 
-<% if (exampleRequired) { %>
 declare type User = {
   avatar_url?: string,
 };
@@ -31,5 +30,3 @@ declare type UserAction =
   | FetchUserRequestAction
   | FetchUserSuccessAction
   | FetchUserErrorAction;
-<% } %>
-

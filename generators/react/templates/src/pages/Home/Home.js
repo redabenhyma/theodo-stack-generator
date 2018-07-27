@@ -1,31 +1,24 @@
 //@flow
 import * as React from 'react';
-<% if (exampleRequired) { %>import { Link } from 'react-router-dom';<% } %>
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import type { RouterHistory } from 'react-router-dom';
 
 import StyledIntro from './Home.style';
 
-<% if (exampleRequired) { %>
-  const navigateTo = (history: RouterHistory): (() => void) => (): void => {
-    history.push('/avatar');
-  };
-<% } %>
-
-type Props = {
-<% if (exampleRequired) { %>
-  history: RouterHistory,
-<% } %>
+const navigateTo = (history: RouterHistory): (() => void) => (): void => {
+  history.push('/avatar');
 };
 
-const Home = (<% if (exampleRequired) { %>{ history }: Props<% } %>) => (
+type Props = {
+  history: RouterHistory,
+};
+
+const Home = ({ history }: Props) => (
   <React.Fragment>
     <StyledIntro>
       <p>
-        <FormattedMessage
-          id="home.get-started"
-          defaultMessage="To get started, edit"
-        />
+        <FormattedMessage id="home.get-started" defaultMessage="To get started, edit" />
         <code className="intro-code">src/App.js</code>
         <FormattedMessage id="home.save-to-reload" />
       </p>
@@ -42,14 +35,12 @@ const Home = (<% if (exampleRequired) { %>{ history }: Props<% } %>) => (
       <p>
         <FormattedMessage id="home.readme" />
       </p>
-      <% if (exampleRequired) { %>
-          <button onClick={navigateTo(history)}>
-          <FormattedMessage id="home.click-me" />
-        </button>
-        <Link to="/avatar" href="/avatar">
-          <FormattedMessage id="home.use-a-link" />
-        </Link>
-    <% } %>
+      <button onClick={navigateTo(history)}>
+        <FormattedMessage id="home.click-me" />
+      </button>
+      <Link to="/avatar" href="/avatar">
+        <FormattedMessage id="home.use-a-link" />
+      </Link>
     </StyledIntro>
   </React.Fragment>
 );

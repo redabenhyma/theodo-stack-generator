@@ -5,35 +5,14 @@ class StackGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
 
-    this.option(
-      'add-example',
-      {
-        description: 'Add a cool page example which demonstrates the best practices?',
-        type: Boolean
-      },
-    );
-
-    this.option(
-      'empty-folder',
-      {
-        description: 'Empty the client folder',
-        type: Boolean
-      }
-    );
+    this.option('empty-folder', {
+      description: 'Empty the client folder',
+      type: Boolean,
+    });
   }
 
   prompting() {
     const prompt = [
-      {
-        type: 'confirm',
-        name: 'add-example',
-        message:
-          'Do you want a cool page example which demonstrates the best practices?',
-        default: true,
-        when: (answers) => {
-          return this.options['add-example'] === undefined;
-        }
-      },
       // When server is required, the react app is always in a 'client' folder
       {
         type: 'confirm',
@@ -41,16 +20,22 @@ class StackGenerator extends Generator {
         message:
           'The current folder must be empty, even of hidden files, do you confirm?',
         default: true,
-        when: (answers) => {
-          return !this.options['server-required'] && this.options['empty-folder'] == undefined;
-        }
-      }
+        when: answers => {
+          return (
+            !this.options['server-required'] &&
+            this.options['empty-folder'] == undefined
+          );
+        },
+      },
     ];
 
     return this.prompt(prompt).then(answers => {
       this.answers = Object.assign({}, answers, this.options);
 
-      if (this.options['server-required'] === false && this.answers['empty-folder'] === false) {
+      if (
+        this.options['server-required'] === false &&
+        this.answers['empty-folder'] === false
+      ) {
         this.env.error(
           'The current folder must be empty to clone create-react-app',
         );
@@ -96,15 +81,8 @@ class StackGenerator extends Generator {
       this.fs.copyTpl(
         this.templatePath(file.src),
         this.destinationPath(file.dest),
-        { 'exampleRequired': this.answers['add-example'] },
       ),
     );
-
-    if (!this.answers['add-example']) {
-      // delete example page
-      this.fs.delete('src/pages/Avatar');
-      this.fs.delete('src/redux/Avatar');
-    }
 
     return Promise.resolve();
   }
