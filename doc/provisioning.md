@@ -5,7 +5,8 @@
 To provision a remote machine, you need ssh access to the server as root.
 
 - Provision the remote staging server :
-```
+
+```bash
 ansible-playbook -i devops/provisioning/hosts/staging devops/provisioning/playbook.yml
 ```
 

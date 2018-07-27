@@ -15,16 +15,20 @@
 ## Install the server
 
 - **Connect to the vagrant as www-data**:
-  ```bash
-  vagrant ssh
-  sudo su - www-data
-  ```
+
+```bash
+vagrant ssh
+sudo su - www-data
+```
+
 - Update your .env
-  ```bash
-  TRUSTED_PROXIES=10.0.0.0/8
-  TRUSTED_HOSTS=<%= appName %>.local, localhost, api
+
+```bash
+TRUSTED_PROXIES=10.0.0.0/8
+TRUSTED_HOSTS={myAppName}.local, localhost, api
   ```
-- Go to your app folder: `cd /var/www/<%= appName %>/current`
+
+- Go to your app folder: `cd /var/www/{myAppName}/current`
 - Create your Symfony application `composer create-project symfony/skeleton api`
 - Add API Platform if you need it `cd api && composer req api`
 - Install and configure the php code sniffer with SymfonyCustom coding standard `composer require --dev vincentlanglet/symfony3-custom-coding-standard && vendor/bin/phpcs --config-set installed_paths ../../vincentlanglet/symfony3-custom-coding-standard`
@@ -39,11 +43,11 @@
 
   - Connect to the vagrant: `vagrant ssh`
 
-  - Build the frontend code: `cd /var/www/<%= appName %>/current/client && source .env && yarn build`
+  - Build the frontend code: `cd /var/www/{myAppName}/current/client && source .env && yarn build`
 
-  - Symlink the frontend code in the web directory: `cd /var/www/<%= appName %>/current/api/public && ln -s ../../client/build/ build`
+  - Symlink the frontend code in the web directory: `cd /var/www/{myAppName}/current/api/public && ln -s ../../client/build/ build`
 
-  - Browse your static frontend: https://10.0.0.10
+  - Browse your static frontend: [https://10.0.0.10](https://10.0.0.10)
 
 ## Update your API base path
 
@@ -56,4 +60,4 @@ api:
     prefix:   '/api'  # This line can be added
 ```
 
-Then your API is available at https://10.0.0.10/app_dev.php/api
+Then your API is available at [https://10.0.0.10/app_dev.php/api](https://10.0.0.10/app_dev.php/api)
