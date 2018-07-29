@@ -81,7 +81,7 @@ class StackGenerator extends Generator {
     }
 
     const server = require.resolve('../server');
-    this.composeWith(server, this.options);
+    this.composeWith(server, { ...this.options, arguments: [this.options.appname] });
   }
 
   installClient() {
@@ -90,7 +90,7 @@ class StackGenerator extends Generator {
     }
 
     const client = require.resolve('../react');
-    this.composeWith(client, this.options);
+    this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
   }
 };
 

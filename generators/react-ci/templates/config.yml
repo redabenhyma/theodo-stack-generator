@@ -1,7 +1,7 @@
 version: 2
 jobs:
   install:
-    working_directory: ~/<%= appName %>
+    working_directory: ~/<%= appname %>
     docker:
       - image: circleci/node:8.4.0
     steps:
@@ -17,7 +17,7 @@ jobs:
             - node_modules
 
   test:
-    working_directory: ~/<%= appName %>
+    working_directory: ~/<%= appname %>
     docker:
       - image: circleci/node:8.4.0
     environment:
@@ -33,7 +33,7 @@ jobs:
           path: coverage
 
   build:
-    working_directory: ~/<%= appName %>
+    working_directory: ~/<%= appname %>
     docker:
       - image: circleci/node:8.4.0
     steps:
