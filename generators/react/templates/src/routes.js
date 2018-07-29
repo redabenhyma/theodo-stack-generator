@@ -1,12 +1,12 @@
 // @flow
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Home<% if (exampleRequired) { %>, Avatar<% } %> } from './pages';
+import { Home, Avatar } from './pages';
 
 const routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <% if (exampleRequired) { %><Route path="/avatar" component={Avatar} /><% } %>
+    <Route path="/avatar" component={Avatar} />
   </Switch>
 );
 
