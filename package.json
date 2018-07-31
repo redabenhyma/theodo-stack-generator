@@ -22,8 +22,8 @@
     "yeoman-generator": "^1.0.0"
   },
   "devDependencies": {
-    "commitizen": "^2.10.1",
-    "cz-conventional-changelog": "^2.1.0"
+    "commitizen": "2.10.1",
+    "cz-conventional-changelog": "2.1.0"
   },
   "license": "MIT",
   "config": {
