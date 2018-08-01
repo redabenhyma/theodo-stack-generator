@@ -1,4 +1,4 @@
-# Theodo stack generator
+# Theodo stack generator  ![Current npm package version](https://img.shields.io/npm/v/generator-theodo-stack.svg?style=flat-square)
 
 This generator scripts everything you need to start a React-Redux project with an API Platform (Symfony) server.
 
