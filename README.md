@@ -40,10 +40,6 @@ This generator scripts everything you need to start a React-Redux project with a
 
 ## Prerequisites
 
-You need to install:
-
-- [Yarn](https://yarnpkg.com/en/docs/install)
-
 If you want a server with the provisioning and the deployment scripts:
 
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant (version >= 2)](https://www.vagrantup.com/downloads.html)
