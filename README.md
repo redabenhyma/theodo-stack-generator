@@ -63,7 +63,7 @@ If you want a server with the provisioning and the deployment scripts:
 ```bash
 nvm use 8.4.0
 git clone git@github.com:theodo/theodo-stack-generator.git
-cd theodo-stack-generator && yarn && npm link && cd ../
+cd theodo-stack-generator && npm install && npm link && cd ../
 ```
 
 ## Usage
