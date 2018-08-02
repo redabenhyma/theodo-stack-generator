@@ -13,7 +13,7 @@ class ReactCIGenerator extends Generator {
         this.fs.copyTpl(
             this.templatePath('config.yml'),
             this.destinationPath('.circleci/config.yml'),
-            { appName: this.options.appname },
+            { appname: this.options.appname },
         );
     }
 }
