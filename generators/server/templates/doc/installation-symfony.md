@@ -3,34 +3,27 @@
 ## Create and provision the vagrant
 
 - Launch VM:
+
   - `vagrant up`
   - If you encounter error `ttyname failed: Inappropriate ioctl for devices`:
     - Update vagrant to the latest version from the website
 
-- Add your ssh key in the vagrant:
-  - `vagrant ssh`
-  - `vim .ssh/authorized_keys` and copy-paste your public key.
-
 - Launch the provisionning
   - Install [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html#installation) on your machine if you do not have it already
-  - `ansible-playbook devops/provisioning/playbook.yml -i devops/provisioning/hosts/vagrant`
-  - If the command fails, run:
-    - `ssh-keygen -R 10.0.0.10 && ssh vagrant@10.0.0.10`
-    - exit the vagrant
-  - If it still fails, run `sudo pip install mozdownload`
+  - `ansible-playbook devops/provisioning/playbook.yml -i devops/provisioning/hosts/vagrant --key-file=.vagrant/machines/default/virtualbox/private_key`
 
 ## Install the server
 
 - **Connect to the vagrant as www-data**:
-    ```bash
-    vagrant ssh
-    sudo su - www-data
-    ```
+  ```bash
+  vagrant ssh
+  sudo su - www-data
+  ```
 - Update your .env
-    ```bash
-    TRUSTED_PROXIES=10.0.0.0/8
-    TRUSTED_HOSTS=<%= appName %>.local, localhost, api
-    ```
+  ```bash
+  TRUSTED_PROXIES=10.0.0.0/8
+  TRUSTED_HOSTS=<%= appName %>.local, localhost, api
+  ```
 - Go to your app folder: `cd /var/www/<%= appName %>/current`
 - Create your Symfony application `composer create-project symfony/skeleton api`
 - Add API Platform if you need it `cd api && composer req api`
