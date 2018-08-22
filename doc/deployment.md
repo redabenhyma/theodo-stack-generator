@@ -1,4 +1,4 @@
-## The deployment
+# The deployment
 
 - Create a git repository: `git init`
 
@@ -19,7 +19,6 @@
 - Deploy the code: `cap staging deploy`:
   - The first deployment will create the structure of the project. It will fail because the `parameters.yml` file is not present in the the shared folder, you have to **create it now**.
   - Deploy the code again
-
 
 If deployment fails, it maybe because:
 

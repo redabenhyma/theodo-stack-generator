@@ -96,7 +96,13 @@ git pull
 ```
 
 ## Contributing to the generator
-*Administrators: thibautc@theodo.fr, benjaming@theodo.fr, nicolasb@theodo.fr, georgesb@theodo.fr*
+
+Administrators:
+
+- thibautc@theodo.fr
+- benjaming@theodo.fr
+- nicolasb@theodo.fr,
+- georgesb@theodo.fr
 
 This generator can be improved in many ways, PR are welcome! [here](https://github.com/theodo/theodo-stack-generator) !
 
@@ -107,3 +113,12 @@ This generator can be improved in many ways, PR are welcome! [here](https://gith
   - Generate a new project
   - See if your new project works
 - To merge a PR **it must have been approved by one of the administrators**
+
+## Set-up and develop on your project
+
+- [Installation](doc/installation.md)
+- [Database](doc/database.md)
+- [Development](doc/development.md)
+- [Deployment](doc/deployment.md)
+- [Server installation](doc/provisioning.md)
+- [Tests](doc/tests.md)
