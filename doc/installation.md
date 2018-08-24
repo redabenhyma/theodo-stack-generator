@@ -34,7 +34,7 @@ TRUSTED_HOSTS={myAppName}.local, localhost, api
 - Install and configure the php code sniffer with SymfonyCustom coding standard `composer require --dev vincentlanglet/symfony3-custom-coding-standard && vendor/bin/phpcs --config-set installed_paths ../../vincentlanglet/symfony3-custom-coding-standard`
 - Create the database `bin/console doctrine:database:create`
 - Create the database schema `bin/console doctrine:schema:create`
-- Browse your API: `http://10.0.0.10/app_dev.php/api`
+- Browse your API: `http://10.0.0.10/index.php/api`
 - That's it! You can now [create your first entity](https://api-platform.com/docs/distribution#bringing-your-own-model).
 
 ## Build your frontend code
@@ -60,4 +60,4 @@ api:
     prefix:   '/api'  # This line can be added
 ```
 
-Then your API is available at [https://10.0.0.10/app_dev.php/api](https://10.0.0.10/app_dev.php/api)
+Then your API is available at [https://10.0.0.10/index.php/api](https://10.0.0.10/app_dev.php/api)
