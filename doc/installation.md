@@ -43,7 +43,7 @@ TRUSTED_HOSTS='{myAppName}.local, localhost, api'
 
   - Connect to the vagrant: `vagrant ssh`
 
-  - Build the frontend code: `cd /var/www/{myAppName}/current/client && source .env && yarn build`
+  - Build the frontend code: `cd /var/www/{myAppName}/current/client && source .env && npm run build`
 
   - Symlink the frontend code in the web directory: `cd /var/www/{myAppName}/current/api/public && ln -s ../../client/build/ build`
 
