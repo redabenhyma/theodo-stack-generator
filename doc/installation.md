@@ -21,15 +21,15 @@ vagrant ssh
 sudo su - www-data
 ```
 
+- Go to your app folder: `cd /var/www/{myAppName}/current`
+- Create your Symfony application `composer create-project symfony/skeleton api`
 - Update your .env
 
 ```bash
 TRUSTED_PROXIES=10.0.0.0/8
-TRUSTED_HOSTS={myAppName}.local, localhost, api
+TRUSTED_HOSTS='{myAppName}.local, localhost, api'
   ```
 
-- Go to your app folder: `cd /var/www/{myAppName}/current`
-- Create your Symfony application `composer create-project symfony/skeleton api`
 - Add API Platform if you need it `cd api && composer req api`
 - Install and configure the php code sniffer with SymfonyCustom coding standard `composer require --dev vincentlanglet/symfony3-custom-coding-standard && vendor/bin/phpcs --config-set installed_paths ../../vincentlanglet/symfony3-custom-coding-standard`
 - Create the database `bin/console doctrine:database:create`
