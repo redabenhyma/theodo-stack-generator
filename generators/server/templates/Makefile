@@ -2,8 +2,8 @@
 help:
 	@echo 'TODO Write Me'
 
-.PHONY: install
-install: check_deps install_client install_admin generate_jwt install_api run_fixtures setup_hosts
+.PHONY: setup
+setup: check_deps install_client install_admin generate_jwt install_api run_fixtures setup_hosts
 
 .PHONY: check_deps
 # Checks that the required dependencies are installed
@@ -30,11 +30,12 @@ install_client: provision_vagrant check_deps
 install_api: check_deps
 	@vagrant ssh -c 'composer create-project symfony/skeleton api'
 	@vagrant ssh -c 'composer req api'
+	@vagrant ssh -c 'echo TRUSTED_PROXIES=10.0.0.0/8 >> /var/www/<%= appName %>/current/api/.env'
+	@vagrant ssh -c "echo TRUSTED_HOSTS='<%= appName %>.local,localhost,api' >> /var/www/<%= appName %>/current/api/.env"
 	@vagrant ssh -c 'sudo -u www-data -- sh -c "cd /var/www/<%= appName %>/current/api && php composer install"'
 	@vagrant ssh -c "sed -i.bak s/^DATABASE_NAME=.*\$\// /var/www/<%= appName %>/current/api/.env"
 	@vagrant ssh -c 'sudo -u www-data -- sh -c "cd /var/www/<%= appName %>/current/api && bin/console doctrine:database:create"'
 	@vagrant ssh -c 'sudo -u www-data -- sh -c "cd /var/www/<%= appName %>/current/api && bin/console doctrine:schema:create"'
-	@vagrant ssh -c 'sudo -u www-data -- sh -c "cd /var/www/<%= appName %>/current/api && bin/console doctrine:migrations:migrate"'
 
 .PHONY: setup_hosts
 setup_hosts:
