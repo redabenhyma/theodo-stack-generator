@@ -47,7 +47,6 @@ class ReactGenerator extends Generator {
     const packageJson = {
       scripts: {
         analyze: 'source-map-explorer build/static/js/main.*',
-        generate: 'plop --plopfile scripts/generators/index.js',
         lint: 'eslint --ext .jsx,.js -c .eslintrc src',
         'lint:fix': 'eslint --fix --ext .jsx,.js -c .eslintrc src',
         nsp: 'nsp check',
@@ -60,7 +59,6 @@ class ReactGenerator extends Generator {
 
   _addPackages() {
     this.npmInstall([
-      'plop',
       'react-intl',
       'react-redux',
       'react-router-dom',
@@ -101,7 +99,6 @@ class ReactGenerator extends Generator {
     this.log('Copying new files for create-react-app');
     [
       { src: 'src', dest: 'src' },
-      { src: 'flow-typed', dest: 'flow-typed' },
       { src: 'scripts', dest: 'scripts' },
       { src: 'public/*', dest: 'public' },
       { src: '.*', dest: '' },
@@ -141,13 +138,16 @@ class ReactGenerator extends Generator {
     if (!this.options['server-required']) {
       const client = require.resolve('../react-ci');
       this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
-
-      return Promise.resolve();
     }
   }
 
   _addFlow() {
     const client = require.resolve('../react-flow');
+    this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
+  }
+
+  _addPlop() {
+    const client = require.resolve('../react-plop');
     this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
   }
 
@@ -161,6 +161,7 @@ class ReactGenerator extends Generator {
     this._addDevPackages();
     this._updatePackageJSon();
     this._addFlow();
+    this._addPlop();
     this._addTemplates();
     this._addCircleCiConfig();
   }
