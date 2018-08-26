@@ -113,7 +113,6 @@ class ReactGenerator extends Generator {
       ),
     );
 
-    return Promise.resolve();
   }
 
   _addReactBoilerplate() {
@@ -126,7 +125,6 @@ class ReactGenerator extends Generator {
 
     this.log('Removing create-react-app generator boilerplate');
     [
-      'package.json',
       'src/App.js',
       'README.md',
       'src/App.css',
@@ -136,9 +134,7 @@ class ReactGenerator extends Generator {
       'public/index.html',
       'public/reset.css',
       'src/index.js',
-    ].forEach(file => this.spawnCommandSync('rm', [file]));
-
-    return Promise.resolve();
+    ].forEach(file => this.fs.delete(file));
   }
 
   _addCircleCiConfig() {
