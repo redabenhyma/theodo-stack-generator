@@ -44,8 +44,66 @@ class ReactGenerator extends Generator {
     });
   }
 
-  _updatePackageJSon() {
-    const packageJson = {
+  _addReactBoilerplate() {
+    this.conflicter.force = true;
+    this.log('Installing create-react-app 1.5.1');
+    this.spawnCommandSync('npm', ['install', '-g', 'create-react-app@1.4.3']);
+
+    this.log('Starting create-react-app generator');
+    this.spawnCommandSync('create-react-app', ['.']);
+
+    this.log('Removing create-react-app generator boilerplate');
+    [
+      'package.json',
+      'src/App.js',
+      'README.md',
+      'src/App.css',
+      'src/logo.svg',
+      'src/App.test.js',
+      'public/favicon.ico',
+      'public/index.html',
+      'public/reset.css',
+      'src/index.js',
+    ].forEach(file => this.spawnCommandSync('rm', [file]));
+
+    return Promise.resolve();
+  }
+
+  _addTemplates() {
+    this.log('Copying new files for create-react-app');
+    [
+      { src: 'src', dest: 'src' },
+      { src: 'flow-typed', dest: 'flow-typed' },
+      { src: 'scripts', dest: 'scripts' },
+      { src: 'public/*', dest: 'public' },
+      { src: '.*', dest: '' },
+      { src: '*.md', dest: '' },
+    ].forEach(file =>
+      this.fs.copyTpl(
+        this.templatePath(file.src),
+        this.destinationPath(file.dest),
+      ),
+    );
+
+    return Promise.resolve();
+  }
+
+  _addExamples() {
+    const client = require.resolve('../react-examples');
+    this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
+  }
+
+  _addCircleCiConfig() {
+    if (!this.options['server-required']) {
+      const client = require.resolve('../react-ci');
+      this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
+
+      return Promise.resolve();
+    }
+  }
+
+  _updatePackageJson() {
+    const packageContent = {
       scripts: {
         build: 'env-cmd .env.${REACT_APP_ENV} react-scripts build',
         analyze: 'source-map-explorer build/static/js/main.*',
@@ -190,6 +248,7 @@ class ReactGenerator extends Generator {
       this.destinationRoot('client');
     }
 
+<<<<<<< HEAD
     this._addReactBoilerplate();
     this._addPackages();
     this._addDevPackages();
@@ -199,6 +258,13 @@ class ReactGenerator extends Generator {
     this._addLint();
     this._addTemplates();
     this._addCircleCiConfig();
+=======
+    return this._addReactBoilerplate()
+      .then(() => this._addTemplates())
+      .then(() => this._addExamples())
+      .then(() => this._updatePackageJson())
+      .then(() => this._addCircleCiConfig());
+>>>>>>> feat(react-examples): Add examples in the routing configuration
   }
 
   end() {
