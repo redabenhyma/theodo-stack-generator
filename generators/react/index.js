@@ -1,5 +1,6 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
+const fs = require('fs');
 
 class ReactGenerator extends Generator {
   constructor(args, opts) {
@@ -49,7 +50,30 @@ class ReactGenerator extends Generator {
         analyze: 'source-map-explorer build/static/js/main.*',
         nsp: 'nsp check',
         'test:coverage': 'npm run test -- --coverage',
-      }
+      },
+      jest: {
+        collectCoverageFrom: [
+          'src/** /*.js',
+          '!src/** /*.test.js',
+          '!src/** /index.js',
+          '!src/** /registerServiceWorker.js',
+          '!src/** /*.container.js',
+          '!src/index.js',
+          '!src/tempPolyfills.js',
+          '!src/setupTests.js',
+          '!src/redux/reducers.js',
+          '!src/redux/sagas.js',
+          '!src/redux/store.js',
+        ],
+        coverageThreshold: {
+          global: {
+            statements: 100,
+            branches: 100,
+            functions: 100,
+            lines: 100,
+          },
+        },
+      },
     };
 
     this.fs.extendJSON('package.json', packageJson, null, 2);
@@ -99,13 +123,24 @@ class ReactGenerator extends Generator {
 
   _addReactBoilerplate() {
     this.conflicter.force = true;
-    this.log('Installing create-react-app');
+    this.log(chalk.black.bgGreen('Installing create-react-app'));
     this.spawnCommandSync('npm', ['install', '-g', 'create-react-app']);
 
-    this.log('Starting create-react-app generator');
+    this.log(chalk.black.bgGreen('Starting create-react-app generator'));
     this.spawnCommandSync('create-react-app', ['.']);
 
-    this.log('Removing create-react-app generator boilerplate');
+    /**
+     * When the generator starts it tries to guess the value of appname from
+     * the package.json file. This registers the file and its
+     * content in mem-fs, the virtual filesystem used by Yeoman.
+     * At this stage the package.json file does not exist yet as it is created
+     * by create-react-app. Thus we need to read the file created by CRA and
+     * update the virtual filesystem.
+     */
+    const packageJson = JSON.parse(fs.readFileSync(this.destinationPath('package.json')));
+    this.fs.writeJSON(this.destinationPath('package.json'), packageJson);
+
+    this.log(chalk.black.bgGreen('Removing create-react-app generator boilerplate'));
     [
       'src/App.js',
       'README.md',
