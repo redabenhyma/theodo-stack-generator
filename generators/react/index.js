@@ -47,8 +47,6 @@ class ReactGenerator extends Generator {
     const packageJson = {
       scripts: {
         analyze: 'source-map-explorer build/static/js/main.*',
-        lint: 'eslint --ext .jsx,.js -c .eslintrc src',
-        'lint:fix': 'eslint --fix --ext .jsx,.js -c .eslintrc src',
         nsp: 'nsp check',
         'test:coverage': 'npm run test -- --coverage',
       }
@@ -73,23 +71,10 @@ class ReactGenerator extends Generator {
 
   _addDevPackages() {
     this.npmInstall([
-        'babel-eslint',
         'enzyme',
         'enzyme-adapter-react-16',
         'enzyme-to-json',
-        'eslint',
-        'eslint-config-airbnb',
-        'eslint-config-prettier',
-        'eslint-plugin-flowtype',
-        'eslint-plugin-import',
-        'eslint-plugin-jest',
-        'eslint-plugin-jsx-a11y',
-        'eslint-plugin-mysticatea',
-        'eslint-plugin-prefer-object-spread',
-        'eslint-plugin-prettier',
-        'eslint-plugin-react',
         'nsp',
-        'prettier',
       ],
       {'save-dev': true},
     );
@@ -151,6 +136,11 @@ class ReactGenerator extends Generator {
     this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
   }
 
+  _addLint() {
+    const client = require.resolve('../react-lint');
+    this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
+  }
+
   install() {
     if (this.options['server-required']) {
       this.destinationRoot('client');
@@ -162,6 +152,7 @@ class ReactGenerator extends Generator {
     this._updatePackageJSon();
     this._addFlow();
     this._addPlop();
+    this._addLint();
     this._addTemplates();
     this._addCircleCiConfig();
   }
