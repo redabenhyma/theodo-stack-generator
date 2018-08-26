@@ -89,7 +89,7 @@ class ReactGenerator extends Generator {
       'redux-saga',
       'source-map-explorer',
       'styled-components',
-      'whatwg-fetch',
+      'superagent',
     ]);
   }
 
