@@ -1,7 +1,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 
-class StackGenerator extends Generator {
+class ReactGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
 
@@ -255,4 +255,4 @@ class StackGenerator extends Generator {
   }
 }
 
-module.exports = StackGenerator;
+module.exports = ReactGenerator;
