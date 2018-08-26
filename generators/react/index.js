@@ -81,7 +81,7 @@ class ReactGenerator extends Generator {
   }
 
   _addTemplates() {
-    this.log('Copying new files for create-react-app');
+    this.log(chalk.black.bgGreen('Copying new files for create-react-app'));
     [
       { src: 'src', dest: 'src' },
       { src: 'scripts', dest: 'scripts' },
@@ -149,11 +149,14 @@ class ReactGenerator extends Generator {
     this._addReactBoilerplate();
     this._addPackages();
     this._addDevPackages();
-    this._updatePackageJSon();
     this._addFlow();
     this._addPlop();
     this._addLint();
     this._addTemplates();
+  }
+
+  writing() {
+    this._updatePackageJSon();
     this._addCircleCiConfig();
   }
 
@@ -164,7 +167,7 @@ class ReactGenerator extends Generator {
       'install',
       'jest@20.0.4',
     ]);
-    this.log('Fixing possible linting issues');
+    this.log(chalk.black.bgGreen('Fixing possible linting issues'));
     this.spawnCommandSync('yarn', ['lint:fix']);
 
     this.log(

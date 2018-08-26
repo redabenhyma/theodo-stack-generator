@@ -1,7 +1,10 @@
 const Generator = require('yeoman-generator');
+const chalk = require('chalk');
 
 class ReactFlowGenerator extends Generator {
   install() {
+    this.log(chalk.black.bgGreen('Install flow as dev dependecies.'));
+
     this.npmInstall([
         'flow-bin',
         'flow-coverage-report',
@@ -9,6 +12,10 @@ class ReactFlowGenerator extends Generator {
       ],
       {'save-dev': true},
     );
+  }
+
+  writing() {
+    this.log(chalk.black.bgGreen('Update package.json to add flow commands.'));
 
     this.fs.extendJSON(
       'package.json',

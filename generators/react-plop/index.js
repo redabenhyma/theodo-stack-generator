@@ -1,8 +1,15 @@
 const Generator = require('yeoman-generator');
+const chalk = require('chalk');
 
 class ReactPlopGenerator extends Generator {
   install() {
+    this.log(chalk.black.bgGreen('Install plop as dev dependencies.'));
+
     this.npmInstall(['plop'], {'save-dev': true});
+  }
+
+  writing() {
+    this.log(chalk.black.bgGreen('Update package.json to add plop commands.'));
 
     this.fs.extendJSON(
       'package.json',

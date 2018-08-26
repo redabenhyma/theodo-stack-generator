@@ -1,7 +1,10 @@
 const Generator = require('yeoman-generator');
+const chalk = require('chalk');
 
 class ReactLintGenerator extends Generator {
   install() {
+    this.log(chalk.black.bgGreen('Install eslint and prettier as dev dependencies.'));
+
     this.npmInstall([
         'babel-eslint',
         'eslint',
@@ -19,6 +22,10 @@ class ReactLintGenerator extends Generator {
       ],
       {'save-dev': true},
     );
+  }
+
+  configuring() {
+    this.log(chalk.black.bgGreen('Add configuration for eslint and prettier.'));
 
     this.fs.copyTpl(
       this.templatePath('.prettierrc'),
@@ -34,6 +41,10 @@ class ReactLintGenerator extends Generator {
       this.templatePath('.eslintignore'),
       this.destinationPath('.eslintignore'),
     );
+  }
+
+  writing() {
+    this.log(chalk.black.bgGreen('Update package.json to add eslint and prettier commands.'));
 
     this.fs.extendJSON(
       'package.json',
