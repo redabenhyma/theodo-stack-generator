@@ -17,19 +17,29 @@ class ReactExamplesGenerator extends Generator {
     Runner.run(this._transformsDir('add-avatar-routes'), [this._routingFile()], {});
   }
 
+  addReducer() {
+    this.log(chalk.black.bgGreen('Add Avatar reducers'));
+    Runner.run(this._transformsDir('add-avatar-reducer'), [this._reducerFile()], {});
   }
 
   _transformsDir(transform) {
     return `${this.sourceRoot()}/../transforms/${transform}.js`;
   }
 
-  _routingFile() {
+  _reducerFile() {
+    return `${this._appRoot()}/src/redux/reducers.js`;
+  }
+
+  _appRoot() {
     let routingFilePath = this.destinationPath();
     if (this.options['server-required']) {
       routingFilePath += '/client'
     }
+    return routingFilePath;
+  }
 
-    return `${routingFilePath}/src/routes.js`;
+  _routingFile() {
+    return `${this._appRoot()}/src/routes.js`;
   }
 }
 
