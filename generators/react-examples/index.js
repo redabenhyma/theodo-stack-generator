@@ -1,5 +1,6 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
+const Runner = require('jscodeshift/dist/Runner');
 
 class ReactExamplesGenerator extends Generator {
   // Todo: add pages/Avatar
@@ -13,19 +14,9 @@ class ReactExamplesGenerator extends Generator {
 
   addRoutes() {
     this.log(chalk.black.bgGreen('Add Avatar routes'));
+    Runner.run(this._transformsDir('add-avatar-routes'), [this._routingFile()], {});
+  }
 
-    /**
-     * Todo: Would be best to use jscodeshift programmatically instead but it is not possible yet...
-     */
-    this.spawnCommandSync(
-      'npx',
-      [
-        'jscodeshift',
-        this._routingFile(),
-        '-t',
-        this._transformsDir('add-avatar-routes'),
-      ]
-    );
   }
 
   _transformsDir(transform) {
