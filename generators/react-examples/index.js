@@ -8,26 +8,29 @@ class ReactExamplesGenerator extends Generator {
   // Todo: add Avatar type in flow-typed and in app.js => store
   // Todo: add Avatar page type
   // Todo: add redux/Avatar
-  // Todo: add Avatar reducer in src/redux/reducers.js
   // Todo: add Avatar saga in src/redux/sagas.js
   // Todo: add translations in src/translations/en.json and src/translations/fr.json
 
   addRoutes() {
     this.log(chalk.black.bgGreen('Add Avatar routes'));
-    Runner.run(this._transformsDir('add-avatar-routes'), [this._routingFile()], {});
+    Runner.run(
+      this._transform('add-avatar-routes'),
+      [`${this._appRoot()}/src/routes.js`],
+      {}
+    );
   }
 
   addReducer() {
     this.log(chalk.black.bgGreen('Add Avatar reducers'));
-    Runner.run(this._transformsDir('add-avatar-reducer'), [this._reducerFile()], {});
+    Runner.run(
+      this._transform('add-avatar-reducer'),
+      [`${this._appRoot()}/src/redux/reducers.js`],
+      {}
+    );
   }
 
-  _transformsDir(transform) {
+  _transform(transform) {
     return `${this.sourceRoot()}/../transforms/${transform}.js`;
-  }
-
-  _reducerFile() {
-    return `${this._appRoot()}/src/redux/reducers.js`;
   }
 
   _appRoot() {
@@ -36,10 +39,6 @@ class ReactExamplesGenerator extends Generator {
       routingFilePath += '/client'
     }
     return routingFilePath;
-  }
-
-  _routingFile() {
-    return `${this._appRoot()}/src/routes.js`;
   }
 }
 
