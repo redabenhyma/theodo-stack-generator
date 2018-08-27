@@ -116,10 +116,6 @@ class StackGenerator extends Generator {
     );
   }
 
-  _addProvisioningTemplates() {
-    return this._addSymfonyDevopsTemplates();
-  }
-
   _addSymfonyDevopsTemplates() {
     this.fs.copy(
       this.templatePath('devops-symfony/provisioning/roles'),
@@ -172,7 +168,7 @@ class StackGenerator extends Generator {
   installProject() {
     return this._addComposer()
       .then(() => this._addConfigurationTemplates())
-      .then(() => this._addProvisioningTemplates())
+      .then(() => this._addSymfonyDevopsTemplates())
     ;
   }
 
