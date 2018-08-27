@@ -33,3 +33,7 @@ const request = function(url) {
 request('api/users')
 .then(console.log)
  ```
+
+ # Manage your environments
+
+ You can use custom .env.* files (not only *development*, *test* and *production*) to load your environment variables before build, by managing the REACT_APP_ENV environment variable.
