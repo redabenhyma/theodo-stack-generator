@@ -170,7 +170,10 @@ class StackGenerator extends Generator {
   }
 
   installProject() {
-    return this._addComposer().then(() => this._addProvisioningTemplates());
+    return this._addComposer()
+      .then(() => this._addConfigurationTemplates())
+      .then(() => this._addProvisioningTemplates())
+    ;
   }
 
   end() {
