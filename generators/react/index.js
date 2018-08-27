@@ -184,14 +184,11 @@ class ReactGenerator extends Generator {
     this._addReactBoilerplate();
     this._addPackages();
     this._addDevPackages();
+    this._updatePackageJSon();
     this._addFlow();
     this._addPlop();
     this._addLint();
     this._addTemplates();
-  }
-
-  writing() {
-    this._updatePackageJSon();
     this._addCircleCiConfig();
   }
 
