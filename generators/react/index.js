@@ -108,7 +108,6 @@ class ReactGenerator extends Generator {
     this.log(chalk.black.bgGreen('Copying new files for create-react-app'));
     [
       { src: 'src', dest: 'src' },
-      { src: 'scripts', dest: 'scripts' },
       { src: 'public/*', dest: 'public' },
       { src: '.*', dest: '' },
       { src: '*.md', dest: '' },
