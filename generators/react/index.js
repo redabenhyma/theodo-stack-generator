@@ -47,8 +47,8 @@ class ReactGenerator extends Generator {
   _updatePackageJSon() {
     const packageJson = {
       scripts: {
+        build: 'env-cmd .env.${REACT_APP_ENV} react-scripts build',
         analyze: 'source-map-explorer build/static/js/main.*',
-        nsp: 'nsp check',
         'test:coverage': 'npm run test -- --coverage',
       },
       jest: {
@@ -95,10 +95,10 @@ class ReactGenerator extends Generator {
 
   _addDevPackages() {
     this.npmInstall([
+        'env-cmd',
         'enzyme',
         'enzyme-adapter-react-16',
         'enzyme-to-json',
-        'nsp',
       ],
       {'save-dev': true},
     );
@@ -122,11 +122,8 @@ class ReactGenerator extends Generator {
 
   _addReactBoilerplate() {
     this.conflicter.force = true;
-    this.log(chalk.black.bgGreen('Installing create-react-app'));
-    this.spawnCommandSync('npm', ['install', '-g', 'create-react-app']);
-
     this.log(chalk.black.bgGreen('Starting create-react-app generator'));
-    this.spawnCommandSync('create-react-app', ['.']);
+    this.spawnCommandSync('npx', ['create-react-app', '.']);
 
     /**
      * When the generator starts it tries to guess the value of appname from
