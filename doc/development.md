@@ -36,4 +36,9 @@ request('api/users')
 
  # Manage your environments
 
- You can use custom .env.* files (not only *development*, *test* and *production*) to load your environment variables before build, by managing the REACT_APP_ENV environment variable.
+ You can use custom .env.* files (not only *.env.development*, *.env.test* and *.env.production*) to load your environment variables before building by managing the REACT_APP_ENV environment variable.
+
+ You can either set the REACT_APP_ENV variable on your server or prefix the commande like this: `REACT_APP_ENV=staging yarn build`.
+
+ An env file is just a list of `KEY=VALUE` pairs.
+
