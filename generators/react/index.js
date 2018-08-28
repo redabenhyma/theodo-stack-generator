@@ -120,11 +120,8 @@ class ReactGenerator extends Generator {
 
   _addReactBoilerplate() {
     this.conflicter.force = true;
-    this.log(chalk.black.bgGreen('Installing create-react-app'));
-    this.spawnCommandSync('npm', ['install', '-g', 'create-react-app']);
-
     this.log(chalk.black.bgGreen('Starting create-react-app generator'));
-    this.spawnCommandSync('create-react-app', ['.']);
+    this.spawnCommandSync('npx', ['create-react-app', '.']);
 
     /**
      * When the generator starts it tries to guess the value of appname from
