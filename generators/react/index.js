@@ -48,7 +48,6 @@ class ReactGenerator extends Generator {
     const packageJson = {
       scripts: {
         analyze: 'source-map-explorer build/static/js/main.*',
-        nsp: 'nsp check',
         'test:coverage': 'npm run test -- --coverage',
       },
       jest: {
@@ -98,7 +97,6 @@ class ReactGenerator extends Generator {
         'enzyme',
         'enzyme-adapter-react-16',
         'enzyme-to-json',
-        'nsp',
       ],
       {'save-dev': true},
     );
