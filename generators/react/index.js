@@ -47,6 +47,7 @@ class ReactGenerator extends Generator {
   _updatePackageJSon() {
     const packageJson = {
       scripts: {
+        build: 'env-cmd .env.${REACT_APP_ENV} react-scripts build',
         analyze: 'source-map-explorer build/static/js/main.*',
         'test:coverage': 'npm run test -- --coverage',
       },
@@ -94,6 +95,7 @@ class ReactGenerator extends Generator {
 
   _addDevPackages() {
     this.npmInstall([
+        'env-cmd',
         'enzyme',
         'enzyme-adapter-react-16',
         'enzyme-to-json',
