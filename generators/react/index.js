@@ -94,13 +94,9 @@ class ReactGenerator extends Generator {
   }
 
   _addDevPackages() {
-    this.npmInstall([
-        'env-cmd',
-        'enzyme',
-        'enzyme-adapter-react-16',
-        'enzyme-to-json',
-      ],
-      {'save-dev': true},
+    this.npmInstall(
+      ['env-cmd', 'enzyme', 'enzyme-adapter-react-16', 'enzyme-to-json'],
+      { 'save-dev': true },
     );
   }
 
@@ -117,7 +113,6 @@ class ReactGenerator extends Generator {
         this.destinationPath(file.dest),
       ),
     );
-
   }
 
   _addReactBoilerplate() {
@@ -133,10 +128,14 @@ class ReactGenerator extends Generator {
      * by create-react-app. Thus we need to read the file created by CRA and
      * update the virtual filesystem.
      */
-    const packageJson = JSON.parse(fs.readFileSync(this.destinationPath('package.json')));
+    const packageJson = JSON.parse(
+      fs.readFileSync(this.destinationPath('package.json')),
+    );
     this.fs.writeJSON(this.destinationPath('package.json'), packageJson);
 
-    this.log(chalk.black.bgGreen('Removing create-react-app generator boilerplate'));
+    this.log(
+      chalk.black.bgGreen('Removing create-react-app generator boilerplate'),
+    );
     [
       'src/App.js',
       'README.md',
@@ -153,23 +152,35 @@ class ReactGenerator extends Generator {
   _addCircleCiConfig() {
     if (!this.options['server-required']) {
       const client = require.resolve('../react-ci');
-      this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
+      this.composeWith(client, {
+        ...this.options,
+        arguments: [this.options.appname],
+      });
     }
   }
 
   _addFlow() {
     const client = require.resolve('../react-flow');
-    this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
+    this.composeWith(client, {
+      ...this.options,
+      arguments: [this.options.appname],
+    });
   }
 
   _addPlop() {
     const client = require.resolve('../react-plop');
-    this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
+    this.composeWith(client, {
+      ...this.options,
+      arguments: [this.options.appname],
+    });
   }
 
   _addLint() {
     const client = require.resolve('../react-lint');
-    this.composeWith(client, { ...this.options, arguments: [this.options.appname] });
+    this.composeWith(client, {
+      ...this.options,
+      arguments: [this.options.appname],
+    });
   }
 
   install() {

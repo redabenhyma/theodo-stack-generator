@@ -1,0 +1,50 @@
+version: 2
+jobs:
+  project_setup:
+    docker:
+      - image: circleci/node:9.10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+  project_react_test:
+    docker:
+      - image: circleci/node:9.10
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - restore_cache:
+          keys:
+            - npm-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: Set up NPM to use circleci user
+          command: npm set prefix=/home/circleci/npm && echo 'export PATH=/home/circleci/npm/bin:$PATH' >> /home/circleci/.bashrc
+      - run:
+          name: Install dependencies and link project
+          command: |
+            npm i
+            npm link
+      - save_cache:
+          key: npm-dependencies-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Install yeoman
+          command: npm i -g yo
+      - run:
+          name: Generate React project and run tests
+          command: |
+            mkdir /home/circleci/client && cd "$_"
+            /home/circleci/npm/bin/yo theodo-stack:react --empty-folder
+            npm run test
+workflows:
+  version: 2
+  build_setup_test:
+    jobs:
+      - project_setup
+      - project_react_test:
+          requires:
+            - project_setup
