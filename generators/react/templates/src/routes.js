@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router';
 import { Home, Avatar } from './pages';
 
 const routes = () => (

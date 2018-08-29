@@ -2,13 +2,11 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import type { IntlShape } from 'react-intl';
-import type { RouterHistory } from 'react-router-dom';
 
 import StyledAvatar from './Avatar.style';
 
 type Props = {
   intl: IntlShape,
-  history: RouterHistory,
   fetchUser: (username: string) => void,
   updateUsername: (value: string) => void,
   userAvatarUrl: string,
@@ -25,7 +23,8 @@ class Avatar extends React.Component<Props> {
   };
 
   navigateTo = (path: string): (() => void) => (): void => {
-    this.props.history.push(path);
+    const { push } = this.props;
+    push(path);
   };
 
   render() {

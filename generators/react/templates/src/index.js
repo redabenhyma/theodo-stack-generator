@@ -1,18 +1,19 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createBrowserHistory } from 'history';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './redux/store';
 
-const initialState = {};
-const store = configureStore(initialState);
+const history = createBrowserHistory();
+const store = configureStore(history);
 
 const rootEl = document.getElementById('root');
 
 if (rootEl) {
-  ReactDOM.render(<App store={store} />, rootEl);
+  ReactDOM.render(<App history={history} store={store} />, rootEl);
   registerServiceWorker();
 }
 

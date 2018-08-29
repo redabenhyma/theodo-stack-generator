@@ -1,11 +1,14 @@
 // @flow
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { Route } from 'react-router';
+
 import Routes from './routes';
 import { Root } from './components';
 
 type Props = {
+  history: History,
   store: Store,
 };
 
@@ -17,11 +20,13 @@ const RootComponentWithRoutes = () => (
 
 class App extends React.Component<Props> {
   render() {
+    const { history, store } = this.props;
+
     return (
-      <Provider store={this.props.store}>
-        <Router basename="/">
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
           <Route path="/" component={RootComponentWithRoutes} />
-        </Router>
+        </ConnectedRouter>
       </Provider>
     );
   }
