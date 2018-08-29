@@ -23,6 +23,7 @@ type Props = {
 
 export default class Root extends React.Component<Props> {
   render() {
+    const { children } = this.props;
     return (
       <IntlProvider locale="fr" messages={locales.fr}>
         <StyledRoot>
@@ -30,7 +31,7 @@ export default class Root extends React.Component<Props> {
             <img src={logo} className="logo" alt="logo" />
             <h2>Welcome to React</h2>
           </div>
-          {this.props.children}
+          {children}
         </StyledRoot>
       </IntlProvider>
     );
