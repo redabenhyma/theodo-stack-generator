@@ -53,11 +53,11 @@ class ReactGenerator extends Generator {
       },
       jest: {
         collectCoverageFrom: [
-          'src/** /*.js',
-          '!src/** /*.test.js',
-          '!src/** /index.js',
-          '!src/** /registerServiceWorker.js',
-          '!src/** /*.container.js',
+          'src/**/*.js',
+          '!src/**/*.test.js',
+          '!src/**/index.js',
+          '!src/**/registerServiceWorker.js',
+          '!src/**/*.container.js',
           '!src/index.js',
           '!src/tempPolyfills.js',
           '!src/setupTests.js',
@@ -67,10 +67,10 @@ class ReactGenerator extends Generator {
         ],
         coverageThreshold: {
           global: {
-            statements: 100,
+            statements: 85,
             branches: 100,
-            functions: 100,
-            lines: 100,
+            functions: 75,
+            lines: 90,
           },
         },
       },
@@ -81,8 +81,10 @@ class ReactGenerator extends Generator {
 
   _addPackages() {
     this.npmInstall([
+      'connected-react-router',
       'react-intl',
       'react-redux',
+      'react-router',
       'react-router-dom',
       'react-test-renderer',
       'redux',
@@ -207,7 +209,7 @@ class ReactGenerator extends Generator {
       'jest@20.0.4',
     ]);
     this.log(chalk.black.bgGreen('Fixing possible linting issues'));
-    this.spawnCommandSync('yarn', ['lint:fix']);
+    this.spawnCommandSync('npm', ['run', 'lint:fix']);
 
     this.log(
       chalk.black.bgGreen(

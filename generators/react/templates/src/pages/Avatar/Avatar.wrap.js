@@ -1,4 +1,5 @@
 // @flow
+import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import type { Dispatch } from 'redux';
@@ -15,9 +16,15 @@ const mapDispatchToProps = (dispatch: Dispatch<*>): Object => ({
   fetchUser(username) {
     dispatch(actions.fetchUserRequest(username));
   },
+  push(pathName: string): Dispatch<*> {
+    dispatch(push(pathName));
+  },
   updateUsername(username) {
     dispatch(actions.updateUsername(username));
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Avatar));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(injectIntl(Avatar));

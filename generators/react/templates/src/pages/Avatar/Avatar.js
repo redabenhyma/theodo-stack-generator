@@ -1,15 +1,15 @@
 // @flow
 import * as React from 'react';
+import type { Dispatch } from 'redux';
 import { FormattedMessage } from 'react-intl';
 import type { IntlShape } from 'react-intl';
-import type { RouterHistory } from 'react-router-dom';
 
 import StyledAvatar from './Avatar.style';
 
 type Props = {
-  intl: IntlShape,
-  history: RouterHistory,
   fetchUser: (username: string) => void,
+  intl: IntlShape,
+  push: (pathName: string) => Dispatch<*>,
   updateUsername: (value: string) => void,
   userAvatarUrl: string,
   username: string,
@@ -17,27 +17,32 @@ type Props = {
 
 class Avatar extends React.Component<Props> {
   onInputChange = (event: SyntheticInputEvent<HTMLInputElement>): void => {
-    this.props.updateUsername(event.target.value);
+    const { updateUsername } = this.props;
+    updateUsername(event.target.value);
   };
 
   fetchUser = (): void => {
-    this.props.fetchUser(this.props.username);
+    const { fetchUser, username } = this.props;
+    fetchUser(username);
   };
 
   navigateTo = (path: string): (() => void) => (): void => {
-    this.props.history.push(path);
+    const { push } = this.props;
+    push(path);
   };
 
   render() {
-    const { formatMessage } = this.props.intl;
-    const { userAvatarUrl } = this.props;
+    const { intl, userAvatarUrl } = this.props;
+    const { formatMessage } = intl;
 
     return (
       <StyledAvatar>
-        <button tabIndex={0} onClick={this.navigateTo('/')}>
+        <button tabIndex={0} type="button" onClick={this.navigateTo('/')}>
           <FormattedMessage id="page.back" />
         </button>
-        <p>{formatMessage({ id: 'page.api-to-translate-example' })}</p>
+        <p>
+          <FormattedMessage id="page.api-to-translate-example" />
+        </p>
         <p>
           <input
             className="github-avatar-input"
@@ -47,7 +52,7 @@ class Avatar extends React.Component<Props> {
           />
         </p>
         <p>
-          <button onClick={this.fetchUser}>
+          <button onClick={this.fetchUser} type="button">
             <FormattedMessage id="page.fetch-github-avatar" />
           </button>
         </p>
