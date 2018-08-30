@@ -3,7 +3,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import intlShape from '__mocks__/intlShape';
-import historyProp from '__mocks__/historyProp';
 import Avatar from '../Avatar';
 
 describe('<Avatar />', () => {
