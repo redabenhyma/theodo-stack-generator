@@ -1,13 +1,15 @@
 // @flow
 import * as React from 'react';
+import type { Dispatch } from 'redux';
 import { FormattedMessage } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 
 import StyledAvatar from './Avatar.style';
 
 type Props = {
-  intl: IntlShape,
   fetchUser: (username: string) => void,
+  intl: IntlShape,
+  push: (pathName: string) => Dispatch<*>,
   updateUsername: (value: string) => void,
   userAvatarUrl: string,
   username: string,
