@@ -7,12 +7,17 @@ exports[`The page component should render correctly 1`] = `
   <button
     onClick={[Function]}
     tabIndex={0}
+    type="button"
   >
     <span>
       Retour
     </span>
   </button>
-  <p />
+  <p>
+    <span>
+      Ce message est traduit en utilisant directement l'API react-intl
+    </span>
+  </p>
   <p>
     <input
       className="github-avatar-input"
@@ -24,6 +29,7 @@ exports[`The page component should render correctly 1`] = `
   <p>
     <button
       onClick={[Function]}
+      type="button"
     >
       <span>
         Affiche l'avatar github

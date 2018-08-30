@@ -16,13 +16,11 @@ exports[`<App> should render correctly 1`] = `
     }
   }
 >
-  <BrowserRouter
-    basename="/"
-  >
+  <Connect(ConnectedRouter)>
     <Route
       component={[Function]}
       path="/"
     />
-  </BrowserRouter>
+  </Connect(ConnectedRouter)>
 </Provider>
 `;

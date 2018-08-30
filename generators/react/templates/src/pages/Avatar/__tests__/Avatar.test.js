@@ -11,18 +11,23 @@ describe('<Avatar />', () => {
     find: jest.fn(),
     setProps: jest.fn(),
   };
+
   const props = {
     username: 'Juste Leblanc',
     userAvatarUrl: 'url',
     intl: intlShape,
     fetchUser: jest.fn(),
     updateUsername: jest.fn(),
-    history: historyProp,
+    push: jest.fn(),
   };
 
   describe('render', () => {
     beforeEach(() => {
       wrapper = shallow(<Avatar {...props} />);
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
     });
 
     it('should call onInputChange when writing in the text input', () => {
@@ -53,12 +58,11 @@ describe('<Avatar />', () => {
   describe('onInputChange', () => {
     it('should call updateUsername with the event value', () => {
       const avatar = new Avatar(props);
-
-      expect(props.updateUsername.mock.calls.length).toBe(0);
+      expect(props.updateUsername).toHaveBeenCalledTimes(0);
       // $FlowFixMe
       avatar.onInputChange({ target: { value: 'value' } });
-      expect(props.updateUsername.mock.calls.length).toBe(1);
-      expect(props.updateUsername.mock.calls[0][0]).toBe('value');
+      expect(props.updateUsername).toHaveBeenCalledTimes(1);
+      expect(props.updateUsername).toHaveBeenCalledWith('value');
     });
   });
 
@@ -66,10 +70,10 @@ describe('<Avatar />', () => {
     it('should call fetchUser with the user id prop', () => {
       const avatar = new Avatar(props);
 
-      expect(props.fetchUser.mock.calls.length).toBe(0);
+      expect(props.fetchUser).toHaveBeenCalledTimes(0);
       avatar.fetchUser();
-      expect(props.fetchUser.mock.calls.length).toBe(1);
-      expect(props.fetchUser.mock.calls[0][0]).toBe(props.username);
+      expect(props.fetchUser).toHaveBeenCalledTimes(1);
+      expect(props.fetchUser).toHaveBeenCalledWith(props.username);
     });
   });
 
@@ -77,10 +81,10 @@ describe('<Avatar />', () => {
     it('should redirect to specified path', () => {
       const avatar = new Avatar(props);
 
-      expect(props.history.push.mock.calls.length).toBe(0);
+      expect(props.push).toHaveBeenCalledTimes(0);
       avatar.navigateTo('/path')();
-      expect(props.history.push.mock.calls.length).toBe(1);
-      expect(props.history.push.mock.calls[0][0]).toBe('/path');
+      expect(props.push).toHaveBeenCalledTimes(1);
+      expect(props.push).toHaveBeenCalledWith('/path');
     });
   });
 });

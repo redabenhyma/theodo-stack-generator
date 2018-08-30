@@ -48,14 +48,6 @@ exports[`<Home> should render correctly 1`] = `
         values={Object {}}
       />
     </p>
-    <button
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="home.click-me"
-        values={Object {}}
-      />
-    </button>
     <Link
       href="/avatar"
       replace={false}
