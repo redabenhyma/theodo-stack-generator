@@ -29,9 +29,14 @@ class ReactFlowGenerator extends Generator {
       2
     );
 
-    this.fs.copyTpl(
-      this.templatePath('flow-typed'),
-      this.destinationPath('flow-typed'),
+    [
+      { src: 'flow-typed', dest: 'flow-typed' },
+      { src: '.*', dest: '' },
+    ].forEach(file =>
+      this.fs.copyTpl(
+        this.templatePath(file.src),
+        this.destinationPath(file.dest),
+      ),
     );
   }
 }
