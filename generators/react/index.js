@@ -209,7 +209,7 @@ class ReactGenerator extends Generator {
       'jest@20.0.4',
     ]);
     this.log(chalk.black.bgGreen('Fixing possible linting issues'));
-    this.spawnCommandSync('yarn', ['lint:fix']);
+    this.spawnCommandSync('npm', ['run', 'lint:fix']);
 
     this.log(
       chalk.black.bgGreen(
