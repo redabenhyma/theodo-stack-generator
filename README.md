@@ -1,4 +1,4 @@
-# Theodo stack generator  ![Current npm package version](https://img.shields.io/npm/v/generator-theodo-stack.svg?style=flat-square)
+# Theodo stack generator ![Current npm package version](https://img.shields.io/npm/v/generator-theodo-stack.svg?style=flat-square)
 
 This generator scripts everything you need to start a React-Redux project with an API Platform (Symfony) server.
 
@@ -51,17 +51,16 @@ If you want a server with the provisioning and the deployment scripts:
 
 - Install nvm: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
 
-- Install node 9.5:
-  - `nvm install 9.5.0`
-  - `nvm alias default 9.5`
-  - `nvm use default`
+- Install and use node 10.9:
+
+  - `nvm install 10.9.0`
+  - `nvm use 10.9.0`
 
 - Install Yeoman globally: `npm install -g yo`
 
 - Install the package:
 
 ```bash
-nvm use 9.5.0
 git clone git@github.com:theodo/theodo-stack-generator.git
 cd theodo-stack-generator && npm install && npm link && cd ../
 ```
@@ -70,9 +69,9 @@ cd theodo-stack-generator && npm install && npm link && cd ../
 
 - Create an **empty** directory and run the generator:
 
-``` bash
+```bash
 mkdir my-app && cd my-app
-nvm use 9.5.0
+nvm use 10.9.0
 yo theodo-stack
 ```
 
@@ -91,7 +90,7 @@ You only need to pull the latest changes from your theodo-stack-directory. npm l
 
 - From the theodo-stack-generator directory
 
-``` bash
+```bash
 git pull
 ```
 
