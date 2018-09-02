@@ -49,6 +49,7 @@
     "react/prefer-stateless-function": 0,
     "react/require-default-props": 0,
     "react/prop-types": 0,
+    "react/no-array-index-key": 2,
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 0,
