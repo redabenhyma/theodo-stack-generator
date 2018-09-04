@@ -17,3 +17,5 @@ postgresql_user_privileges:
     db: <%= appName %>
     priv: "ALL"
     role_attr_flags: "SUPERUSER"
+
+jwt_pass: changeme

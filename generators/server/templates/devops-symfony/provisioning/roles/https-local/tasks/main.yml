@@ -1,0 +1,30 @@
+---
+# /!\ Only for development use. DO NOT USE IN PRODUCTION /!\
+
+- stat: path=/etc/letsencrypt/live/{{ project_name }}/fullchain.pem
+  register: keys
+
+- name: Create and give the keys directory the right permissions
+  file:
+    path: /etc/letsencrypt/live/{{ project_name }}/
+    state: directory
+    mode: "a+rx"
+  when: keys.stat.exists == False
+
+- name: Generate private key for NGINX
+  shell: openssl req -x509 -out /etc/letsencrypt/live/{{ project_name }}/fullchain.pem -keyout /etc/letsencrypt/live/{{ project_name }}/privkey.pem -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost'
+  when: keys.stat.exists == False
+
+- name: Give the private keys the right permission
+  file:
+    path: /etc/letsencrypt/live/{{ project_name }}/privkey.pem
+    state: touch
+    mode: "a+rx"
+  when: keys.stat.exists == False
+
+- name: Give the public keys the right permission
+  file:
+    path: /etc/letsencrypt/live/{{ project_name }}/fullchain.pem
+    state: touch
+    mode: "a+rx"
+  when: keys.stat.exists == False

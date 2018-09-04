@@ -7,6 +7,13 @@
   - name: install python 2
     raw: sudo bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qy python-minimal)"
 
+- name: Create the certificates for the local https
+  hosts: vagrant
+  become: yes
+  gather_facts: true
+  roles:
+    - https-local
+
 - name: Provisioning <%= appName %>
   hosts: all
   become: true
@@ -24,8 +31,9 @@
     - certbot
     - any-nodejs
     - fubarhouse.yarn
+    - jwt
 
-- name: Vagrant provisioning
+- name: Install xdebug for the Vagrant
   hosts: vagrant
   become: yes
   gather_facts: true

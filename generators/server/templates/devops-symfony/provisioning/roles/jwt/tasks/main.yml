@@ -1,0 +1,33 @@
+---
+
+- stat: path=/etc/ssl/private/private.pem
+  register: keys
+
+- name: Generate private key for JWT
+  shell: openssl genrsa -out /etc/ssl/private/private.pem -aes256 -passout pass:{{ jwt_pass }} 4096
+  when: keys.stat.exists == False
+
+- name: Generate private key for JWT
+  shell: openssl rsa -pubout -in /etc/ssl/private/private.pem -passin pass:{{ jwt_pass }} -out /etc/ssl/private/public.pem
+  when: keys.stat.exists == False
+
+- name: Give the keys directory the right permissions
+  file:
+    path: /etc/ssl/private/
+    state: touch
+    mode: "a+rx"
+  when: keys.stat.exists == False
+
+- name: Give the private keys the right permission
+  file:
+    path: /etc/ssl/private/private.pem
+    state: touch
+    mode: "a+rx"
+  when: keys.stat.exists == False
+
+- name: Give the public keys the right permission
+  file:
+    path: /etc/ssl/private/public.pem
+    state: touch
+    mode: "a+rx"
+  when: keys.stat.exists == False
