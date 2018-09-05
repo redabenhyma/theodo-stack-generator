@@ -7,9 +7,14 @@
   file: path=/etc/nginx/sites-available/default state=absent
   notify: reload nginx
 
+- name: Create enhanced Diffie-Hellman parameters
+  command: openssl dhparam -out /etc/nginx/dhparams.pem 2048
+  args:
+    creates: /etc/nginx/dhparams.pem
+
 - name: Create the Nginx configuration file - Local
   template: src=nginx.conf.j2
-            dest=/etc/nginx/site-avalaible/{{ project_name }}.conf
+            dest=/etc/nginx/sites-available/{{ project_name }}.conf
             backup=yes
   notify: reload nginx
 
@@ -18,7 +23,7 @@
   notify: reload nginx
 
 - name: Ensure that the application site is enabled
-  file: src=/etc/nginx/site-avalaible/{{ project_name }}.conf
+  file: src=/etc/nginx/sites-available/{{ project_name }}.conf
         dest=/etc/nginx/sites-enabled/{{ project_name }}.conf
         state=link
   notify: reload nginx
