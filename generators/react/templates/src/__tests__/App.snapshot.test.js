@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
@@ -7,6 +6,7 @@ import App from '../App';
 describe('<App>', () => {
   it('should render correctly', () => {
     const props = {
+      history: {},
       store: {
         subscribe: () => {},
         dispatch: () => {},
@@ -21,6 +21,7 @@ describe('<App>', () => {
   describe('<Route>', () => {
     it('should render the Root component', () => {
       const props = {
+        history: {},
         store: {
           subscribe: () => {},
           dispatch: () => {},

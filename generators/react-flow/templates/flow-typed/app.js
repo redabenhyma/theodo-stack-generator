@@ -6,7 +6,7 @@ declare type AvatarState = {
   userAvatarUrl: ?string,
 };
 
-declare type Store = {
+declare type State = {
   avatar: AvatarState,
   runSaga?: any,
   asyncReducers?: any,

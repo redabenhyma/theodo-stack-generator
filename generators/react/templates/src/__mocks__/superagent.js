@@ -1,5 +1,3 @@
-// @flow
-
 const request = {
   get: jest.fn(),
   post: jest.fn(),

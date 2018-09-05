@@ -5,28 +5,28 @@ declare type User = {
   avatar_url?: string,
 };
 
-declare type UpdateUsernameAction = {
+declare type UpdateUsernameActionType = {
   type: 'Avatar/UPDATE_USERNAME',
   payload: { username: string },
 };
 
-declare type FetchUserRequestAction = {
+declare type FetchUserRequestActionType = {
   type: 'Avatar/USER_FETCH_REQUEST',
   payload: { username: string },
 };
 
-declare type FetchUserSuccessAction = {
+declare type FetchUserSuccessActionType = {
   type: 'Avatar/USER_FETCH_SUCCESS',
   payload: { user: User },
 };
 
-declare type FetchUserErrorAction = {
+declare type FetchUserErrorActionType = {
   type: 'Avatar/USER_FETCH_ERROR',
   payload: { error: string },
 };
 
 declare type UserAction =
-  | UpdateUsernameAction
-  | FetchUserRequestAction
-  | FetchUserSuccessAction
-  | FetchUserErrorAction;
+  | UpdateUsernameActionType
+  | FetchUserRequestActionType
+  | FetchUserSuccessActionType
+  | FetchUserErrorActionType;

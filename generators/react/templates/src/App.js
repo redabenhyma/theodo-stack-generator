@@ -1,15 +1,17 @@
 // @flow
 import React from 'react';
+import { type Store } from 'redux';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router';
+import type { BrowserHistory } from 'history/createBrowserHistory';
 
 import Routes from './routes';
 import { Root } from './components';
 
 type Props = {
-  history: History,
-  store: Store,
+  history: BrowserHistory,
+  store: Store<State, *, *>,
 };
 
 const RootComponentWithRoutes = () => (

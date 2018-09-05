@@ -82,6 +82,7 @@ class ReactGenerator extends Generator {
   _addPackages() {
     this.npmInstall([
       'connected-react-router',
+      'history',
       'react-intl',
       'react-redux',
       'react-router',
