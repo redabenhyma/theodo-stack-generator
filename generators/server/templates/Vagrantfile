@@ -1,5 +1,5 @@
 $HOSTNAME = "<%= appName %>.local"
-$BOX = "ubuntu/xenial64"
+$BOX = "bento/ubuntu-18.04"
 $IP = "10.0.0.10"
 $MEMORY = ENV.has_key?('VM_MEMORY') ? ENV['VM_MEMORY'] : "2048"
 $CPUS = ENV.has_key?('VM_CPUS') ? ENV['VM_CPUS'] : "1"
