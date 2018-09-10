@@ -25,3 +25,12 @@ If deployment fails, it maybe because:
 - yarn/npm install requires a lot of memory. To bypass this issue, [add some swap file](https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/)
 
 - yarn don't have enough permissions to write its cache
+
+### Rollback
+
+If you need to rollback after a deployment:
+
+- Make sure to rollback your new migrations before rolling back the code as these migrations won't be available once your code is back to the previous version.
+  - Roll back to the last migration before your deployment:  `bin/console doctrine:migrations:migrate LAST_MIGRATION_BEFORE_DEPLOYMENT_ID`
+
+- Rollback the code: `cap staging deploy:rollback`
