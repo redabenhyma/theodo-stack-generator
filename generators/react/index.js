@@ -92,12 +92,13 @@ class ReactGenerator extends Generator {
       'source-map-explorer',
       'styled-components',
       'superagent',
+      'env-cmd'
     ]);
   }
 
   _addDevPackages() {
     this.npmInstall(
-      ['env-cmd', 'enzyme', 'enzyme-adapter-react-16', 'enzyme-to-json'],
+      ['enzyme', 'enzyme-adapter-react-16', 'enzyme-to-json'],
       { 'save-dev': true },
     );
   }
