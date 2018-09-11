@@ -1,13 +1,11 @@
 # Theodo stack generator ![Current npm package version](https://img.shields.io/npm/v/generator-theodo-stack.svg?style=flat-square)
 
-<table><tr><td>
 🏆 **Objectives:**
 
 * launch a project in 2 hours
 * upgrade an existing project to our standards
 
 ☝️In any case, open an [issue](https://github.com/theodo/theodo-stack-generator/issues) if you don't succeed ! 
-</td></tr></table>
 
 ## Features
 
