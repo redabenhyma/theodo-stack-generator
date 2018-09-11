@@ -1,42 +1,37 @@
 # Theodo stack generator ![Current npm package version](https://img.shields.io/npm/v/generator-theodo-stack.svg?style=flat-square)
 
-This generator scripts everything you need to start a React-Redux project with an API Platform (Symfony) server.
+<table><tr><td>
+🏆 **Objectives:**
 
-**Objective: launch a project in 2 hours - make an [issue](https://github.com/theodo/theodo-stack-generator/issues) if you don't succeed !**
+* launch a project in 2 hours
+* upgrade an existing project to our standards
 
-## Choose a server
+☝️In any case, open an [issue](https://github.com/theodo/theodo-stack-generator/issues) if you don't succeed ! 
+</td></tr></table>
 
-- No server at all, you want an awesome frontend.
+## Features
 
-- [Api platform](https://api-platform.com/) with:
-  - Ansible provisioning for:
-    - PHP7
-    - Yarn
-    - Nginx
-    - Creating www-data user
-    - Postgresql database
-    - HTTPS configuration
-  - Capistrano deployment script
+With the Theodo Stack Generator you can
 
-## Choose a client
+* create a new project with React + a Symfony API: ```yo theodo-stack```
+* create a new React application: ```yo theodo-stack:react```
+* create a new Symfony API: ```yo theodo-stack:server```
 
-- React-Redux: A boosted [create-react-app](https://github.com/facebookincubator/create-react-app) with
-  - Redux
-  - Redux-saga
-  - Hot-reloading
-  - React-intl with nested translations files!
-  - React-router 4 for creating multiples pages
-  - Examples of unit and snapshot tests
-  - Eslint with airbnb linter
-  - Flow
-  - Prettier
-  - Plop scripts to generate React components
+Upgrade an existing React project:
 
-## What's next
+* add CircleCI configuration: ```yo theodo-stack:react-ci```
+* add and configure Flow: ```yo theodo-stack:react-flow```
+* add and configure linter: ```yo theodo-stack:react-lint```
+* add Plop.js generators: ```yo theodo-stack:react-plop```
 
-- End-to-end tests
-- Authentication
-- Vault ansible files to be able to commit them.
+And many more (to come), to list what you can do: ```yo --help```
+
+## Let's use it!
+
+```
+npm install -g theodo-stack-generator
+yo theodo-stack
+```
 
 ## Prerequisites
 
@@ -45,33 +40,12 @@ If you want a server with the provisioning and the deployment scripts:
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant (version >= 2)](https://www.vagrantup.com/downloads.html)
 - [Ansible (version >= 2)](http://docs.ansible.com/ansible/intro_installation.html)
 
-## Installation
-
-### Install the generator
-
-- Install nvm: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
-
-- Install and use node 10.9:
-
-  - `nvm install 10.9.0`
-  - `nvm use 10.9.0`
-
-- Install Yeoman globally: `npm install -g yo`
-
-- Install the package:
-
-```bash
-git clone git@github.com:theodo/theodo-stack-generator.git
-cd theodo-stack-generator && npm install && npm link && cd ../
-```
-
 ## Usage
 
 - Create an **empty** directory and run the generator:
 
 ```bash
 mkdir my-app && cd my-app
-nvm use 10.9.0
 yo theodo-stack
 ```
 
@@ -84,36 +58,7 @@ yarn start
 
 For the client, you may need to source the .env file (`source .env`) if you want to use absolute PATH. Also see: [this issue on create-react-app repository](https://github.com/facebook/create-react-app/issues/2300)
 
-## Update the generator
-
-You only need to pull the latest changes from your theodo-stack-directory. npm link created a symlink to your installation so it is automatic.
-
-- From the theodo-stack-generator directory
-
-```bash
-git pull
-```
-
-## Contributing to the generator
-
-Administrators:
-
-- thibautc@theodo.fr
-- benjaming@theodo.fr
-- nicolasb@theodo.fr,
-- georgesb@theodo.fr
-
-This generator can be improved in many ways, PR are welcome! [here](https://github.com/theodo/theodo-stack-generator) !
-
-- To install it and use it locally, follow the previous documentation.
-- When you make a change to the generator in local, you can use it immediatly with your changes
-- How to develop ?
-  - Change the code
-  - Generate a new project
-  - See if your new project works
-- To merge a PR **it must have been approved by one of the administrators**
-
-## Set-up and develop on your project
+## Set-up and develop on your generated project
 
 - [Installation](doc/installation.md)
 - [Database](doc/database.md)
@@ -121,3 +66,55 @@ This generator can be improved in many ways, PR are welcome! [here](https://gith
 - [Deployment](doc/deployment.md)
 - [Server installation](doc/provisioning.md)
 - [Tests](doc/tests.md)
+
+## Update the generator
+
+**If you installed it with npm:**
+```npm update -g theodo-stack-generator```
+
+**If you cloned it:** 
+you only need to pull the latest changes from your theodo-stack-directory. npm link created a symlink to your installation so it is automatic.
+
+- From the theodo-stack-generator directory
+
+```bash
+git pull
+```
+
+## Wanna contribute to the Theodo Stack Generator?
+
+**Prerequisites:**
+ - node >= 10.9
+ 
+**Installation:**
+- Install Yeoman globally: `npm install -g yo`
+- Install the package:
+
+```bash
+git clone git@github.com:theodo/theodo-stack-generator.git
+cd theodo-stack-generator && npm install && npm link
+```
+You can use nvm if you don't have the right node version: 
+
+- Install nvm: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
+- Install and use node 10.9:
+  - `nvm install 10.9.0`
+  - `nvm use 10.9.0`
+
+**Make a change:**
+
+- Change the code, you don't need to do re ```npm link``` as it created a symlink to the generator directory
+- Check everything still works fine generating a project (yest this is painful and [we will work on it](https://github.com/theodo/theodo-stack-generator/issues/197)) 
+
+- When you make a change to the generator in local, you can use it immediatly with your changes
+
+PR **must have been approved by one of the administrators** to be merged.
+
+## Administrators and contributors
+
+- thibautc@theodo.fr
+- benjaming@theodo.fr
+- nicolasb@theodo.fr
+- georgesb@theodo.fr
+
+This generator can be improved in many ways, PR are welcome! [here](https://github.com/theodo/theodo-stack-generator) !
