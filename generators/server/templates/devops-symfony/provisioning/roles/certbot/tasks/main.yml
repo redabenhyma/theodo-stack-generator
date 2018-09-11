@@ -16,6 +16,11 @@
   args:
     creates: "{{ certbot_output_dir }}"
 
+- name: Update the Nginx configuration file - Local
+  template: src=prod.conf.j2
+            dest=/etc/nginx/sites-available/{{ project_name }}.conf
+            backup=yes
+
 - name: Ensure Nginx is started
   service: name=nginx state=started
   when: nginx_status.stat.exists
