@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 class ReactLintGenerator extends Generator {
   install() {
-    this.log(chalk.black.bgGreen('Install eslint and prettier as dev dependencies.'));
+    this.log(chalk.black.bgGreen('Install prettier as dev dependencies, add eslint plugins.'));
 
     this.npmInstall([
         'babel-eslint',
@@ -18,6 +18,10 @@ class ReactLintGenerator extends Generator {
         'eslint-plugin-prefer-object-spread',
         'eslint-plugin-prettier',
         'eslint-plugin-react',
+      ],
+    );
+
+    this.npmInstall([
         'prettier',
       ],
       {'save-dev': true},
@@ -25,7 +29,7 @@ class ReactLintGenerator extends Generator {
   }
 
   configuring() {
-    this.log(chalk.black.bgGreen('Add configuration for eslint and prettier.'));
+    this.log(chalk.black.bgGreen('Add configurations for eslint and prettier.'));
 
     this.fs.copyTpl(
       this.templatePath('.prettierrc'),
