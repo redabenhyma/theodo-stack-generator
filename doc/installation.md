@@ -27,7 +27,7 @@ sudo su - www-data
 
 ```bash
 TRUSTED_PROXIES=10.0.0.0/8
-TRUSTED_HOSTS='{myAppName}.local, localhost, 10.0.0.10'
+TRUSTED_HOSTS='10.0.0.10'
   ```
 
 - Add API Platform if you need it `cd api && composer req api`
