@@ -16,7 +16,9 @@ exports[`<App> should render correctly 1`] = `
     }
   }
 >
-  <Connect(ConnectedRouter)>
+  <Connect(ConnectedRouter)
+    history={Object {}}
+  >
     <Route
       component={[Function]}
       path="/"

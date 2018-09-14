@@ -10,6 +10,7 @@ describe('The page component', () => {
     const props = {
       intl: intlShape,
       fetchUser: jest.fn(),
+      push: jest.fn(),
       updateUsername: jest.fn(),
       userAvatarUrl: 'https://avatars1.githubusercontent.com/u/9215726?v=4',
       username: 'juste_leblanc',
