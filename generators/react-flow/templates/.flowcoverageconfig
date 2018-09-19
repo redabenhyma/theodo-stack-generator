@@ -1,5 +1,5 @@
 {
-  "excludeGlob": [
+  "globExcludePatterns": [
     "node_modules/**",
     "src/setupTests.js",
     "src/__mocks__/**",
@@ -7,9 +7,9 @@
     "src/registerServiceWorker.js"
   ],
   "flowCommandPath": "node_modules/.bin/flow",
-  "includeGlob": [
+  "globIncludePatterns": [
     "src/**/*.js"
   ],
   "threshold": 85,
-  "type": "html"
+  "reportTypes": "html"
 }

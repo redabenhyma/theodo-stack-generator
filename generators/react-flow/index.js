@@ -5,9 +5,12 @@ class ReactFlowGenerator extends Generator {
   install() {
     this.log(chalk.black.bgGreen('Install flow as dev dependecies.'));
 
-    this.yarnInstall(['flow-bin', 'flow-coverage-report', 'flow-typed'], {
-      dev: true,
-    });
+    this.yarnInstall(
+      ['flow-bin@0.80.0', 'flow-coverage-report', 'flow-typed'],
+      {
+        dev: true,
+      },
+    );
   }
 
   writing() {
