@@ -5,13 +5,9 @@ class ReactFlowGenerator extends Generator {
   install() {
     this.log(chalk.black.bgGreen('Install flow as dev dependecies.'));
 
-    this.npmInstall([
-        'flow-bin',
-        'flow-coverage-report',
-        'flow-typed',
-      ],
-      {'save-dev': true},
-    );
+    this.yarnInstall(['flow-bin', 'flow-coverage-report', 'flow-typed'], {
+      dev: true,
+    });
   }
 
   writing() {
@@ -22,11 +18,11 @@ class ReactFlowGenerator extends Generator {
       {
         scripts: {
           flow: 'flow',
-          'flow:coverage': "flow-coverage-report --config=.flowcoverageconfig",
-        }
+          'flow:coverage': 'flow-coverage-report --config=.flowcoverageconfig',
+        },
       },
       null,
-      2
+      2,
     );
 
     [

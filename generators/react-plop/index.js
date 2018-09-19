@@ -5,7 +5,7 @@ class ReactPlopGenerator extends Generator {
   install() {
     this.log(chalk.black.bgGreen('Install plop as dev dependencies.'));
 
-    this.npmInstall(['plop'], {'save-dev': true});
+    this.yarnInstall(['plop'], { dev: true });
   }
 
   writing() {
@@ -16,10 +16,10 @@ class ReactPlopGenerator extends Generator {
       {
         scripts: {
           generate: 'plop --plopfile scripts/generators/index.js',
-        }
+        },
       },
       null,
-      2
+      2,
     );
 
     this.fs.copyTpl(

@@ -3,9 +3,14 @@ const chalk = require('chalk');
 
 class ReactLintGenerator extends Generator {
   install() {
-    this.log(chalk.black.bgGreen('Install prettier as dev dependencies, add eslint plugins.'));
+    this.log(
+      chalk.black.bgGreen(
+        'Install prettier as dev dependencies, add eslint plugins.',
+      ),
+    );
 
-    this.npmInstall([
+    this.yarnInstall(
+      [
         'babel-eslint',
         'eslint',
         'eslint-config-airbnb',
@@ -18,18 +23,16 @@ class ReactLintGenerator extends Generator {
         'eslint-plugin-prefer-object-spread',
         'eslint-plugin-prettier',
         'eslint-plugin-react',
-      ],
-    );
-
-    this.npmInstall([
         'prettier',
       ],
-      {'save-dev': true},
+      { dev: true },
     );
   }
 
   configuring() {
-    this.log(chalk.black.bgGreen('Add configurations for eslint and prettier.'));
+    this.log(
+      chalk.black.bgGreen('Add configurations for eslint and prettier.'),
+    );
 
     this.fs.copyTpl(
       this.templatePath('.prettierrc'),
@@ -48,7 +51,11 @@ class ReactLintGenerator extends Generator {
   }
 
   writing() {
-    this.log(chalk.black.bgGreen('Update package.json to add eslint and prettier commands.'));
+    this.log(
+      chalk.black.bgGreen(
+        'Update package.json to add eslint and prettier commands.',
+      ),
+    );
 
     this.fs.extendJSON(
       'package.json',
@@ -56,10 +63,10 @@ class ReactLintGenerator extends Generator {
         scripts: {
           lint: 'eslint --ext .jsx,.js -c .eslintrc src',
           'lint:fix': 'eslint --fix --ext .jsx,.js -c .eslintrc src',
-        }
+        },
       },
       null,
-      2
+      2,
     );
   }
 }

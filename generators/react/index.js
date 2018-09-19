@@ -49,7 +49,7 @@ class ReactGenerator extends Generator {
       scripts: {
         build: 'env-cmd .env.${REACT_APP_ENV} react-scripts build',
         analyze: 'source-map-explorer build/static/js/main.*',
-        'test:coverage': 'npm run test -- --coverage',
+        'test:coverage': 'yarn test --coverage',
       },
       jest: {
         collectCoverageFrom: [
@@ -80,8 +80,9 @@ class ReactGenerator extends Generator {
   }
 
   _addPackages() {
-    this.npmInstall([
+    this.yarnInstall([
       'connected-react-router',
+      'env-cmd',
       'history',
       'react-intl',
       'react-redux',
@@ -93,15 +94,13 @@ class ReactGenerator extends Generator {
       'source-map-explorer',
       'styled-components',
       'superagent',
-      'env-cmd'
     ]);
   }
 
   _addDevPackages() {
-    this.npmInstall(
-      ['enzyme', 'enzyme-adapter-react-16', 'enzyme-to-json'],
-      { 'save-dev': true },
-    );
+    this.yarnInstall(['enzyme', 'enzyme-adapter-react-16', 'enzyme-to-json'], {
+      dev: true,
+    });
   }
 
   _addTemplates() {
@@ -211,7 +210,7 @@ class ReactGenerator extends Generator {
       'jest@20.0.4',
     ]);
     this.log(chalk.black.bgGreen('Fixing possible linting issues'));
-    this.spawnCommandSync('npm', ['run', 'lint:fix']);
+    this.spawnCommandSync('yarn', ['lint:fix']);
 
     this.log(
       chalk.black.bgGreen(
