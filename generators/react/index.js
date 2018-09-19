@@ -93,7 +93,7 @@ class ReactGenerator extends Generator {
       'redux-saga',
       'source-map-explorer',
       'styled-components',
-      'superagent',
+      'superagent@3.8.3',
     ]);
   }
 
