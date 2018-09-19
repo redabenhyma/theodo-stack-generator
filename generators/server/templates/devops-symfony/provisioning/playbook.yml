@@ -12,20 +12,28 @@
   become: true
   vars_files:
     - vars/main.yml
-    - vars/ubuntu-xdebug.yml
-
   roles:
     - ubuntu-apt
     - create-www-data-user
     - ubuntu-php
     - composer
-    - ubuntu-symfony-nginx
     - nginx
     - ubuntu-postgresql
     - any-nodejs
     - fubarhouse.yarn
 
-- name: Vagrant provisioning
+- name: Create the certificates for production https
+  hosts:
+    - prod
+    - staging
+  become: yes
+  gather_facts: true
+  vars_files:
+    - vars/main.yml
+  roles:
+    - certbot
+
+- name: Install xdebug for Vagrant
   hosts: vagrant
   become: yes
   gather_facts: true

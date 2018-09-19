@@ -27,11 +27,29 @@ sudo su - www-data
 
 ```bash
 TRUSTED_PROXIES=10.0.0.0/8
-TRUSTED_HOSTS='{myAppName}.local, localhost, api'
+TRUSTED_HOSTS='10.0.0.10'
   ```
 
 - Add API Platform if you need it `cd api && composer req api`
 - Install and configure the php code sniffer with SymfonyCustom coding standard `composer require --dev vincentlanglet/symfony3-custom-coding-standard && vendor/bin/phpcs --config-set installed_paths ../../vincentlanglet/symfony3-custom-coding-standard`
+
+- Update DATABASE_URL in `.env` file with `db_user`, `db_password` and `db_name`
+- If you are using PostgresSQL, you need:
+     - to replace in .env file `mysql` by `pgsql` and `3306`by `5432`
+     - to update `doctrine.yaml` by updating driver and changing charset this way:
+
+```
+    dbal:
+         # configure these for your database server
+         driver: 'pdo_pgsql'
+         server_version: '9.6'
+         charset: utf8
+         default_table_options:
+             charset: utf8
+             collate: utf8_unicode_ci
+         url: '%env(resolve:DATABASE_URL)%'
+ ```
+
 - Create the database `bin/console doctrine:database:create`
 - Create the database schema `bin/console doctrine:schema:create`
 - Browse your API: `http://10.0.0.10/index.php/api`
