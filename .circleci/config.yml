@@ -47,7 +47,11 @@ jobs:
           command: npm i -g snyk
       - run:
           name: Test module dependencies
-          command: /home/circleci/npm/bin/snyk test
+          command: |
+            /home/circleci/npm/bin/snyk auth ${SNYK_TOKEN}
+            /home/circleci/npm/bin/snyk ignore --id='shelljs@0.8.2' --expiry='2019-01-01' --reason='testing'
+            /home/circleci/npm/bin/snyk test --severity-threshold=high
+
 workflows:
   version: 2
   build_setup_test:
