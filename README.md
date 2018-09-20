@@ -15,6 +15,8 @@ With the Theodo Stack Generator you can
 * create a new React application: ```yo theodo-stack:react```
 * create a new Symfony API: ```yo theodo-stack:server```
 
+> If you want to generate a Django and/or Elastic Beanstalk project, check out TheodoUK's [Project Generator](https://github.com/Theodo-UK/project-generator)
+
 Upgrade an existing React project:
 
 * add CircleCI configuration: ```yo theodo-stack:react-ci```
