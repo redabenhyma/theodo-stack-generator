@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createBrowserHistory } from 'history';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -23,7 +23,7 @@ if (module.hot) {
   module.hot.accept('./App', () => {
     const NextApp = require('./App').default; // eslint-disable-line
     if (rootEl) {
-      ReactDOM.render(<NextApp store={store} />, rootEl);
+      ReactDOM.render(<NextApp history={history} store={store} />, rootEl);
     }
   });
 }
