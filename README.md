@@ -29,7 +29,7 @@ And many more (to come), to list what you can do: ```yo --help```
 ## Let's use it!
 
 ```
-npm install -g theodo-stack-generator
+npm install -g generator-theodo-stack
 yo theodo-stack
 ```
 
