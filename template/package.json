@@ -1,0 +1,46 @@
+{
+  "scripts": {
+    "flow": "flow",
+    "flow:coverage": "flow-coverage-report --config=.flowcoverageconfig",
+    "generate": "plop --plopfile scripts/generators/index.js",
+    "lint": "eslint --ext .jsx,.js -c .eslintrc src",
+    "lint:fix": "eslint --fix --ext .jsx,.js -c .eslintrc src"
+  },
+  "dependencies": {
+    "babel-eslint": "^9.0.0",
+    "connected-react-router": "^4.4.1",
+    "env-cmd": "^8.0.2",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.21.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-mysticatea": "^4.2.4",
+    "eslint-plugin-prefer-object-spread": "^1.2.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.11.1",
+    "history": "^4.7.2",
+    "react-intl": "^2.4.0",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-test-renderer": "^16.4.2",
+    "redux": "^4.0.0",
+    "redux-saga": "^0.16.0",
+    "source-map-explorer": "^1.6.0",
+    "styled-components": "^3.4.2",
+    "superagent": "^3.8.3"
+  },
+  "devDependencies": {
+    "enzyme": "^3.4.1",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "enzyme-to-json": "^3.3.4",
+    "flow-bin": "^0.78.0",
+    "flow-coverage-report": "^0.5.0",
+    "flow-typed": "^2.5.1",
+    "plop": "^2.1.0",
+    "prettier": "^1.13.6"
+  }
+}

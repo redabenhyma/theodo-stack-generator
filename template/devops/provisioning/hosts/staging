@@ -1,0 +1,2 @@
+[staging]
+changeme  ansible_ssh_user=ubuntu

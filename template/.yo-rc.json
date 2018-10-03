@@ -1,0 +1,7 @@
+{
+  "generator-theodo-stack": {
+    "appName": "template",
+    "client-required": true,
+    "server-required": true
+  }
+}

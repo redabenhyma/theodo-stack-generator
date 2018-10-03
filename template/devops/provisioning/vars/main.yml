@@ -1,0 +1,10 @@
+---
+#PUT here your main variable
+project_name: template
+port: 80
+apt_specific_packages:
+  - git
+
+composer_update: false
+update_apt_cache: yes
+postgresql_version: 9.6

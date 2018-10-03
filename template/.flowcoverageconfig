@@ -1,0 +1,15 @@
+{
+  "excludeGlob": [
+    "node_modules/**",
+    "src/setupTests.js",
+    "src/__mocks__/**",
+    "src/**/*.style.js",
+    "src/registerServiceWorker.js"
+  ],
+  "flowCommandPath": "node_modules/.bin/flow",
+  "includeGlob": [
+    "src/**/*.js"
+  ],
+  "threshold": 85,
+  "type": "html"
+}

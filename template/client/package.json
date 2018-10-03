@@ -1,0 +1,50 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "2.0.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "env-cmd .env.${REACT_APP_ENV} react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "test:coverage": "npm run test -- --coverage"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.test.js",
+      "!src/**/index.js",
+      "!src/**/registerServiceWorker.js",
+      "!src/**/*.container.js",
+      "!src/index.js",
+      "!src/tempPolyfills.js",
+      "!src/setupTests.js",
+      "!src/redux/reducers.js",
+      "!src/redux/sagas.js",
+      "!src/redux/store.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 85,
+        "branches": 100,
+        "functions": 75,
+        "lines": 90
+      }
+    }
+  }
+}

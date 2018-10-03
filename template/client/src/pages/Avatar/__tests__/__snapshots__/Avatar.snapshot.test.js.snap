@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The page component should render correctly 1`] = `
+<div
+  className="sc-bdVaJa hiBQnU"
+>
+  <button
+    onClick={[Function]}
+    tabIndex={0}
+    type="button"
+  >
+    <span>
+      Retour
+    </span>
+  </button>
+  <p>
+    <span>
+      Ce message est traduit en utilisant directement l'API react-intl
+    </span>
+  </p>
+  <p>
+    <input
+      className="github-avatar-input"
+      onChange={[Function]}
+      placeholder={undefined}
+      type="text"
+    />
+  </p>
+  <p>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      <span>
+        Affiche l'avatar github
+      </span>
+    </button>
+  </p>
+  <img
+    alt="user avatar"
+    src="https://avatars1.githubusercontent.com/u/9215726?v=4"
+  />
+</div>
+`;
