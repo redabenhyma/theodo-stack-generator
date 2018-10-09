@@ -19,7 +19,7 @@
     - composer
     - nginx
     - ubuntu-postgresql
-    - any-nodejs
+    - { role: geerlingguy.nodejs }
     - fubarhouse.yarn
 
 - name: Create the certificates for production https

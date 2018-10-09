@@ -8,3 +8,5 @@ apt_specific_packages:
 composer_update: false
 update_apt_cache: yes
 postgresql_version: 9.6
+
+nodejs_version: "8.x"

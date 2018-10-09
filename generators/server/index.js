@@ -118,8 +118,8 @@ class StackGenerator extends Generator {
 
   _addSymfonyDevopsTemplates() {
     this.fs.copy(
-      this.templatePath('devops-symfony/provisioning/roles'),
-      this.destinationPath('devops/provisioning/roles'),
+      this.templatePath('devops-symfony/provisioning'),
+      this.destinationPath('devops/provisioning'),
       this.provisioningVars,
     );
 
