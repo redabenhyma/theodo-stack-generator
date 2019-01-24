@@ -1,7 +1,4 @@
-You should use https://github.com/theodo/francis rather than the stack generator. We move to francis because it is easier and faster to improve a boilerplater than code generator. We might use the same concepts later on to add or remove features from the boilerplate. But for now we only need a boilerplate.
-
-Cheers
-
+# You should use https://github.com/theodo/forge
 
 # Theodo stack generator ![Current npm package version](https://img.shields.io/npm/v/generator-theodo-stack.svg?style=flat-square)
 
